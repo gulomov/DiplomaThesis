@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 rootProject.name = "DiplomaThesis"
 include(":app")
 include(":features")
-include(":data")
