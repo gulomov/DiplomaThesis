@@ -5,6 +5,7 @@ import libs.Compose.compose
 import libs.Firebase.firebase
 import libs.Hilt.hilt
 import libs.Moshi.moshi
+import libs.Room.room
 import libs.Timber.timber
 
 plugins {
@@ -13,6 +14,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("io.gitlab.arturbosch.detekt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -65,6 +67,10 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":data"))
+    implementation(project(":features"))
+
     androidCore()
     accompanistPager()
     coil()
@@ -73,6 +79,7 @@ dependencies {
     hilt()
     moshi()
     timber()
+    room()
 }
 
 kapt {
