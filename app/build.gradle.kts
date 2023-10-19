@@ -70,6 +70,7 @@ dependencies {
 
     implementation(project(":data"))
     implementation(project(":features"))
+    implementation(project(":screens"))
 
     androidCore()
     accompanistPager()
