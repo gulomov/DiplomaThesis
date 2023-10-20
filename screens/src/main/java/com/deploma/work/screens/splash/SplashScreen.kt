@@ -34,7 +34,7 @@ fun SplashScreen(navController: NavController) {
             }),
         )
         delay(1000L)
-        navController.navigate(ScreenRoute.Home.route) {
+        navController.navigate(ScreenRoute.Introduction.route) {
             popUpTo(IntroNav.INTRO_ROUTE)
         }
     }
