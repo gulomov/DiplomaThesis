@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "185411968421",
+    "project_id": "dimplomathesis",
+    "storage_bucket": "dimplomathesis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185411968421:android:de64e28379cf8b1d771c4c",
+        "android_client_info": {
+          "package_name": "com.deploma.work.diplomathesis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAih6CfkHFKhi4xyzcTzp5YmfavrFVTAAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
