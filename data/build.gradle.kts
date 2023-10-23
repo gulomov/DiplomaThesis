@@ -1,3 +1,4 @@
+import libs.AndroidCode.androidCore
 import libs.Hilt.hilt
 import libs.Room.room
 
@@ -25,5 +26,6 @@ android {
     dependencies {
         room()
         hilt()
+        androidCore()
     }
 }

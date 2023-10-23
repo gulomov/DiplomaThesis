@@ -69,8 +69,10 @@ android {
 dependencies {
 
     implementation(project(":data"))
+    implementation(project(":features:splash"))
+    implementation(project(":features:introduction"))
+    implementation(project(":features:home"))
     implementation(project(":features"))
-    implementation(project(":screens"))
 
     androidCore()
     accompanistPager()
