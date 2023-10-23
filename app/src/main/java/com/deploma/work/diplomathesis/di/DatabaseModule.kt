@@ -2,8 +2,8 @@ package com.deploma.work.diplomathesis.di
 
 import android.content.Context
 import androidx.room.Room
-import com.deploma.work.data.dao.ProductListDao
-import com.deploma.work.data.database.DiplomaThesisDatabase
+import com.deploma.work.database.dao.ProductListDao
+import com.deploma.work.database.database.DiplomaThesisDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

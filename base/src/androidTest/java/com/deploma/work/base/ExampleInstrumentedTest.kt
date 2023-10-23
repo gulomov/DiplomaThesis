@@ -1,4 +1,4 @@
-package com.deploma.work.spash
+package com.deploma.work.base
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.deploma.work.spash", appContext.packageName)
+        assertEquals("com.deploma.work.base.test", appContext.packageName)
     }
 }

@@ -72,6 +72,7 @@ dependencies {
     implementation(project(":features:introduction"))
     implementation(project(":features:home"))
     implementation(project(":features"))
+    implementation(project(":base:database"))
 
     androidCore()
     accompanistPager()

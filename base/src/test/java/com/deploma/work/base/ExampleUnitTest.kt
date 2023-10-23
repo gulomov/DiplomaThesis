@@ -1,4 +1,4 @@
-package com.deploma.work.spash
+package com.deploma.work.base
 
 import org.junit.Test
 
