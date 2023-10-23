@@ -6,4 +6,8 @@
     <string name="introduction_sales_info_text">Everything you desire, now at discounted prices</string>
     <string name="introduction_enjoy_your_time_title">Shop, Smile, Repeat</string>
     <string name="introduction_enjoy_your_time_text">Your shopping journey begins now – buckle up!</string>
+    <string name="introduction_button_previous">Previous</string>
+    <string name="introduction_button_next">Next</string>
+    <string name="introduction_button_start">Start</string>
+    <string name="introduction_button_finish">Finish</string>
 </resources>

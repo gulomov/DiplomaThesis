@@ -43,6 +43,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":features"))
+
     androidCore()
     accompanistPager()
     coil()

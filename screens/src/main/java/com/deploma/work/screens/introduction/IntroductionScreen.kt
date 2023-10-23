@@ -14,10 +14,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,22 +31,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.deploma.work.features.MainButton
 import com.deploma.work.screens.R
 import com.deploma.work.screens.ScreenRoute
 import com.deploma.work.screens.graph.IntroNav
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IntroductionScreen(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState()
+    val pageCount = 3
 
-    Box(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+    ) {
         Column {
             Spacer(modifier = Modifier.height(32.dp))
             HorizontalPager(
-                pageCount = 3,
-                modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally),
+                pageCount = pageCount,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally),
                 state = pagerState,
                 contentPadding = PaddingValues(8.dp),
                 pageSpacing = 8.dp,
@@ -55,7 +65,7 @@ fun IntroductionScreen(navController: NavController) {
                         val imageResources = when (page) {
                             0 -> R.drawable.ic_intro_one
                             1 -> R.drawable.ic_intro_two
-                            2 -> R.drawable.ic_intro_one
+                            2 -> R.drawable.ic_intro_three
                             else -> 0
                         }
 
@@ -98,7 +108,12 @@ fun IntroductionScreen(navController: NavController) {
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Row(Modifier.height(50.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            Row(
+                Modifier
+                    .height(50.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
                 repeat(3) { iteration ->
                     val color =
                         if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
@@ -110,21 +125,69 @@ fun IntroductionScreen(navController: NavController) {
                     )
                 }
             }
-            Button(modifier = Modifier.fillMaxWidth(), onClick = {
-                /* coroutineScope.launch {
-                     pagerState.scrollToPage(2)
-                 }*/ // TODO will be implement more
-
-                navController.navigate(ScreenRoute.Home.route) {
-                    popUpTo(IntroNav.INTRO_ROUTE)
+            Row(modifier = Modifier.fillMaxWidth()) {
+                if (pagerState.currentPage > 0) {
+                    MainButton(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .wrapContentWidth()
+                            .weight(1f),
+                        onClick = {
+                            coroutineScope.launch {
+                                val previousPage = pagerState.currentPage - 1
+                                if (previousPage < pageCount) {
+                                    pagerState.animateScrollToPage(previousPage)
+                                }
+                            }
+                        },
+                        content = {
+                            Text(
+                                text = stringResource(id = R.string.introduction_button_previous),
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth(),
+                            )
+                        },
+                    )
                 }
-            }, content = {
-                Text(
-                    "Finish",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
+                MainButton(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .wrapContentWidth()
+                        .weight(1f),
+                    onClick = {
+                        coroutineScope.launch {
+                            val nextPage = pagerState.currentPage + 1
+                            if (nextPage < pageCount) {
+                                pagerState.animateScrollToPage(nextPage)
+                            } else {
+                                navController.navigate(ScreenRoute.Home.route) {
+                                    popUpTo(IntroNav.INTRO_ROUTE)
+                                }
+                            }
+                        }
+                    },
+                    content = {
+                        IntroductionNextButtonText(pagerState)
+                    },
                 )
-            })
+            }
         }
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun IntroductionNextButtonText(pagerState: PagerState) {
+    Text(
+        text = when (pagerState.currentPage) {
+            pagerState.initialPage -> stringResource(
+                id = R.string.introduction_button_start,
+            )
+
+            1 -> stringResource(id = R.string.introduction_button_next)
+            else -> stringResource(id = R.string.introduction_button_finish)
+        },
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth(),
+    )
 }
