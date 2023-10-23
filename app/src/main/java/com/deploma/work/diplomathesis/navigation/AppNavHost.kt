@@ -14,7 +14,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.deploma.work.features.ScreenRoute
 import com.deploma.work.features.ScreenRoute.HOME
-import com.deploma.work.home.HomeScreen
 import com.deploma.work.home.navigation.homeScreen
 import com.deploma.work.introduction.navigation.introductionScreen
 import com.deploma.work.splash.navigation.splashScreen
