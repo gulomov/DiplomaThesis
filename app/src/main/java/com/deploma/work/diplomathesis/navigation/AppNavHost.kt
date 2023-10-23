@@ -12,10 +12,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.deploma.work.screens.ScreenRoute
-import com.deploma.work.screens.graph.IntroNav
-import com.deploma.work.screens.graph.introGraph
-import com.deploma.work.screens.graph.mainGraph
+import com.deploma.work.features.ScreenRoute
+import com.deploma.work.features.ScreenRoute.HOME
+import com.deploma.work.home.HomeScreen
+import com.deploma.work.home.navigation.homeScreen
+import com.deploma.work.introduction.navigation.introductionScreen
+import com.deploma.work.splash.navigation.splashScreen
 
 @Composable
 fun AppNavHost(
@@ -28,16 +30,17 @@ fun AppNavHost(
     val coroutineScope = rememberCoroutineScope()
 
     when (navBackStackEntry?.destination?.route) {
-        ScreenRoute.Splash.route -> {}
+        HOME -> {}
     }
     Scaffold(topBar = {}, bottomBar = {}, content = {
         NavHost(
             navController = navController,
-            startDestination = IntroNav.INTRO_ROUTE,
+            startDestination = ScreenRoute.INTRO_SPLASH,
             modifier = Modifier.padding(it),
         ) {
-            introGraph(navController)
-            mainGraph(navController)
+            splashScreen(navController)
+            introductionScreen(navController)
+            homeScreen(navController)
         }
     })
 }
