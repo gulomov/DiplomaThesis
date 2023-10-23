@@ -16,9 +16,9 @@ dependencyResolutionManagement {
 rootProject.name = "DiplomaThesis"
 include(":app")
 include(":features")
-include(":data")
 include(":screens")
 include(":spash")
 include(":features:splash")
 include(":features:introduction")
 include(":features:home")
+include(":base:database")

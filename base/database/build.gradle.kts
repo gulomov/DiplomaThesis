@@ -15,8 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.introduction"
-
+    namespace = "com.deploma.work.database"
     defaultConfig {
         minSdk = 24
         compileSdk = 33
@@ -39,7 +38,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":features"))
 
     androidCore()
     accompanistPager()
