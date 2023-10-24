@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.deploma.work.features.MainButton
 import com.deploma.work.features.ScreenRoute.HOME
@@ -38,7 +39,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroductionScreen(navController: NavController) {
+fun IntroductionScreen(
+    navController: NavController,
+    viewModel: IntroductionViewModel = hiltViewModel(),
+) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState()
     val pageCount = 3
@@ -159,6 +163,7 @@ fun IntroductionScreen(navController: NavController) {
                             if (nextPage < pageCount) {
                                 pagerState.animateScrollToPage(nextPage)
                             } else {
+                                viewModel.setIntroductionShown()
                                 navController.navigate(HOME) {
                                     popUpTo(INTRODUCTION) {
                                         inclusive = true

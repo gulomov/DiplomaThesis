@@ -14,13 +14,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.deploma.work.features.ScreenRoute.HOME
 import com.deploma.work.features.ScreenRoute.INTRODUCTION
 import com.deploma.work.features.ScreenRoute.INTRO_SPLASH
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(
+    navController: NavController,
+    viewModel: SplashScreenViewModel = hiltViewModel(),
+) {
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
     }
@@ -33,9 +38,28 @@ fun SplashScreen(navController: NavController) {
             }),
         )
         delay(1000L)
-        navController.navigate(INTRODUCTION) {
-            popUpTo(INTRO_SPLASH) {
-                inclusive = true
+       /* if (!viewModel.wasIntroductionShown()) {
+            navController.navigate(INTRODUCTION) {
+                popUpTo(INTRO_SPLASH) {
+                    inclusive = true
+                }
+            }
+        } else {
+            navController.navigate(HOME) {
+                popUpTo(INTRO_SPLASH) {
+                    inclusive = true
+                }
+            }
+        }*/
+        if (!viewModel.wasIntroductionShown()) {
+            INTRODUCTION
+        } else {
+            HOME
+        }.let {
+            navController.navigate(it) {
+                popUpTo(INTRO_SPLASH) {
+                    inclusive = true
+                }
             }
         }
     }
@@ -43,8 +67,7 @@ fun SplashScreen(navController: NavController) {
     Scaffold() { innerPaddingModifier ->
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
-                .padding(innerPaddingModifier),
+            modifier = Modifier.fillMaxSize().padding(innerPaddingModifier),
         ) {
             Image(
                 painter = painterResource(id = R.drawable.app_logo),

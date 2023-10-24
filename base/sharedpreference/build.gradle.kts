@@ -1,12 +1,5 @@
-import libs.AccompanistPager.accompanistPager
 import libs.AndroidCode.androidCore
-import libs.Coil.coil
-import libs.Compose.compose
-import libs.Firebase.firebase
 import libs.Hilt.hilt
-import libs.Moshi.moshi
-import libs.Room.room
-import libs.Timber.timber
 
 plugins {
     id("com.android.library")
@@ -15,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.introduction"
+    namespace = "com.deploma.work.sharedpreference"
 
     defaultConfig {
         minSdk = 24
@@ -39,15 +32,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":features"))
-    implementation(project(":base:sharedpreference"))
+
     androidCore()
-    accompanistPager()
-    coil()
-    compose()
-    firebase()
     hilt()
-    moshi()
-    timber()
-    room()
 }
