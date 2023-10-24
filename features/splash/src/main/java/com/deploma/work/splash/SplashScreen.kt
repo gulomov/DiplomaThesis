@@ -38,19 +38,6 @@ fun SplashScreen(
             }),
         )
         delay(1000L)
-       /* if (!viewModel.wasIntroductionShown()) {
-            navController.navigate(INTRODUCTION) {
-                popUpTo(INTRO_SPLASH) {
-                    inclusive = true
-                }
-            }
-        } else {
-            navController.navigate(HOME) {
-                popUpTo(INTRO_SPLASH) {
-                    inclusive = true
-                }
-            }
-        }*/
         if (!viewModel.wasIntroductionShown()) {
             INTRODUCTION
         } else {
