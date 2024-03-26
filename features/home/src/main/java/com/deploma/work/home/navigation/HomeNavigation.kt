@@ -8,6 +8,6 @@ import com.deploma.work.home.HomeScreen
 
 fun NavGraphBuilder.homeScreen(navController: NavController) {
     composable(ScreenRoute.HOME) {
-        HomeScreen()
+        HomeScreen(navController)
     }
 }

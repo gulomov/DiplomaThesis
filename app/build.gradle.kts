@@ -4,6 +4,7 @@ import libs.Coil.coil
 import libs.Compose.compose
 import libs.Firebase.firebase
 import libs.Hilt.hilt
+import libs.LogBack.logback
 import libs.Moshi.moshi
 import libs.Room.room
 import libs.Timber.timber
@@ -72,8 +73,9 @@ dependencies {
     implementation(project(":features:introduction"))
     implementation(project(":features:home"))
     implementation(project(":features"))
-    implementation(project(":base:database"))
+    implementation(project(":domain:database"))
 
+    logback()
     androidCore()
     accompanistPager()
     coil()

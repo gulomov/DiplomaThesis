@@ -4,6 +4,7 @@ import libs.Coil.coil
 import libs.Compose.compose
 import libs.Firebase.firebase
 import libs.Hilt.hilt
+import libs.LogBack.logback
 import libs.Moshi.moshi
 import libs.Room.room
 import libs.Timber.timber
@@ -47,6 +48,7 @@ android {
 
         implementation(project(":features"))
 
+        logback()
         androidCore()
         accompanistPager()
         coil()

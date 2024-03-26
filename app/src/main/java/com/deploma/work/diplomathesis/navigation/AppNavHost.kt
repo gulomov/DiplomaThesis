@@ -14,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.deploma.work.features.ScreenRoute
 import com.deploma.work.features.ScreenRoute.HOME
+import com.deploma.work.features.ThesisTopBar
 import com.deploma.work.home.navigation.homeScreen
 import com.deploma.work.introduction.navigation.introductionScreen
 import com.deploma.work.splash.navigation.splashScreen
@@ -31,7 +32,7 @@ fun AppNavHost(
     when (navBackStackEntry?.destination?.route) {
         HOME -> {}
     }
-    Scaffold(topBar = {}, bottomBar = {}, content = {
+    Scaffold(topBar = { ThesisTopBar() }, bottomBar = {}, content = {
         NavHost(
             navController = navController,
             startDestination = ScreenRoute.INTRO_SPLASH,
