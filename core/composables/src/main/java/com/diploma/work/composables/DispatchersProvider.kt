@@ -1,4 +1,4 @@
-package com.diploma.work.features
+package com.diploma.work.composables
 
 import kotlinx.coroutines.CoroutineDispatcher
 

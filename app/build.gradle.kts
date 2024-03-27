@@ -74,6 +74,7 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":features"))
     implementation(project(":core:database"))
+    implementation(project(":core:composables"))
 
     logback()
     androidCore()
