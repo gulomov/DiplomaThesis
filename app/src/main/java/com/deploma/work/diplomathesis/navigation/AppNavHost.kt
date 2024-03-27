@@ -14,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.deploma.work.features.ScreenRoute
 import com.deploma.work.features.ScreenRoute.HOME
+import com.deploma.work.features.ScreenRoute.INTRO_SPLASH
 import com.deploma.work.features.ThesisTopBar
 import com.deploma.work.home.navigation.homeScreen
 import com.deploma.work.introduction.navigation.introductionScreen
@@ -25,22 +26,41 @@ fun AppNavHost(
 ) {
     val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
     val topBarVisibility = rememberSaveable { (mutableStateOf(false)) }
+    val topBarBackArrowVisibility = rememberSaveable { (mutableStateOf(true)) }
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val coroutineScope = rememberCoroutineScope()
 
     when (navBackStackEntry?.destination?.route) {
-        HOME -> {}
-    }
-    Scaffold(topBar = { ThesisTopBar() }, bottomBar = {}, content = {
-        NavHost(
-            navController = navController,
-            startDestination = ScreenRoute.INTRO_SPLASH,
-            modifier = Modifier.padding(it),
-        ) {
-            splashScreen(navController)
-            introductionScreen(navController)
-            homeScreen(navController)
+        HOME -> {
+            topBarVisibility.value = true
+            topBarBackArrowVisibility.value = false
         }
-    })
+
+        INTRO_SPLASH -> {
+            topBarVisibility.value = false
+            topBarBackArrowVisibility.value = false
+        }
+
+        else -> topBarVisibility.value = true
+    }
+    Scaffold(
+        topBar = {
+            if (topBarVisibility.value) ThesisTopBar(
+                navController,
+                topBarBackArrowVisibility.value
+            )
+        },
+        bottomBar = {},
+        content = {
+            NavHost(
+                navController = navController,
+                startDestination = INTRO_SPLASH,
+                modifier = Modifier.padding(it),
+            ) {
+                splashScreen(navController)
+                introductionScreen(navController)
+                homeScreen(navController)
+            }
+        })
 }

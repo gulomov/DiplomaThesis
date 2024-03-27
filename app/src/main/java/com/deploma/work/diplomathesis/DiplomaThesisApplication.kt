@@ -12,19 +12,6 @@ import org.slf4j.LoggerFactory
 class DiplomaThesisApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
         FirebaseApp.initializeApp(this)
-        BasicLogcatConfigurator.configureDefaultContext()
-
-        System.setProperty("log.name", "Log")
-        System.setProperty("log.path", filesDir.absolutePath)
-
-        // Initialize Logback with the configuration
-        val lc = LoggerFactory.getILoggerFactory() as LoggerContext
-        try {
-            StatusPrinter.print(lc)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

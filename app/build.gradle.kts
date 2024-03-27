@@ -73,7 +73,7 @@ dependencies {
     implementation(project(":features:introduction"))
     implementation(project(":features:home"))
     implementation(project(":features"))
-    implementation(project(":domain:database"))
+    implementation(project(":data:database"))
 
     logback()
     androidCore()

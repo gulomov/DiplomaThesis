@@ -11,16 +11,10 @@ import org.slf4j.LoggerFactory
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val context = LocalContext.current
-    val selectedRingtoneName = remember { mutableStateOf<String?>(null) }
-
-    val log: org.slf4j.Logger? = LoggerFactory.getLogger("HomeScreen")
     Button(
         onClick = {
-            log?.info("Open System Notification Sound Settings button clicked")
+            // TODO: Will be added later
         },
-        content = {
-            Text("Open System Notification Sound Settings")
-        },
+        content = {},
     )
 }
