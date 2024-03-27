@@ -40,7 +40,7 @@ android {
 
 dependencies {
     implementation(project(":features"))
-    implementation(project(":data:sharedpreference"))
+    implementation(project(":core:sharedpreference"))
 
     androidCore()
     accompanistPager()

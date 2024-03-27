@@ -47,7 +47,6 @@ android {
     dependencies {
 
         implementation(project(":features"))
-        implementation(project(":app"))
 
         logback()
         androidCore()

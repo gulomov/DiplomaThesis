@@ -12,10 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.deploma.work.diplomathesis.composables.AutoSlidingCarousel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import org.slf4j.LoggerFactory
 
@@ -30,7 +28,6 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier.padding(16.dp),
             shape = RoundedCornerShape(16.dp)
         ) {
-            AutoSlidingCarousel(itemsCount = 10, itemContent = {})
         }
     }
 }

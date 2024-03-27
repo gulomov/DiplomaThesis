@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ProductListDao {
     @Query("SELECT * FROM product_list")
-    suspend fun getProductList(): Flow<List<ProductListEntity>>
+    fun getProductList(): Flow<List<ProductListEntity>>
 }
