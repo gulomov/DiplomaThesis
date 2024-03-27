@@ -12,11 +12,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.deploma.work.features.ScreenRoute
 import com.deploma.work.features.ScreenRoute.HOME
 import com.deploma.work.features.ScreenRoute.INTRO_SPLASH
 import com.deploma.work.features.ThesisTopBar
-import com.deploma.work.home.navigation.homeScreen
+import com.deploma.work.home.navigation.mainGraph
 import com.deploma.work.introduction.navigation.introductionScreen
 import com.deploma.work.splash.navigation.splashScreen
 
@@ -60,7 +59,7 @@ fun AppNavHost(
             ) {
                 splashScreen(navController)
                 introductionScreen(navController)
-                homeScreen(navController)
+                mainGraph(navController)
             }
         })
 }
