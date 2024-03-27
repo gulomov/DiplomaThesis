@@ -1,4 +1,4 @@
-package com.deploma.work.features
+package com.diploma.work.features
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.CornerBasedShape

@@ -16,10 +16,10 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.deploma.work.features.ScreenRoute.HOME
-import com.deploma.work.features.ScreenRoute.INTRODUCTION
-import com.deploma.work.features.ScreenRoute.INTRO_SPLASH
 import com.deploma.work.splash.R
+import com.diploma.work.features.ScreenRoute.HOME
+import com.diploma.work.features.ScreenRoute.INTRODUCTION
+import com.diploma.work.features.ScreenRoute.INTRO_SPLASH
 import kotlinx.coroutines.delay
 
 @Composable

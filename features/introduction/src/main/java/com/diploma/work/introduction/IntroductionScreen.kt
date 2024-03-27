@@ -32,10 +32,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.deploma.work.features.MainButton
-import com.deploma.work.features.ScreenRoute.HOME
-import com.deploma.work.features.ScreenRoute.INTRODUCTION
 import com.deploma.work.introduction.R
+import com.diploma.work.features.MainButton
+import com.diploma.work.features.ScreenRoute.HOME
+import com.diploma.work.features.ScreenRoute.INTRODUCTION
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
