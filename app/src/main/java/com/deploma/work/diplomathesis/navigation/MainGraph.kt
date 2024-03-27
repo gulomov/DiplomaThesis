@@ -1,4 +1,4 @@
-package com.deploma.work.home.navigation
+package com.deploma.work.diplomathesis.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
