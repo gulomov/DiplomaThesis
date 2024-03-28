@@ -19,10 +19,10 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.diplomathesis"
+    namespace = "com.diploma.work.diplomathesis"
 
     defaultConfig {
-        applicationId = "com.deploma.work.diplomathesis"
+        applicationId = "com.diploma.work.diplomathesis"
         minSdk = DefaultConfig.minSdkVersion
         compileSdk = DefaultConfig.compileSdkVersion
         targetSdk = DefaultConfig.targetSdkVersion
@@ -73,7 +73,8 @@ dependencies {
     implementation(project(":features:introduction"))
     implementation(project(":features:home"))
     implementation(project(":features"))
-    implementation(project(":data:database"))
+    implementation(project(":core:database"))
+    implementation(project(":core:design"))
 
     logback()
     androidCore()

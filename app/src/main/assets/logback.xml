@@ -1,7 +1,7 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://tony19.github.io/logback-android/xml"
     xsi:schemaLocation="https://tony19.github.io/logback-android/xml https://cdn.jsdelivr.net/gh/tony19/logback-android/logback.xsd">
-    <property name="log.path" value="/data/data/com.deploma.work.diplomathesis/files/log" />
+    <property name="log.path" value="/data/data/com.diploma.work.diplomathesis/files/log" />
     <property name="log.name" value="foo" />
 
     <!-- Create a file appender for a log in the application's data directory -->

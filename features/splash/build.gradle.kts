@@ -15,7 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.splash"
+    namespace = "com.diploma.work.splash"
 
     defaultConfig {
         minSdk = 24
@@ -40,7 +40,7 @@ android {
 
 dependencies {
     implementation(project(":features"))
-    implementation(project(":data:sharedpreference"))
+    implementation(project(":core:sharedpreference"))
 
     androidCore()
     accompanistPager()

@@ -15,7 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.introduction"
+    namespace = "com.diploma.work.introduction"
 
     defaultConfig {
         minSdk = 24
@@ -40,7 +40,8 @@ android {
 
 dependencies {
     implementation(project(":features"))
-    implementation(project(":data:sharedpreference"))
+    implementation(project(":core:sharedpreference"))
+    implementation(project(":core:design"))
     androidCore()
     accompanistPager()
     coil()

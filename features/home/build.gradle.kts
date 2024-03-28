@@ -16,7 +16,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.home"
+    namespace = "com.diploma.work.home"
 
     defaultConfig {
         minSdk = 24
@@ -47,6 +47,7 @@ android {
     dependencies {
 
         implementation(project(":features"))
+        implementation(project(":core:design"))
 
         logback()
         androidCore()
