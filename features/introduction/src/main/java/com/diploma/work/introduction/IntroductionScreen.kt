@@ -46,12 +46,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun IntroductionScreen(
     navController: NavController,
+    modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState()
     val pageCount = 3
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(normal100),
     ) {
@@ -80,8 +81,8 @@ fun IntroductionScreen(
 }
 
 @Composable
-fun IntroductionContent(page: Int) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+fun IntroductionContent(page: Int, modifier: Modifier = Modifier) {
+    Card(modifier = modifier.fillMaxWidth()) {
         Column {
             val imageResources = when (page) {
                 0 -> R.drawable.ic_intro_one
@@ -131,9 +132,9 @@ fun IntroductionContent(page: Int) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PagerIndicators(pagerState: PagerState, pageCount: Int) {
+fun PagerIndicators(pagerState: PagerState, pageCount: Int, modifier: Modifier = Modifier) {
     Row(
-        Modifier
+        modifier
             .height(pagerIndicatorSize)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -157,11 +158,12 @@ fun PagerButtons(
     pagerState: PagerState,
     pageCount: Int,
     navController: NavController,
+    modifier: Modifier = Modifier,
     viewModel: IntroductionViewModel = hiltViewModel(),
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(modifier = modifier.fillMaxWidth()) {
         if (pagerState.currentPage > 0) {
             MainButton(
                 modifier = Modifier
@@ -214,7 +216,7 @@ fun PagerButtons(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroductionNextButtonText(pagerState: PagerState) {
+fun IntroductionNextButtonText(pagerState: PagerState, modifier: Modifier = Modifier) {
     Text(
         text = when (pagerState.currentPage) {
             pagerState.initialPage -> stringResource(
@@ -225,6 +227,6 @@ fun IntroductionNextButtonText(pagerState: PagerState) {
             else -> stringResource(id = R.string.introduction_button_finish)
         },
         textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
     )
 }
