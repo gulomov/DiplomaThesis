@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":features"))
     implementation(project(":core:sharedpreference"))
+    implementation(project(":core:navigation"))
 
     androidCore()
     accompanistPager()

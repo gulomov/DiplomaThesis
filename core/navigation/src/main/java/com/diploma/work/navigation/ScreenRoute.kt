@@ -1,4 +1,4 @@
-package com.diploma.work.features
+package com.diploma.work.navigation
 
 object ScreenRoute {
     const val INTRO_ROUTE = "intro"
