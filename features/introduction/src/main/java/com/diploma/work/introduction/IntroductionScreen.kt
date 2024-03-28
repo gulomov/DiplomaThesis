@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.diploma.work.design.composables.MainButton
 import com.diploma.work.features.ScreenRoute.HOME
 import com.diploma.work.features.ScreenRoute.INTRODUCTION
 import kotlinx.coroutines.launch
@@ -129,7 +130,7 @@ fun IntroductionScreen(
             }
             Row(modifier = Modifier.fillMaxWidth()) {
                 if (pagerState.currentPage > 0) {
-                    com.diploma.work.composables.MainButton(
+                    MainButton(
                         modifier = Modifier
                             .padding(8.dp)
                             .wrapContentWidth()
@@ -151,7 +152,7 @@ fun IntroductionScreen(
                         },
                     )
                 }
-                com.diploma.work.composables.MainButton(
+                MainButton(
                     modifier = Modifier
                         .padding(8.dp)
                         .wrapContentWidth()

@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.diploma.work.composables.ThesisTopBar
+import com.diploma.work.design.composables.ThesisTopBar
 import com.diploma.work.features.ScreenRoute.HOME
 import com.diploma.work.features.ScreenRoute.INTRO_SPLASH
 import com.diploma.work.introduction.navigation.introductionScreen

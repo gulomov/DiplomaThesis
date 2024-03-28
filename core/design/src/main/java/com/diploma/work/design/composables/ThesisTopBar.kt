@@ -1,4 +1,4 @@
-package com.diploma.work.composables
+package com.diploma.work.design.composables
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack

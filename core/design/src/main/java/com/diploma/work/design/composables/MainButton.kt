@@ -1,4 +1,4 @@
-package com.diploma.work.composables
+package com.diploma.work.design.composables
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.CornerBasedShape
