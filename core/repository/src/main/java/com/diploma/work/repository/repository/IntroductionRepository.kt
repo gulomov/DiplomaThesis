@@ -1,4 +1,4 @@
-package com.diploma.work.introduction
+package com.diploma.work.repository.repository
 
 import com.diploma.work.sharedpreference.SharedPreferencesManager
 import javax.inject.Inject
