@@ -15,7 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.database"
+    namespace = "com.diploma.work.database"
     defaultConfig {
         minSdk = 24
         compileSdk = 33

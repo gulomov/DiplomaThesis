@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.sharedpreference"
+    namespace = "com.diploma.work.sharedpreference"
 
     defaultConfig {
         minSdk = 24

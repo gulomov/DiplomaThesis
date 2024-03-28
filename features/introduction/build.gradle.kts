@@ -15,7 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.introduction"
+    namespace = "com.diploma.work.introduction"
 
     defaultConfig {
         minSdk = 24
