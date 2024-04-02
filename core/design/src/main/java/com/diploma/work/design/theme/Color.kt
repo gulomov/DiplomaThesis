@@ -1,4 +1,4 @@
-package com.diploma.work.diplomathesis.ui.theme
+package com.diploma.work.design.theme
 
 import androidx.compose.ui.graphics.Color
 

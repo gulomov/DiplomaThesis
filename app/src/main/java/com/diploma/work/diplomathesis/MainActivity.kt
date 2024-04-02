@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.diploma.work.diplomathesis.navigation.AppNavHost
-import com.diploma.work.diplomathesis.ui.theme.DiplomaThesisTheme
+import com.diploma.work.design.theme.DiplomaThesisTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
