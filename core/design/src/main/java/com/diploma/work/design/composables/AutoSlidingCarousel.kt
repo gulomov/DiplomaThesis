@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,8 +22,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.diploma.work.design.theme.Purple40
-import com.diploma.work.design.theme.Purple80
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -72,8 +71,8 @@ fun IndicatorDots(
     selectedIndex: Int,
     dotSize: Dp,
     modifier: Modifier = Modifier,
-    selectedColor: Color = Purple40,
-    unSelected: Color = Purple80,
+    selectedColor: Color = MaterialTheme.colorScheme.primary,
+    unSelected: Color = MaterialTheme.colorScheme.onPrimary,
 ) {
     LazyRow(
         modifier = modifier

@@ -16,25 +16,59 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = primary_dark,
+    primaryContainer = primaryContainer_dark,
+    onPrimary = onPrimary_dark,
+    onPrimaryContainer = onPrimaryContainer_dark,
+    secondary = secondary_dark,
+    secondaryContainer = secondaryContainer_dark,
+    onSecondary = onSecondary_dark,
+    onSecondaryContainer = onSecondaryContainer_dark,
+    tertiary = tertiary_dark,
+    tertiaryContainer = tertiaryContainer_dark,
+    onTertiary = onTertiary_dark,
+    onTertiaryContainer = onTertiaryContainer_dark,
+    background = background_dark,
+    onBackground = onBackground_dark,
+    surface = surface_dark,
+    surfaceVariant = surfaceVariant_dark,
+    surfaceTint = surfaceTint_dark,
+    onSurface = onSurface_dark,
+    onSurfaceVariant = onSurfaceVariant_dark,
+    outline = outline_dark,
+    outlineVariant = outlineVariant_dark,
+    error = error_dark,
+    errorContainer = errorContainer_dark,
+    onError = onError_dark,
+    onErrorContainer = onErrorContainer_dark
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = primary_light,
+    primaryContainer = primaryContainer_light,
+    onPrimary = onPrimary_light,
+    onPrimaryContainer = onPrimaryContainer_light,
+    secondary = secondary_light,
+    secondaryContainer = secondaryContainer_light,
+    onSecondary = onSecondary_light,
+    onSecondaryContainer = onSecondaryContainer_light,
+    tertiary = tertiary_light,
+    tertiaryContainer = tertiaryContainer_light,
+    onTertiary = onTertiary_light,
+    onTertiaryContainer = onTertiaryContainer_light,
+    background = background_light,
+    onBackground = onBackground_light,
+    surface = surface_light,
+    surfaceVariant = surfaceVariant_light,
+    surfaceTint = surfaceTint_light,
+    onSurface = onSurface_light,
+    onSurfaceVariant = onSurfaceVariant_light,
+    outline = outline_light,
+    outlineVariant = outlineVariant_light,
+    error = error_light,
+    errorContainer = errorContainer_light,
+    onError = onError_light,
+    onErrorContainer = onErrorContainer_light
 )
 
 @Composable
