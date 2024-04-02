@@ -13,9 +13,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.diploma.work.design.composables.ThesisTopBar
-import com.diploma.work.features.ScreenRoute.HOME
-import com.diploma.work.features.ScreenRoute.INTRO_SPLASH
 import com.diploma.work.introduction.navigation.introductionScreen
+import com.diploma.work.navigation.ScreenRoute
+import com.diploma.work.navigation.ScreenRoute.HOME
+import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
+import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
 import com.diploma.work.splash.navigation.splashScreen
 
 @Composable
@@ -27,6 +29,7 @@ fun AppNavHost(
     val topBarBackArrowVisibility = rememberSaveable { (mutableStateOf(true)) }
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+
     val coroutineScope = rememberCoroutineScope()
 
     when (navBackStackEntry?.destination?.route) {
@@ -40,25 +43,29 @@ fun AppNavHost(
             topBarBackArrowVisibility.value = false
         }
 
+        INTRODUCTION -> {
+            topBarVisibility.value = false
+        }
+
         else -> topBarVisibility.value = true
     }
     Scaffold(
         topBar = {
             if (topBarVisibility.value) ThesisTopBar(
-                navController,
-                topBarBackArrowVisibility.value
+                backArrowVisibility = topBarBackArrowVisibility.value,
+                navController = navController,
             )
         },
         bottomBar = {},
-        content = {
-            NavHost(
-                navController = navController,
-                startDestination = INTRO_SPLASH,
-                modifier = Modifier.padding(it),
-            ) {
-                splashScreen(navController)
-                introductionScreen(navController)
-                mainGraph(navController)
-            }
-        })
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = INTRO_SPLASH,
+            modifier = Modifier.padding(it),
+        ) {
+            splashScreen(navController)
+            introductionScreen(navController)
+            mainGraph(navController)
+        }
+    }
 }

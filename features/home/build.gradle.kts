@@ -46,7 +46,6 @@ android {
 
     dependencies {
 
-        implementation(project(":features"))
         implementation(project(":core:design"))
 
         logback()

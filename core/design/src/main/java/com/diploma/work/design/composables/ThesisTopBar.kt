@@ -15,8 +15,8 @@ import androidx.navigation.compose.rememberNavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThesisTopBar(
+    backArrowVisibility: Boolean,
     navController: NavHostController = rememberNavController(),
-    backArrowVisibility: Boolean
 ) {
     CenterAlignedTopAppBar(
         title = {

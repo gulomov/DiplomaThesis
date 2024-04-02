@@ -29,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.diploma.work.design.composables.MainButton
@@ -38,8 +37,8 @@ import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.pagerIndicatorSize
 import com.diploma.work.design.theme.small100
 import com.diploma.work.design.theme.small150
-import com.diploma.work.features.ScreenRoute.HOME
-import com.diploma.work.features.ScreenRoute.INTRODUCTION
+import com.diploma.work.navigation.ScreenRoute.HOME
+import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

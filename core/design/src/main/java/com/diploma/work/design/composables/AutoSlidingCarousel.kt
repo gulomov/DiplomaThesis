@@ -1,9 +1,8 @@
-package com.diploma.work.diplomathesis.composables
+package com.diploma.work.design.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,8 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.diploma.work.diplomathesis.ui.theme.Purple40
-import com.diploma.work.diplomathesis.ui.theme.Purple80
+import com.diploma.work.design.theme.Purple40
+import com.diploma.work.design.theme.Purple80
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState

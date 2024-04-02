@@ -15,11 +15,11 @@ plugins {
 }
 
 android {
-    namespace = "com.diploma.work.features"
+    namespace = "com.diploma.work.navigation"
 
     defaultConfig {
+        compileSdk = 34
         minSdk = 24
-        compileSdk = 33
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+
     androidCore()
     accompanistPager()
     coil()

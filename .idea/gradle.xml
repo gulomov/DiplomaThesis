@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/design" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/repository" />
             <option value="$PROJECT_DIR$/core/sharedpreference" />
             <option value="$PROJECT_DIR$/features" />
