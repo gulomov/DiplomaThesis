@@ -20,6 +20,7 @@ inline fun <reified T : Any> fetchFromDatabase(
         reference.addOnCompleteListener { task ->
             val response = if (task.isSuccessful) {
                 val result = task.result.getValue<T>()
+                println("Result is $result")
                 Resource.Success(result)
             } else {
                 task.exception?.cause?.let { Resource.Error(it) }

@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -50,20 +51,26 @@ fun NewsInHome(
     news: NewsInfo,
     modifier: Modifier = Modifier
 ) {
-    val newsSize = news.newsList?.size ?: 0
-
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = modifier.fillMaxWidth()
     ) {
+        Spacer(modifier = Modifier.width(normal100))
+        Text(
+            text = news.title.orEmpty(),
+            modifier = Modifier.padding(normal100),
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.width(small100))
         Card(
             modifier = Modifier.padding(normal100),
             shape = RoundedCornerShape(normal100)
         ) {
             news.newsList?.let { newsInfo ->
-                AutoSlidingCarousel(
-                    itemsCount = newsSize,
+                if (newsInfo.isNotEmpty()) AutoSlidingCarousel(
+                    itemsCount = newsInfo.size,
                     itemContent = {
+                        NewsItem(news = newsInfo, index = it)
                     }
                 )
             }
@@ -73,11 +80,13 @@ fun NewsInHome(
 
 @Composable
 fun NewsItem(
-    news: NewsItem,
+    index: Int,
+    news: List<NewsItem>,
+    modifier: Modifier = Modifier
 ) {
-    Box {
+    Box(modifier = modifier) {
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current).data(news.imageUrl)
+            model = ImageRequest.Builder(LocalContext.current).data(news[index].image)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
@@ -85,15 +94,19 @@ fun NewsItem(
                 .height(newsCarouselImageSize)
                 .align(Alignment.Center)
         )
-        Column {
-            news.bodyText?.let {
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(normal100)
+        ) {
+            news[index].body?.let {
                 Text(
                     text = it,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
             Spacer(modifier = Modifier.width(small100))
-            news.titleText?.let {
+            news[index].title?.let {
                 Text(
                     text = it,
                     modifier = Modifier.align(Alignment.CenterHorizontally)

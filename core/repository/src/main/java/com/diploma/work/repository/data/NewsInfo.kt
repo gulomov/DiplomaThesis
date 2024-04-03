@@ -1,12 +1,14 @@
 package com.diploma.work.repository.data
 
+import com.google.firebase.database.PropertyName
+
 data class NewsInfo(
-    val newsList: List<NewsItem>? = emptyList(),
-    val titleText: String? = null
+    @PropertyName("newsList") val newsList: List<NewsItem>? = emptyList(),
+    @PropertyName("title") val title: String? = null
 )
 
 data class NewsItem(
-    val imageUrl: String? = null,
-    val bodyText: String? = null,
-    val titleText: String? = null
+    @PropertyName("image") val image: String? = null,
+    @PropertyName("body") val body: String? = null,
+    @PropertyName("title") val title: String? = null
 )

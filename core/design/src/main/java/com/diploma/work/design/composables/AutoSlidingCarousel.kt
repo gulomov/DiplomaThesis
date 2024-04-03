@@ -1,8 +1,10 @@
 package com.diploma.work.design.composables
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,11 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small50
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.delay
+
+private const val NEXT_PAGE = 1
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -33,31 +38,38 @@ fun AutoSlidingCarousel(
     itemsCount: Int,
     itemContent: @Composable (index: Int) -> Unit,
     modifier: Modifier = Modifier,
-    autoSlideDuration: Long = 500,
+    autoSlideDuration: Long = 3000,
     pagerState: PagerState = remember { PagerState() },
 ) {
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
 
     LaunchedEffect(pagerState.currentPage) {
         delay(autoSlideDuration)
-        pagerState.animateScrollToPage((pagerState.currentPage + 1) % itemsCount)
+        pagerState.animateScrollToPage(
+            page = (pagerState.currentPage + NEXT_PAGE) % itemsCount,
+            animationSpec = tween(5000) // FIXME: This should be reconsidered
+        )
     }
 
     Box(modifier = modifier.fillMaxWidth()) {
-        HorizontalPager(count = itemsCount, state = pagerState) { page ->
+        HorizontalPager(
+            count = itemsCount,
+            state = pagerState,
+            itemSpacing = small100
+        ) { page ->
             itemContent(page)
         }
 
         Surface(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(small100)
                 .align(Alignment.BottomCenter),
             shape = CircleShape,
         ) {
             IndicatorDots(
                 totalDots = itemsCount,
                 selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                dotSize = 8.dp
+                dotSize = small100
             )
         }
     }
@@ -76,6 +88,7 @@ fun IndicatorDots(
         modifier = modifier
             .wrapContentWidth()
             .wrapContentHeight()
+            .padding(small50)
     ) {
         items(totalDots) {
             IndicatorDot(
