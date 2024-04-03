@@ -27,3 +27,5 @@ val dividerNormal100 = 1.dp
 val pagerIndicatorSize = 50.dp
 
 val iconSize = 24.dp
+
+val newsCarouselImageSize = 200.dp

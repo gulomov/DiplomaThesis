@@ -59,10 +59,8 @@ fun AutoSlidingCarousel(
                 selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
                 dotSize = 8.dp
             )
-
         }
     }
-
 }
 
 @Composable
