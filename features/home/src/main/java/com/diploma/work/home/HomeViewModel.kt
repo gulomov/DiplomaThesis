@@ -3,6 +3,7 @@ package com.diploma.work.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diploma.work.repository.data.NewsInfo
+import com.diploma.work.repository.data.RecommendationsList
 import com.diploma.work.repository.repository.HomeRepository
 import com.diploma.work.repository.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,13 +22,15 @@ class HomeViewModel @Inject constructor(
     private val _newsInfo = MutableStateFlow(NewsInfo())
     val news = _newsInfo.asStateFlow()
 
+    private val _recommendationsList = MutableStateFlow(RecommendationsList())
+    val recommendationsList = _recommendationsList.asStateFlow()
+
     fun getNews() {
         viewModelScope.launch {
             repository.getNewsInfo().collect { resource ->
                 when (resource) {
                     is Resource.Success -> {
                         resource.data?.let {
-                            println("Success is $it")
                             _newsInfo.value = it
                         }
                     }
@@ -40,16 +43,23 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    inline fun <T> Flow<Resource<T>>.observeResource(
-        crossinline onSuccess: (T) -> Unit,
-        crossinline onError: (Throwable) -> Unit,
-    ) {
-        this.onEach { resource ->
-            when (resource) {
-                is Resource.Success -> resource.data?.let { onSuccess(it) }
-                is Resource.Error -> resource.error?.let { onError(it) }
+    fun getRecommendationsList() {
+        viewModelScope.launch {
+            repository.getRecommendations().collect { resource ->
+                when (resource) {
+                    is Resource.Success -> {
+                        resource.data?.let {
+                            println("recommendations: $it")
+                            _recommendationsList.value = it
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        println("Error is ${resource.data}")
+                    }
+                }
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }
 
