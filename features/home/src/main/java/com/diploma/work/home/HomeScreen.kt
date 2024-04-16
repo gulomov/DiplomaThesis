@@ -29,11 +29,14 @@ import com.diploma.work.repository.data.RecommendationsList
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.diploma.work.design.theme.large100
 import com.diploma.work.design.theme.recommendationImageHeightSize
 import com.diploma.work.design.theme.recommendationImageWidthSize
+import com.diploma.work.home.componants.RecommendationsHome
 import com.diploma.work.repository.data.RecommendationItem
+import okhttp3.internal.toImmutableList
 
 @Composable
 fun HomeScreen(
@@ -49,67 +52,8 @@ fun HomeScreen(
 
     }
     Column {
-        NewsInHome(news = news)
+        NewsInHome(news = news.toImmutableList())
         Spacer(modifier = Modifier.height(normal100))
         RecommendationsHome(recommendations = recommendations)
-    }
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun RecommendationsHome(
-    recommendations: RecommendationsList,
-    modifier: Modifier = Modifier,
-) {
-    val pagerState = rememberPagerState()
-    Column(
-        horizontalAlignment = Alignment.Start,
-        modifier = modifier
-    ) {
-        Text(
-            text = recommendations.title.orEmpty(),
-            modifier = Modifier.padding(start = normal100, top = normal100),
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.width(small100))
-        HorizontalPager(
-            pageCount = recommendations.recommendationsList.size,
-            state = pagerState,
-            contentPadding = PaddingValues(horizontal = large100, vertical = small100),
-            pageSpacing = small100,
-            pageSize = PageSize.Fixed(recommendationImageWidthSize)
-        ) { page ->
-            // FIXME: Change size
-            Card(
-                modifier = Modifier
-                    .padding(normal100)
-                    .width(recommendationImageWidthSize),
-                shape = RoundedCornerShape(normal100)
-            ) {
-                Recommendation(item = recommendations.recommendationsList[page])
-            }
-        }
-    }
-}
-
-@Composable
-fun Recommendation(
-    item: RecommendationItem,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .width(recommendationImageWidthSize)
-            .height(recommendationImageHeightSize)
-    ) {
-        AsyncImage(
-            model = item.image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(recommendationImageHeightSize)
-                .align(Alignment.Center)
-        )
     }
 }

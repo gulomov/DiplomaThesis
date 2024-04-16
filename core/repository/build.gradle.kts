@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":core:sharedpreference"))
+    implementation(project(":core:database"))
     androidCore()
     accompanistPager()
     coil()

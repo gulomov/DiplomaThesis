@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -24,14 +25,15 @@ import com.diploma.work.design.composables.AutoSlidingCarousel
 import com.diploma.work.design.theme.newsCarouselImageSize
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
-import com.diploma.work.repository.data.NewsInfo
+import com.diploma.work.home.R
 import com.diploma.work.repository.data.NewsItem
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.common.collect.ImmutableList
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun NewsInHome(
-    news: NewsInfo,
+    news: List<NewsItem>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -42,7 +44,7 @@ fun NewsInHome(
     ) {
         Spacer(modifier = Modifier.width(normal100))
         Text(
-            text = news.title.orEmpty(),
+            text = stringResource(id = R.string.homeScreenNewsTitle),
             modifier = Modifier.padding(normal100),
             fontWeight = FontWeight.Bold
         )
@@ -53,7 +55,7 @@ fun NewsInHome(
                 .fillMaxWidth(),
             shape = RoundedCornerShape(normal100)
         ) {
-            news.newsList?.let { newsInfo ->
+            news.let { newsInfo ->
                 if (newsInfo.isNotEmpty()) AutoSlidingCarousel(
                     itemsCount = newsInfo.size,
                     itemContent = {

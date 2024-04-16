@@ -2,7 +2,12 @@ package com.diploma.work.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.home.domain.FetchNewsFromFirebaseAndSaveUseCase
+import com.diploma.work.home.domain.GetHomeRecommendationsUseCase
+import com.diploma.work.home.domain.GetHomeScreenNewsUseCase
 import com.diploma.work.repository.data.NewsInfo
+import com.diploma.work.repository.data.NewsItem
+import com.diploma.work.repository.data.RecommendationItem
 import com.diploma.work.repository.data.RecommendationsList
 import com.diploma.work.repository.repository.HomeRepository
 import com.diploma.work.repository.resource.Resource
@@ -17,46 +22,45 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: HomeRepository
+    private val fetchNewsFromFirebaseAndSaveUseCase: FetchNewsFromFirebaseAndSaveUseCase,
+    private val getHomeNewsInfoUseCase: GetHomeScreenNewsUseCase,
+    private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase
+
 ) : ViewModel() {
-    private val _newsInfo = MutableStateFlow(NewsInfo())
+    private val _newsInfo = MutableStateFlow(listOf<NewsItem>())
     val news = _newsInfo.asStateFlow()
 
-    private val _recommendationsList = MutableStateFlow(RecommendationsList())
+    private val _recommendationsList = MutableStateFlow(listOf<RecommendationItem>())
     val recommendationsList = _recommendationsList.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            fetchNewsFromFirebaseAndSaveUseCase()
+        }
+    }
 
     fun getNews() {
         viewModelScope.launch {
-            repository.getNewsInfo().collect { resource ->
-                when (resource) {
-                    is Resource.Success -> {
-                        resource.data?.let {
-                            _newsInfo.value = it
-                        }
-                    }
-
-                    is Resource.Error -> {
-                        println("Error is ${resource.data}")
-                    }
+            getHomeNewsInfoUseCase().collect { resource ->
+                if (resource.isNotEmpty()) {
+                    println("Success in news viewmodel: $resource")
+                    _newsInfo.value = resource
+                } else {
+                    println("Error in ViewModel")
                 }
+
             }
         }
     }
 
     fun getRecommendationsList() {
         viewModelScope.launch {
-            repository.getRecommendations().collect { resource ->
-                when (resource) {
-                    is Resource.Success -> {
-                        resource.data?.let {
-                            println("recommendations: $it")
-                            _recommendationsList.value = it
-                        }
-                    }
-
-                    is Resource.Error -> {
-                        println("Error is ${resource.data}")
-                    }
+            getHomeRecommendationsUseCase().collect { resource ->
+                if (resource.isNotEmpty()) {
+                    println("Success in recommendations viewmodel: $resource")
+                    _recommendationsList.value = resource
+                } else {
+                    println("Error in ViewModel")
                 }
             }
         }
