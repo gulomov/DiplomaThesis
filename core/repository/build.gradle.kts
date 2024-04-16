@@ -7,6 +7,8 @@ import libs.Hilt.hilt
 import libs.Moshi.moshi
 import libs.Room.room
 import libs.Timber.timber
+import libs.UnitTest.androidTestImplementations
+import libs.UnitTest.testImplementations
 
 plugins {
     id("com.android.library")
