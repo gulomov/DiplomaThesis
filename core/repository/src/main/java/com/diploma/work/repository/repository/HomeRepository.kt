@@ -25,14 +25,18 @@ class HomeRepository @Inject constructor(
         fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
             newsInfo?.newsList?.let { newsList ->
                 withContext(Dispatchers.IO) {
+                    val existingEntries = roomDao.getNewsInfoList().associateBy { it.image }
                     newsList.forEach {
-                        roomDao.saveNewsInfo(
-                            NewsInfoEntity(
-                                image = it.image,
-                                body = it.body,
-                                title = it.title
+                        val existing = existingEntries[it.image]
+                        if (existing == null || existing.image != it.image) {
+                            roomDao.saveNewsInfo(
+                                NewsInfoEntity(
+                                    image = it.image,
+                                    body = it.body,
+                                    title = it.title
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
@@ -40,10 +44,8 @@ class HomeRepository @Inject constructor(
     }
 
     fun getNewsInfo(): Flow<List<NewsItem>> = flow {
-        println("Success in news repository entered")
-        roomDao.getNewsInfo().collect { newsEntityList ->
+        roomDao.getNewsInfoFlow().collect { newsEntityList ->
             emit(newsEntityList.map { entity ->
-                println("Success in news repository entered: $newsEntityList")
                 NewsItem(
                     image = entity.image,
                     body = entity.body,
@@ -54,35 +56,29 @@ class HomeRepository @Inject constructor(
     }
 
 
-    fun fetchAndSaveHomeRecommendationsFromFirebase(): Flow<List<RecommendationItem>> =
-        flow {
-            try {
-                fetchFromDatabase<RecommendationsList>("home/recommendations", firebaseDatabase)
-                    .collect { data ->
-                        withContext(Dispatchers.IO) {
-                            data?.recommendationsList?.map {
-                                println("Success in recommendations repository: $it")
-                                roomDao.saveHomeRecommendations(
-                                    HomeRecommendationsEntity(
-                                        id = it.id ?: 0,
-                                        imageUrl = it.image.orEmpty()
-                                    )
-                                )
-                            }
-                            roomDao.getHomeRecommendations().map { data ->
-                                data.map {
-                                    RecommendationItem(id = it.id, image = it.imageUrl)
-                                }
-                            }
-                        }
+    suspend fun fetchAndSaveHomeRecommendationsFromFirebase() {
+        fetchFromDatabase<RecommendationsList>(
+            "home/recommendations",
+            firebaseDatabase
+        ).collect { data ->
+            withContext(Dispatchers.IO) {
+                val existingEntries = roomDao.getHomeRecommendationsList().associateBy { it.id }
+                data?.recommendationsList?.map {
+                    val existing = existingEntries[it.id]
+                    if (existing == null || existing.id != it.id) {
+                        roomDao.saveHomeRecommendations(
+                            HomeRecommendationsEntity(
+                                id = it.id ?: 0,
+                                imageUrl = it.image.orEmpty()
+                            )
+                        )
                     }
-            } catch (e: Exception) {
-                println("Error in Repository $e")
-                emit(emptyList())
+                }
             }
         }
+    }
 
-    fun getRecommendations() = roomDao.getHomeRecommendations().map { recommendations ->
+    fun getRecommendations() = roomDao.getHomeRecommendationsFlow().map { recommendations ->
         recommendations.map {
             RecommendationItem(id = it.id, image = it.imageUrl)
         }

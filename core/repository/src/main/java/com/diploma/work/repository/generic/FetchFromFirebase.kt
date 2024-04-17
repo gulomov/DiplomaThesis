@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 
 inline fun <reified T : Any> fetchFromDatabase(
     path: String,
@@ -17,20 +18,20 @@ inline fun <reified T : Any> fetchFromDatabase(
         val dataSnapshot = database.getReference(path).get().await()
         if (dataSnapshot.exists()) {
             dataSnapshot.getValue<T>().also {
-                println("Data fetched successfully: $it")
+                Timber.d("Data fetched successfully: $it")
                 trySend(it)
             }
         } else {
-            println("No data found at path: $path")
+            Timber.d("No data found at path: $path")
             trySend(null) // Sending null if no data is found
         }
     } catch (e: Exception) {
-        println("Error fetching data from Firebase: ${e.message}")
+        Timber.d("Error fetching data from Firebase: ${e.message}")
         close(e) // Close the flow with an exception
     }
 
     awaitClose {
         // Optional cleanup can be performed here if necessary
-        println("Closing the fetchFromDatabase flow")
+        Timber.d("Closing the fetchFromDatabase flow")
     }
 }

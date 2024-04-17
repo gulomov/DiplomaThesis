@@ -11,13 +11,19 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HomeScreenDao {
     @Query("SELECT * FROM news_info")
-    fun getNewsInfo(): Flow<List<NewsInfoEntity>>
+    fun getNewsInfoFlow(): Flow<List<NewsInfoEntity>>
+
+    @Query("SELECT * FROM news_info")
+    fun getNewsInfoList(): List<NewsInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveNewsInfo(newsInfoEntity: NewsInfoEntity)
 
     @Query("SELECT * FROM home_recommendations")
-    fun getHomeRecommendations(): Flow<List<HomeRecommendationsEntity>>
+    fun getHomeRecommendationsFlow(): Flow<List<HomeRecommendationsEntity>>
+
+    @Query("SELECT * FROM home_recommendations")
+    fun getHomeRecommendationsList(): List<HomeRecommendationsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveHomeRecommendations(homeRecommendationsEntity: HomeRecommendationsEntity)

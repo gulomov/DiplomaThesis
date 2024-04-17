@@ -10,10 +10,12 @@ import androidx.compose.ui.Modifier
 import com.diploma.work.diplomathesis.navigation.AppNavHost
 import com.diploma.work.design.theme.DiplomaThesisTheme
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.plant(Timber.DebugTree())
         super.onCreate(savedInstanceState)
         setContent {
             DiplomaThesisTheme {

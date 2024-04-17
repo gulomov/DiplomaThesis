@@ -3,26 +3,22 @@ package com.diploma.work.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diploma.work.home.domain.FetchNewsFromFirebaseAndSaveUseCase
+import com.diploma.work.home.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.GetHomeRecommendationsUseCase
 import com.diploma.work.home.domain.GetHomeScreenNewsUseCase
-import com.diploma.work.repository.data.NewsInfo
 import com.diploma.work.repository.data.NewsItem
 import com.diploma.work.repository.data.RecommendationItem
-import com.diploma.work.repository.data.RecommendationsList
-import com.diploma.work.repository.repository.HomeRepository
-import com.diploma.work.repository.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val fetchNewsFromFirebaseAndSaveUseCase: FetchNewsFromFirebaseAndSaveUseCase,
+    private val fetchRecommendationsFromFirebaseAndSaveUseCase: FetchRecommendationsFromFirebaseAndSaveUseCase,
     private val getHomeNewsInfoUseCase: GetHomeScreenNewsUseCase,
     private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase
 
@@ -34,19 +30,17 @@ class HomeViewModel @Inject constructor(
     val recommendationsList = _recommendationsList.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            fetchNewsFromFirebaseAndSaveUseCase()
-        }
+        fetchAndSaveNews()
+        fetchAndSaveRecommendations()
     }
 
     fun getNews() {
         viewModelScope.launch {
             getHomeNewsInfoUseCase().collect { resource ->
                 if (resource.isNotEmpty()) {
-                    println("Success in news viewmodel: $resource")
                     _newsInfo.value = resource
                 } else {
-                    println("Error in ViewModel")
+                    Timber.e("News is empty")
                 }
 
             }
@@ -57,13 +51,21 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getHomeRecommendationsUseCase().collect { resource ->
                 if (resource.isNotEmpty()) {
-                    println("Success in recommendations viewmodel: $resource")
                     _recommendationsList.value = resource
                 } else {
-                    println("Error in ViewModel")
+                    Timber.e("Recommendations is empty")
                 }
             }
         }
+    }
+
+    private fun fetchAndSaveNews() = viewModelScope.launch {
+        fetchNewsFromFirebaseAndSaveUseCase()
+
+    }
+
+    private fun fetchAndSaveRecommendations() = viewModelScope.launch {
+        fetchRecommendationsFromFirebaseAndSaveUseCase()
     }
 }
 
