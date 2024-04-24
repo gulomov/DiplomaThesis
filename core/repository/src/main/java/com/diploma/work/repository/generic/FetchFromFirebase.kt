@@ -22,11 +22,11 @@ inline fun <reified T : Any> fetchFromDatabase(
                 trySend(it)
             }
         } else {
-            Timber.d("No data found at path: $path")
+            Timber.e("No data found at path: $path")
             trySend(null) // Sending null if no data is found
         }
     } catch (e: Exception) {
-        Timber.d("Error fetching data from Firebase: ${e.message}")
+        Timber.e("Error fetching data from Firebase: ${e.message}")
         close(e) // Close the flow with an exception
     }
 

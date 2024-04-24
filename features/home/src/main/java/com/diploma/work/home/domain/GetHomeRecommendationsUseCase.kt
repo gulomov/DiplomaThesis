@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetHomeRecommendationsUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
-    operator fun invoke(): Flow<List<RecommendationItem>> = homeRepository.getRecommendations()
+    operator fun invoke() = homeRepository.getRecommendations()
 }

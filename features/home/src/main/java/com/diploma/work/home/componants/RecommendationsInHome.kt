@@ -32,7 +32,7 @@ import com.diploma.work.repository.data.RecommendationItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RecommendationsHome(
+fun RecommendationsInHome(
     recommendations: List<RecommendationItem>,
     modifier: Modifier = Modifier,
 ) {
@@ -50,7 +50,7 @@ fun RecommendationsHome(
         HorizontalPager(
             pageCount = recommendations.size,
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = large100, vertical = small100),
+            contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
             pageSpacing = small100,
             pageSize = PageSize.Fixed(recommendationImageWidthSize)
         ) { page ->

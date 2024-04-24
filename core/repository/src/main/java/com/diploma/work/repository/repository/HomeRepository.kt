@@ -3,15 +3,16 @@ package com.diploma.work.repository.repository
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
+import com.diploma.work.database.entity.TopProductsListEntity
 import com.diploma.work.repository.data.NewsInfo
 import com.diploma.work.repository.data.NewsItem
 import com.diploma.work.repository.data.RecommendationItem
 import com.diploma.work.repository.data.RecommendationsList
+import com.diploma.work.repository.data.TopProductItem
+import com.diploma.work.repository.data.TopProductsList
 import com.diploma.work.repository.generic.fetchFromDatabase
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -43,19 +44,6 @@ class HomeRepository @Inject constructor(
         }
     }
 
-    fun getNewsInfo(): Flow<List<NewsItem>> = flow {
-        roomDao.getNewsInfoFlow().collect { newsEntityList ->
-            emit(newsEntityList.map { entity ->
-                NewsItem(
-                    image = entity.image,
-                    body = entity.body,
-                    title = entity.title
-                )
-            })
-        }
-    }
-
-
     suspend fun fetchAndSaveHomeRecommendationsFromFirebase() {
         fetchFromDatabase<RecommendationsList>(
             "home/recommendations",
@@ -78,9 +66,58 @@ class HomeRepository @Inject constructor(
         }
     }
 
+    suspend fun fetchAndSaveTopProductsFromFirebase() {
+        fetchFromDatabase<TopProductsList>(
+            "home/topProducts",
+            firebaseDatabase
+        ).collect { data ->
+            withContext(Dispatchers.IO) {
+                val existingEntries = roomDao.getTopProductsList().associateBy { it.id }
+                data?.topProductsList?.map {
+                    val existing = existingEntries[it.id]
+                    if (existing == null || existing.id != it.id) {
+                        roomDao.saveTopProductsList(
+                            TopProductsListEntity(
+                                id = it.id ?: 0,
+                                imageUrl = it.image.orEmpty(),
+                                title = it.title.orEmpty(),
+                                salePercentage = it.salePercentage ?: 0 ,
+                                saleStartsDate = it.saleStartsDate.orEmpty(),
+                                saleEndsDate = it.saleEndsDate.orEmpty()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getNewsInfo() = roomDao.getNewsInfoFlow().map { newsEntityList ->
+        newsEntityList.map { entity ->
+            NewsItem(
+                image = entity.image,
+                body = entity.body,
+                title = entity.title
+            )
+        }
+    }
+
     fun getRecommendations() = roomDao.getHomeRecommendationsFlow().map { recommendations ->
         recommendations.map {
             RecommendationItem(id = it.id, image = it.imageUrl)
+        }
+    }
+
+    fun getTopProducts() = roomDao.getTopProductsFlow().map { topProducts ->
+        topProducts.map {
+            TopProductItem(
+                id = it.id,
+                image = it.imageUrl,
+                title = it.title,
+                salePercentage = it.salePercentage,
+                saleStartsDate = it.saleStartsDate,
+                saleEndsDate = it.saleEndsDate
+            )
         }
     }
 }

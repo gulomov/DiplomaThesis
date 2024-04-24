@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
+import com.diploma.work.database.entity.TopProductsListEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -27,4 +28,13 @@ interface HomeScreenDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveHomeRecommendations(homeRecommendationsEntity: HomeRecommendationsEntity)
+
+    @Query("SELECT * FROM top_products_list")
+    fun getTopProductsList(): List<TopProductsListEntity>
+
+    @Query("SELECT * FROM top_products_list")
+    fun getTopProductsFlow(): Flow<List<TopProductsListEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveTopProductsList(topProductsListEntity: TopProductsListEntity)
 }

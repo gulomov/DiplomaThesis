@@ -5,7 +5,7 @@ import com.google.firebase.database.PropertyName
 data class RecommendationsList(
     @PropertyName("title") val title: String? = null,
     @PropertyName("recommendationsList")
-    val recommendationsList: List<RecommendationItem> = emptyList()
+    val recommendationsList: List<RecommendationItem>? = emptyList()
 )
 
 data class RecommendationItem(

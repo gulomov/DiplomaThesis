@@ -7,12 +7,14 @@ import com.diploma.work.database.dao.ProductListDao
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
 import com.diploma.work.database.entity.ProductListEntity
+import com.diploma.work.database.entity.TopProductsListEntity
 
 @Database(
     entities = [
         ProductListEntity::class,
         NewsInfoEntity::class,
-        HomeRecommendationsEntity::class
+        HomeRecommendationsEntity::class,
+        TopProductsListEntity::class
     ], version = 1
 )
 abstract class DiplomaThesisDatabase : RoomDatabase() {

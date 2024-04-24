@@ -11,5 +11,5 @@ import javax.inject.Inject
 class GetHomeScreenNewsUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
-    operator fun invoke(): Flow<List<NewsItem>> = homeRepository.getNewsInfo()
+    operator fun invoke() = homeRepository.getNewsInfo()
 }

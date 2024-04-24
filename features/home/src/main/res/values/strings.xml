@@ -2,4 +2,5 @@
 <resources>
     <string name="homeScreenNewsTitle">News</string>
     <string name="homeScreenRecommendationsTitle">Recommendations</string>
+    <string name="homeScreenTopProductsTitle">Top Products</string>
 </resources>
