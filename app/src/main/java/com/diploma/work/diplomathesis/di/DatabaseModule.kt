@@ -3,7 +3,7 @@ package com.diploma.work.diplomathesis.di
 import android.content.Context
 import androidx.room.Room
 import com.diploma.work.database.dao.HomeScreenDao
-import com.diploma.work.database.dao.ProductListDao
+import com.diploma.work.database.dao.ProductsDao
 import com.diploma.work.database.database.DiplomaThesisDatabase
 import dagger.Module
 import dagger.Provides
@@ -26,8 +26,8 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideProductListDao(database: DiplomaThesisDatabase): ProductListDao {
-        return database.ProductListDao()
+    fun provideProductListDao(database: DiplomaThesisDatabase): ProductsDao {
+        return database.ProductDao()
     }
 
     @Provides

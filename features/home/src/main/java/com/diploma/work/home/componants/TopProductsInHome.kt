@@ -49,9 +49,9 @@ fun TopProductsInHome(
     Card(
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(normal100),
+        modifier
+            .fillMaxWidth()
+            .padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
@@ -60,29 +60,29 @@ fun TopProductsInHome(
         ) {
             Box {
                 AsyncImage(
-                    model = topProductsItem.image,
+                    model = topProductsItem.images?.first()?.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(16f / 12f)
-                            .padding(small50)
-                            .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
+                    Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(16f / 12f)
+                        .padding(small50)
+                        .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
                 )
                 Text(
                     text = "${topProductsItem.salePercentage}%",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     modifier =
-                        Modifier
-                            .align(Alignment.TopEnd)
-                            .padding(top = small50, end = small50)
-                            .background(
-                                color = MaterialTheme.colorScheme.error,
-                                shape = RoundedCornerShape(topEnd = small100),
-                            )
-                            .padding(small50),
+                    Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(top = small50, end = small50)
+                        .background(
+                            color = MaterialTheme.colorScheme.error,
+                            shape = RoundedCornerShape(topEnd = small100),
+                        )
+                        .padding(small50),
                 )
             }
             Text(
@@ -93,11 +93,11 @@ fun TopProductsInHome(
             Text(
                 text = "${topProductsItem.saleStartsDate} - ${topProductsItem.saleEndsDate}",
                 modifier =
-                    Modifier.padding(
-                        start = normal100,
-                        top = normal100,
-                        bottom = normal100,
-                    ),
+                Modifier.padding(
+                    start = normal100,
+                    top = normal100,
+                    bottom = normal100,
+                ),
             )
         }
     }

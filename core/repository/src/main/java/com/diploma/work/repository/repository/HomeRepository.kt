@@ -1,5 +1,6 @@
 package com.diploma.work.repository.repository
 
+import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 2
 class HomeRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase,
     private val roomDao: HomeScreenDao
@@ -79,9 +81,9 @@ class HomeRepository @Inject constructor(
                         roomDao.saveTopProductsList(
                             TopProductsListEntity(
                                 id = it.id ?: 0,
-                                imageUrl = it.image.orEmpty(),
+                                imageUrl = Converters().fromImagesList(it.images.orEmpty()),
                                 title = it.title.orEmpty(),
-                                salePercentage = it.salePercentage ?: 0 ,
+                                salePercentage = it.salePercentage ?: 0,
                                 saleStartsDate = it.saleStartsDate.orEmpty(),
                                 saleEndsDate = it.saleEndsDate.orEmpty()
                             )
@@ -109,10 +111,10 @@ class HomeRepository @Inject constructor(
     }
 
     fun getTopProducts() = roomDao.getTopProductsFlow().map { topProducts ->
-        topProducts.map {
+        topProducts.shuffled().take(AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN).map {
             TopProductItem(
                 id = it.id,
-                image = it.imageUrl,
+                images = Converters().toImagesList(it.imageUrl),
                 title = it.title,
                 salePercentage = it.salePercentage,
                 saleStartsDate = it.saleStartsDate,
