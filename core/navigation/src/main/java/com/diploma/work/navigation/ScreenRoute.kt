@@ -5,4 +5,5 @@ object ScreenRoute {
     const val INTRO_SPLASH = "splash"
     const val INTRODUCTION = "introduction"
     const val HOME = "home"
+    const val PRODUCTION_DETAIL = "detail/{productId}"
 }

@@ -72,6 +72,7 @@ dependencies {
     implementation(project(":features:splash"))
     implementation(project(":features:introduction"))
     implementation(project(":features:home"))
+    implementation(project(":features:productdetail"))
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))

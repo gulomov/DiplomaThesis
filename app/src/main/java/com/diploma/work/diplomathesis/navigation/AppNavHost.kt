@@ -18,6 +18,7 @@ import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
+import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.splash.navigation.splashScreen
 
 @Composable
@@ -45,6 +46,10 @@ fun AppNavHost(
 
         INTRODUCTION -> {
             topBarVisibility.value = false
+        }
+
+        PRODUCTION_DETAIL -> {
+            topBarBackArrowVisibility.value = true
         }
 
         else -> topBarVisibility.value = true

@@ -2,19 +2,16 @@ package com.diploma.work.home
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.diploma.work.design.theme.normal100
@@ -23,10 +20,12 @@ import com.diploma.work.home.componants.NewsInHome
 import com.diploma.work.home.componants.RecommendationsInHome
 import com.diploma.work.home.componants.TopProductTitle
 import com.diploma.work.home.componants.TopProductsInHome
+import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import okhttp3.internal.toImmutableList
 
 private const val GRID_ITEM_SPAN = 3
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -59,7 +58,13 @@ fun HomeScreen(
             TopProductTitle()
         }
         items(topProducts) {
-            TopProductsInHome(it)
+            TopProductsInHome(
+                topProductsItem = it,
+                productOnClick = { productId ->
+                    val route = PRODUCTION_DETAIL.replace("{productId}", productId)
+                    navController.navigate(route)
+                },
+            )
         }
     }
 }

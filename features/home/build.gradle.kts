@@ -48,6 +48,7 @@ android {
 
         implementation(project(":core:design"))
         implementation(project(":core:repository"))
+        implementation(project(":core:navigation"))
 
         logback()
         androidCore()

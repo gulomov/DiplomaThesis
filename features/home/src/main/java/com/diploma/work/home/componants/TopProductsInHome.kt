@@ -3,15 +3,13 @@ package com.diploma.work.home.componants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,19 +35,23 @@ fun TopProductTitle() {
     Text(
         text = stringResource(id = R.string.homeScreenTopProductsTitle),
         modifier = Modifier.padding(normal100),
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun TopProductsInHome(
     topProductsItem: TopProductItem,
+    productOnClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(normal100),
+        onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
@@ -61,38 +63,41 @@ fun TopProductsInHome(
                     model = topProductsItem.image,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(16f / 12f)
-                        .padding(small50)
-                        .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(16f / 12f)
+                            .padding(small50)
+                            .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
                 )
                 Text(
                     text = "${topProductsItem.salePercentage}%",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = small50, end = small50)
-                        .background(
-                            color = MaterialTheme.colorScheme.error,
-                            shape = RoundedCornerShape(topEnd = small100)
-                        )
-                        .padding(small50)
+                    modifier =
+                        Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(top = small50, end = small50)
+                            .background(
+                                color = MaterialTheme.colorScheme.error,
+                                shape = RoundedCornerShape(topEnd = small100),
+                            )
+                            .padding(small50),
                 )
             }
             Text(
                 text = topProductsItem.title.orEmpty(),
                 modifier = Modifier.padding(start = normal100, top = normal100),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             Text(
                 text = "${topProductsItem.saleStartsDate} - ${topProductsItem.saleEndsDate}",
-                modifier = Modifier.padding(
-                    start = normal100,
-                    top = normal100,
-                    bottom = normal100,
-                ),
+                modifier =
+                    Modifier.padding(
+                        start = normal100,
+                        top = normal100,
+                        bottom = normal100,
+                    ),
             )
         }
     }

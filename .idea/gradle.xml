@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/home" />
             <option value="$PROJECT_DIR$/features/introduction" />
+            <option value="$PROJECT_DIR$/features/productdetail" />
             <option value="$PROJECT_DIR$/features/splash" />
           </set>
         </option>
