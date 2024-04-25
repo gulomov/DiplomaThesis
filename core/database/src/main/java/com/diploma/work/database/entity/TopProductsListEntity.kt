@@ -16,7 +16,7 @@ data class TopProductsListEntity(
     @ColumnInfo(name = "sale_ends_date") val saleEndsDate: String
 )
 
-data class TopProductsImage(
+data class ProductImages(
     @PropertyName("imageUrl")
     val imageUrl: String = ""
 )
