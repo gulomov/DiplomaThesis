@@ -2,12 +2,11 @@ package com.diploma.work.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.diploma.work.database.entity.ProductListEntity
 import com.diploma.work.database.entity.TopProductsListEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductsDao {
     @Query("SELECT * FROM top_products_list WHERE id = :productId")
-    fun getProductList(productId: String): Flow<TopProductsListEntity>
+    fun getTopProductDetail(productId: String): Flow<TopProductsListEntity>
 }

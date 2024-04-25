@@ -8,6 +8,7 @@ import com.google.firebase.database.PropertyName
 @Entity(tableName = "top_products_list")
 data class TopProductsListEntity(
     @PrimaryKey val id: Int,
+    @ColumnInfo("address") val address: String,
     @ColumnInfo(name = "images") val imageUrl: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "sale_percentage") val salePercentage: Int,

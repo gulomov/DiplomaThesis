@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 2
+
 class HomeRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase,
     private val roomDao: HomeScreenDao
@@ -80,6 +81,7 @@ class HomeRepository @Inject constructor(
                     if (existing == null || existing.id != it.id) {
                         roomDao.saveTopProductsList(
                             TopProductsListEntity(
+                                address = it.address.orEmpty(),
                                 id = it.id ?: 0,
                                 imageUrl = Converters().fromImagesList(it.images.orEmpty()),
                                 title = it.title.orEmpty(),

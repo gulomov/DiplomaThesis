@@ -9,6 +9,8 @@ data class TopProductsList(
 )
 
 data class TopProductItem(
+    @PropertyName("address")
+    val address: String? = null,
     @PropertyName("id")
     val id: Int? = null,
     @PropertyName("images")
