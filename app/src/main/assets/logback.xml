@@ -1,0 +1,26 @@
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://tony19.github.io/logback-android/xml"
+    xsi:schemaLocation="https://tony19.github.io/logback-android/xml https://cdn.jsdelivr.net/gh/tony19/logback-android/logback.xsd">
+    <property name="log.path" value="/data/data/com.diploma.work.diplomathesis/files/log" />
+    <property name="log.name" value="foo" />
+
+    <!-- Create a file appender for a log in the application's data directory -->
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/${log.name}.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/${log.name}_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>1KB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- Write INFO (and higher-level) messages to the log file -->
+    <root level="INFO">
+        <appender-ref ref="file" />
+    </root>
+</configuration>

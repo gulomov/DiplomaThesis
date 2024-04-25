@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "185411968421",
+    "firebase_url": "https://dimplomathesis-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "dimplomathesis",
     "storage_bucket": "dimplomathesis.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:185411968421:android:de64e28379cf8b1d771c4c",
+        "mobilesdk_app_id": "1:185411968421:android:0d23ab998d1c265a771c4c",
         "android_client_info": {
-          "package_name": "com.deploma.work.diplomathesis"
+          "package_name": "com.diploma.work.diplomathesis"
         }
       },
       "oauth_client": [],

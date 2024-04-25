@@ -4,6 +4,7 @@ import libs.Coil.coil
 import libs.Compose.compose
 import libs.Firebase.firebase
 import libs.Hilt.hilt
+import libs.LogBack.logback
 import libs.Moshi.moshi
 import libs.Room.room
 import libs.Timber.timber
@@ -18,10 +19,10 @@ plugins {
 }
 
 android {
-    namespace = "com.deploma.work.diplomathesis"
+    namespace = "com.diploma.work.diplomathesis"
 
     defaultConfig {
-        applicationId = "com.deploma.work.diplomathesis"
+        applicationId = "com.diploma.work.diplomathesis"
         minSdk = DefaultConfig.minSdkVersion
         compileSdk = DefaultConfig.compileSdkVersion
         targetSdk = DefaultConfig.targetSdkVersion
@@ -68,10 +69,15 @@ android {
 
 dependencies {
 
-    implementation(project(":data"))
-    implementation(project(":features"))
-    implementation(project(":screens"))
+    implementation(project(":features:splash"))
+    implementation(project(":features:introduction"))
+    implementation(project(":features:home"))
+    implementation(project(":features:productdetail"))
+    implementation(project(":core:database"))
+    implementation(project(":core:design"))
+    implementation(project(":core:navigation"))
 
+    logback()
     androidCore()
     accompanistPager()
     coil()
