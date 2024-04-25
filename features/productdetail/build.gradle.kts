@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(project(":core:design"))
+    implementation(project(":core:database"))
     implementation(project(":core:repository"))
 
     logback()

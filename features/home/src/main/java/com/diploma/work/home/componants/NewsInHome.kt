@@ -40,7 +40,6 @@ fun NewsInHome(
         horizontalAlignment = Alignment.Start,
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface),
     ) {
         Spacer(modifier = Modifier.width(normal100))
         Text(

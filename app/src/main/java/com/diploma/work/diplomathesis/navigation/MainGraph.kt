@@ -9,6 +9,7 @@ import com.diploa.work.prdoductdetail.ProductDetails
 import com.diploma.work.home.HomeScreen
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(HOME) {
