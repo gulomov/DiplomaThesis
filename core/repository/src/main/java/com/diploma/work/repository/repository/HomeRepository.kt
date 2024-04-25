@@ -87,7 +87,9 @@ class HomeRepository @Inject constructor(
                                 title = it.title.orEmpty(),
                                 salePercentage = it.salePercentage ?: 0,
                                 saleStartsDate = it.saleStartsDate.orEmpty(),
-                                saleEndsDate = it.saleEndsDate.orEmpty()
+                                saleEndsDate = it.saleEndsDate.orEmpty(),
+                                originalPrice = it.originalPrice ?: 0,
+                                priceOnSale = it.priceOnSale ?: 0
                             )
                         )
                     }
@@ -120,7 +122,9 @@ class HomeRepository @Inject constructor(
                 title = it.title,
                 salePercentage = it.salePercentage,
                 saleStartsDate = it.saleStartsDate,
-                saleEndsDate = it.saleEndsDate
+                saleEndsDate = it.saleEndsDate,
+                priceOnSale = it.priceOnSale,
+                originalPrice = it.originalPrice
             )
         }
     }

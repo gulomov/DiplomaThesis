@@ -1,6 +1,7 @@
 package com.diploma.work.design.theme
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 val small50 = 4.dp
@@ -32,3 +33,7 @@ val newsCarouselImageSize = 200.dp
 
 val recommendationImageWidthSize = 150.dp
 val recommendationImageHeightSize = 100.dp
+
+val fontSize20 = 20.sp
+val fontSize18 = 18.sp
+val fontSize16 = 16.sp

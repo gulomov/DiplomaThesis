@@ -13,7 +13,9 @@ data class TopProductsListEntity(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "sale_percentage") val salePercentage: Int,
     @ColumnInfo(name = "sale_starts_date") val saleStartsDate: String,
-    @ColumnInfo(name = "sale_ends_date") val saleEndsDate: String
+    @ColumnInfo(name = "sale_ends_date") val saleEndsDate: String,
+    @ColumnInfo(name = "original_price") val originalPrice: Int,
+    @ColumnInfo(name = "price_on_sale") val priceOnSale: Int
 )
 
 data class ProductImages(

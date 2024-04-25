@@ -22,5 +22,9 @@ data class TopProductItem(
     @PropertyName("saleStartsDate")
     val saleStartsDate: String? = null,
     @PropertyName("saleEndsDate")
-    val saleEndsDate: String? = null
+    val saleEndsDate: String? = null,
+    @PropertyName("originalPrice")
+    val originalPrice: Int? = null,
+    @PropertyName("priceOnSale")
+    val priceOnSale: Int? = null
 )

@@ -16,7 +16,9 @@ class ProductRepository @Inject constructor(
             title = it.title,
             salePercentage = it.salePercentage,
             saleStartsDate = it.saleStartsDate,
-            saleEndsDate = it.saleEndsDate
+            saleEndsDate = it.saleEndsDate,
+            priceOnSale = it.priceOnSale,
+            originalPrice = it.originalPrice
         )
     }
 }

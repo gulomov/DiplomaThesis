@@ -80,7 +80,7 @@ fun TopProductsInHome(
                         .padding(top = small50, end = small50)
                         .background(
                             color = MaterialTheme.colorScheme.error,
-                            shape = RoundedCornerShape(topEnd = small100),
+                            shape = RoundedCornerShape(topEnd = small100)
                         )
                         .padding(small50),
                 )
