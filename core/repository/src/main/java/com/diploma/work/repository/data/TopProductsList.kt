@@ -1,6 +1,7 @@
 package com.diploma.work.repository.data
 
 import com.diploma.work.database.entity.ProductImages
+import com.diploma.work.database.entity.ProductSizes
 import com.google.firebase.database.PropertyName
 
 data class TopProductsList(
@@ -26,5 +27,7 @@ data class TopProductItem(
     @PropertyName("originalPrice")
     val originalPrice: Int? = null,
     @PropertyName("priceOnSale")
-    val priceOnSale: Int? = null
+    val priceOnSale: Int? = null,
+    @PropertyName("sizes")
+    val sizes: List<ProductSizes>? = null
 )

@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 2
@@ -89,7 +90,8 @@ class HomeRepository @Inject constructor(
                                 saleStartsDate = it.saleStartsDate.orEmpty(),
                                 saleEndsDate = it.saleEndsDate.orEmpty(),
                                 originalPrice = it.originalPrice ?: 0,
-                                priceOnSale = it.priceOnSale ?: 0
+                                priceOnSale = it.priceOnSale ?: 0,
+                                sizes = Converters().fromSizesList(it.sizes.orEmpty())
                             )
                         )
                     }

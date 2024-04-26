@@ -2,8 +2,10 @@ package com.diploma.work.database.converter
 
 import androidx.room.TypeConverter
 import com.diploma.work.database.entity.ProductImages
+import com.diploma.work.database.entity.ProductSizes
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import com.squareup.moshi.adapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 
@@ -12,16 +14,31 @@ class Converters {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    private val listType = Types.newParameterizedType(List::class.java, ProductImages::class.java)
-    private val adapter = moshi.adapter<List<ProductImages>>(listType)
+    private val imagesListType =
+        Types.newParameterizedType(List::class.java, ProductImages::class.java)
+    private val imagesAdapter = moshi.adapter<List<ProductImages>>(imagesListType)
+
+    private val sizesListType =
+        Types.newParameterizedType(List::class.java, ProductSizes::class.java)
+    private val sizesAdapter = moshi.adapter<List<ProductSizes>>(sizesListType)
 
     @TypeConverter
     fun fromImagesList(images: List<ProductImages>): String {
-        return adapter.toJson(images)
+        return imagesAdapter.toJson(images)
     }
 
     @TypeConverter
     fun toImagesList(imagesJson: String): List<ProductImages> {
-        return adapter.fromJson(imagesJson) ?: emptyList()
+        return imagesAdapter.fromJson(imagesJson) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun fromSizesList(sizes: List<ProductSizes>): String {
+        return sizesAdapter.toJson(sizes)
+    }
+
+    @TypeConverter
+    fun toSizesList(sizesJson: String): List<ProductSizes> {
+        return sizesAdapter.fromJson(sizesJson) ?: emptyList()
     }
 }

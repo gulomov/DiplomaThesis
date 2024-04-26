@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.diploa.work.prdoductdetail.composables.ProductSize
 import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.design.composables.IndicatorDots
 import com.diploma.work.design.composables.MainHorizontalPager
@@ -103,6 +104,8 @@ fun ProductDetails(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(normal150))
+            ProductSize(productDetails.sizes.orEmpty())
             Text(
                 text = stringResource(
                     id = R.string.sales_period,

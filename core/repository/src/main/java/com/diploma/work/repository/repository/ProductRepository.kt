@@ -18,7 +18,8 @@ class ProductRepository @Inject constructor(
             saleStartsDate = it.saleStartsDate,
             saleEndsDate = it.saleEndsDate,
             priceOnSale = it.priceOnSale,
-            originalPrice = it.originalPrice
+            originalPrice = it.originalPrice,
+            sizes = Converters().toSizesList(it.sizes)
         )
     }
 }
