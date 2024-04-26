@@ -5,14 +5,13 @@ import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.database.entity.ProductSizes
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import com.squareup.moshi.adapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-
 class Converters {
-    private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    private val moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
     private val imagesListType =
         Types.newParameterizedType(List::class.java, ProductImages::class.java)

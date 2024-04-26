@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 2
