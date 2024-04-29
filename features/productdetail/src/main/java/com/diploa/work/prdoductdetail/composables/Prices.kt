@@ -7,12 +7,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import com.diploma.work.design.theme.fontSize16
 import com.diploma.work.design.theme.fontSize18
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small50
+import com.diploma.work.prdoductdetail.R
 
 @Composable
 internal fun Prices(
@@ -21,22 +23,20 @@ internal fun Prices(
 ) {
     Row(modifier = Modifier.padding(start = normal100)) {
         Text(
-            text = originalPrice,
+            text = stringResource(id = R.string.product_price, originalPrice),
             modifier = Modifier.padding(small50),
-            style =
-                TextStyle(
-                    color = Color.Gray,
-                    fontSize = fontSize16,
-                    textDecoration = TextDecoration.LineThrough,
-                ),
+            style = TextStyle(
+                color = Color.Gray,
+                fontSize = fontSize16,
+                textDecoration = TextDecoration.LineThrough,
+            ),
         )
         Text(
-            text = priceOnSale,
-            style =
-                TextStyle(
-                    color = MaterialTheme.colorScheme.error,
-                    fontSize = fontSize18,
-                ),
+            text = stringResource(id = R.string.product_price, priceOnSale),
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.error,
+                fontSize = fontSize18,
+            ),
         )
     }
 }

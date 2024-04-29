@@ -3,4 +3,5 @@
     <string name="sales_period">Sales on from: %1$s - to: %2$s</string>
     <string name="sale_on_address">Sale on Address: %1$s</string>
     <string name="show_in_the_map">Show in the map</string>
+    <string name="product_price">%1$sKć</string>
 </resources>

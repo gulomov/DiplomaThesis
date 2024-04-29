@@ -1,26 +1,34 @@
 package com.diploa.work.prdoductdetail.composables
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.design.composables.IndicatorDots
 import com.diploma.work.design.composables.MainHorizontalPager
+import com.diploma.work.design.theme.normal150
 import com.diploma.work.design.theme.productsCarouselImageSize
 import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small150
+import com.diploma.work.prdoductdetail.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 
@@ -37,25 +45,14 @@ internal fun ProductDetailsImages(
             pagerState = pagerState,
             itemsCount = productImages.size,
             itemContent = {
-                AsyncImage(
-                    model =
-                        ImageRequest.Builder(LocalContext.current)
-                            .data(productImages[it].imageUrl)
-                            .build(),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier =
-                        Modifier
-                            .height(productsCarouselImageSize)
-                            .align(Alignment.Center),
-                )
+                ProductHorizontalPager(productImages[it].imageUrl)
             },
         )
         Surface(
             modifier =
-                Modifier
-                    .padding(small100)
-                    .align(Alignment.BottomCenter),
+            Modifier
+                .padding(small100)
+                .align(Alignment.BottomCenter),
             shape = CircleShape,
         ) {
             IndicatorDots(
@@ -64,5 +61,31 @@ internal fun ProductDetailsImages(
                 dotSize = small100,
             )
         }
+    }
+}
+
+@Composable
+internal fun ProductHorizontalPager(imageUrl: String, modifier: Modifier = Modifier) {
+    Box(modifier = modifier) {
+        AsyncImage(
+            model =
+            ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .build(),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier =
+            Modifier
+                .height(productsCarouselImageSize)
+                .align(Alignment.Center),
+        )
+        Image(
+            painter = painterResource(id = R.drawable.ic_favorite),
+            contentDescription = "Favorite",
+            modifier = Modifier
+                .size(normal150)
+                .align(Alignment.BottomEnd)
+                .padding(small150)
+        )
     }
 }
