@@ -2,12 +2,12 @@ package com.diploma.work.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.common.domain.GetTopProductsUseCase
 import com.diploma.work.home.domain.FetchNewsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.FetchTopProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.GetHomeRecommendationsUseCase
 import com.diploma.work.home.domain.GetHomeScreenNewsUseCase
-import com.diploma.work.home.domain.GetHomeTopProductsUseCase
 import com.diploma.work.repository.data.NewsItem
 import com.diploma.work.repository.data.RecommendationItem
 import com.diploma.work.repository.data.TopProductItem
@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
     private val fetchTopProductsFromFirebaseAndSaveUseCase: FetchTopProductsFromFirebaseAndSaveUseCase,
     private val getHomeNewsInfoUseCase: GetHomeScreenNewsUseCase,
     private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase,
-    private val getHomeTopProductsUseCase: GetHomeTopProductsUseCase
+    private val getTopProductsUseCase: GetTopProductsUseCase
 
 ) : ViewModel() {
     private val _newsInfo = MutableStateFlow(listOf<NewsItem>())
@@ -70,7 +70,7 @@ class HomeViewModel @Inject constructor(
 
     fun getTopProductsList() {
         viewModelScope.launch {
-            getHomeTopProductsUseCase().collect { data ->
+            getTopProductsUseCase().collect { data ->
                 if (data.isNotEmpty()) {
                     _topProductsList.value = data
                 } else {

@@ -1,12 +1,7 @@
-import libs.AccompanistPager.accompanistPager
 import libs.AndroidCode.androidCore
 import libs.Coil.coil
 import libs.Compose.compose
-import libs.Firebase.firebase
 import libs.Hilt.hilt
-import libs.Moshi.moshi
-import libs.Room.room
-import libs.Timber.timber
 
 plugins {
     id("com.android.library")
@@ -15,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.diploma.work.repository"
+    namespace = "com.diploma.work.common"
 
     defaultConfig {
         minSdk = 24
-        compileSdk = 34
+        compileSdk = 33
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -38,16 +33,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:sharedpreference"))
+    implementation(project(":core:repository"))
+    implementation(project(":core:design"))
     implementation(project(":core:database"))
+    implementation(project(":core:navigation"))
 
     androidCore()
-    accompanistPager()
     coil()
     compose()
-    firebase()
     hilt()
-    moshi()
-    timber()
-    room()
 }

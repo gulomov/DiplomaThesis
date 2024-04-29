@@ -1,9 +1,9 @@
-package com.diploma.work.home.domain
+package com.diploma.work.common.domain
 
 import com.diploma.work.repository.repository.HomeRepository
 import javax.inject.Inject
 
-class GetHomeTopProductsUseCase @Inject constructor(
+class GetTopProductsUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
     operator fun invoke() = homeRepository.getTopProducts()

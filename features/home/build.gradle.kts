@@ -20,29 +20,24 @@ android {
 
     defaultConfig {
         minSdk = 24
-
         compileSdk = 33
-
-        defaultConfig {
-            minSdk = 24
-            compileSdk = 33
-        }
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-
-        buildFeatures {
-            compose = true
-        }
-
-        composeOptions {
-            kotlinCompilerExtensionVersion = "1.4.8"
-        }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.8"
+    }
+
 
     dependencies {
 
@@ -50,6 +45,7 @@ android {
         implementation(project(":core:database"))
         implementation(project(":core:repository"))
         implementation(project(":core:navigation"))
+        implementation(project(":features:common"))
 
         logback()
         androidCore()

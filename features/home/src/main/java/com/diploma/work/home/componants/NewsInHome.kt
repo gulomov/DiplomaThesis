@@ -32,7 +32,7 @@ import com.google.common.collect.ImmutableList
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun NewsInHome(
+internal fun NewsInHome(
     news: List<NewsItem>,
     modifier: Modifier = Modifier
 ) {

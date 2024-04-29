@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -33,9 +34,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.diploa.work.prdoductdetail.composables.Prices
+import com.diploa.work.prdoductdetail.composables.ProductDetailsImages
 import com.diploa.work.prdoductdetail.composables.ProductSize
+import com.diploa.work.prdoductdetail.composables.ProductTitleAndSale
+import com.diploma.work.common.componants.TopProductsLazyRow
 import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.design.composables.IndicatorDots
 import com.diploma.work.design.composables.MainButton
@@ -43,7 +49,6 @@ import com.diploma.work.design.composables.MainHorizontalPager
 import com.diploma.work.design.theme.fontSize16
 import com.diploma.work.design.theme.fontSize18
 import com.diploma.work.design.theme.fontSize20
-import com.diploma.work.design.theme.newsCarouselImageSize
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
 import com.diploma.work.design.theme.productsCarouselImageSize
@@ -56,61 +61,33 @@ import com.google.accompanist.pager.PagerState
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProductDetails(
+    navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: ProductDetailsViewModel = hiltViewModel(),
 ) {
-    val productDetails by viewModel.productDetails.collectAsState()
     val context = LocalContext.current
+    val productDetails by viewModel.productDetails.collectAsState()
+    val topProducts by viewModel.topProductsList.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.getTopProductsList()
+    }
 
     productDetails.images?.let { data ->
-        Column(modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+        ) {
             ProductDetailsImages(productImages = data)
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = productDetails.title.orEmpty(),
-                    modifier = Modifier
-                        .padding(horizontal = normal100, vertical = normal150)
-                        .weight(1f),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = fontSize20,
-                )
-                Text(
-                    text = "${productDetails.salePercentage}%",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = fontSize16,
-                    modifier =
-                    Modifier
-                        .padding(normal100)
-                        .background(
-                            color = MaterialTheme.colorScheme.error,
-                            shape = RoundedCornerShape(small100),
-                        )
-                        .padding(horizontal = normal100, vertical = small100),
-                )
-            }
-            Row(modifier = Modifier.padding(start = normal100)) {
-                Text(
-                    text = productDetails.originalPrice.toString(),
-                    modifier = Modifier.padding(small50),
-                    style =
-                    TextStyle(
-                        color = Color.Gray,
-                        fontSize = fontSize16,
-                        textDecoration = TextDecoration.LineThrough,
-                    ),
-                )
-                Text(
-                    text = productDetails.priceOnSale.toString(),
-                    style =
-                    TextStyle(
-                        color = MaterialTheme.colorScheme.error,
-                        fontSize = fontSize18,
-                    ),
-                )
-            }
+            ProductTitleAndSale(
+                productDetails.title.orEmpty(),
+                productDetails.salePercentage ?: 0
+            )
+            Prices(
+                productDetails.originalPrice.toString(),
+                productDetails.priceOnSale.toString()
+            )
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())
             Text(
@@ -120,27 +97,28 @@ fun ProductDetails(
                     productDetails.saleStartsDate.orEmpty(),
                     productDetails.saleEndsDate.orEmpty(),
                 ),
-                modifier =
-                Modifier
+                modifier = Modifier
                     .padding(horizontal = normal100, vertical = normal150),
             )
             Text(
-                text =
-                stringResource(
+                text = stringResource(
                     id = R.string.sale_on_address,
                     productDetails.address.orEmpty(),
                 ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
             MainButton(
-                modifier =
-                Modifier
+                modifier = Modifier
                     .padding(normal100)
                     .fillMaxWidth(),
                 onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },
                 content = {
                     Text(text = stringResource(id = R.string.show_in_the_map))
                 },
+            )
+            TopProductsLazyRow(
+                productList = topProducts,
+                navController = navController
             )
         }
     }
@@ -154,46 +132,4 @@ private fun openGoogleMaps(
     val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
     mapIntent.setPackage("com.google.android.apps.maps")
     content.startActivity(mapIntent)
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun ProductDetailsImages(
-    productImages: List<ProductImages>,
-    pagerState: PagerState = remember { PagerState() },
-) {
-    val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
-
-    Box(modifier = Modifier.fillMaxWidth()) {
-        MainHorizontalPager(
-            pagerState = pagerState,
-            itemsCount = productImages.size,
-            itemContent = {
-                AsyncImage(
-                    model =
-                    ImageRequest.Builder(LocalContext.current)
-                        .data(productImages[it].imageUrl)
-                        .build(),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .height(productsCarouselImageSize)
-                        .align(Alignment.Center),
-                )
-            },
-        )
-        Surface(
-            modifier =
-            Modifier
-                .padding(small100)
-                .align(Alignment.BottomCenter),
-            shape = CircleShape,
-        ) {
-            IndicatorDots(
-                totalDots = productImages.size,
-                selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                dotSize = small100,
-            )
-        }
-    }
 }

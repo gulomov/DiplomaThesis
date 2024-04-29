@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
+    implementation(project(":features:common"))
 
     logback()
     androidCore()

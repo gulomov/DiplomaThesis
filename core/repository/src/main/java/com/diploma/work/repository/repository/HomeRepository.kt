@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 2
+private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 5
 
 class HomeRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase,

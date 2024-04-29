@@ -18,6 +18,6 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(route = PRODUCTION_DETAIL, arguments = listOf(navArgument("productId") {
         type = NavType.StringType
     })) {
-        ProductDetails()
+        ProductDetails(navController)
     }
 }

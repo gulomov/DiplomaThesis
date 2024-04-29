@@ -1,11 +1,15 @@
-package com.diploma.work.home.componants
+package com.diploma.work.common.componants
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -21,19 +25,48 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.diploma.work.common.R
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
 import com.diploma.work.design.theme.small50
-import com.diploma.work.home.R
+import com.diploma.work.design.theme.topProductsImageHeightSize
+import com.diploma.work.design.theme.topProductsImageWidthSize
+import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.repository.data.TopProductItem
 
-const val GRIT_CELLS = 2
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopProductsLazyRow(
+    productList: List<TopProductItem>,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = stringResource(id = R.string.TopProductsTitle),
+            modifier = Modifier.padding(normal100),
+            fontWeight = FontWeight.Bold,
+        )
+        LazyRow {
+            items(productList) {
+                TopProducts(
+                    topProductsItem = it,
+                    productOnClick = { productId ->
+                        val route = PRODUCTION_DETAIL.replace("{productId}", productId)
+                        navController.navigate(route)
+                    },
+                )
+            }
+        }
+    }
+}
 
 @Composable
 fun TopProductTitle() {
     Text(
-        text = stringResource(id = R.string.homeScreenTopProductsTitle),
+        text = stringResource(id = R.string.TopProductsTitle),
         modifier = Modifier.padding(normal100),
         fontWeight = FontWeight.Bold,
     )
@@ -48,9 +81,7 @@ fun TopProducts(
 ) {
     Card(
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
-        modifier =
-        modifier
-            .fillMaxWidth()
+        modifier = modifier
             .padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
@@ -63,10 +94,9 @@ fun TopProducts(
                     model = topProductsItem.images?.first()?.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(16f / 12f)
+                    modifier = Modifier
+                        .width(topProductsImageWidthSize)
+                        .height(topProductsImageHeightSize)
                         .padding(small50)
                         .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
                 )

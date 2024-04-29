@@ -32,7 +32,7 @@ import com.diploma.work.repository.data.RecommendationItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RecommendationsInHome(
+internal fun RecommendationsInHome(
     recommendations: List<RecommendationItem>,
     modifier: Modifier = Modifier,
 ) {
