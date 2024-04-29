@@ -6,7 +6,7 @@ import com.google.firebase.database.PropertyName
 
 data class TopProductsList(
     @PropertyName("topProductsList")
-    val topProductsList: List<TopProductItem>? = emptyList()
+    val topProductsList: List<TopProductItem>? = emptyList(),
 )
 
 data class TopProductItem(
@@ -29,5 +29,5 @@ data class TopProductItem(
     @PropertyName("priceOnSale")
     val priceOnSale: Int? = null,
     @PropertyName("sizes")
-    val sizes: List<ProductSizes>? = null
+    val sizes: List<ProductSizes>? = null,
 )

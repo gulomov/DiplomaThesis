@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "home_recommendations")
 data class HomeRecommendationsEntity(
     @PrimaryKey val id: Int = 0,
-    @ColumnInfo("image_url") val imageUrl: String
+    @ColumnInfo("image_url") val imageUrl: String,
 )

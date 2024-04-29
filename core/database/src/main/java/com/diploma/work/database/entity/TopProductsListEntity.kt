@@ -16,15 +16,15 @@ data class TopProductsListEntity(
     @ColumnInfo(name = "sale_ends_date") val saleEndsDate: String,
     @ColumnInfo(name = "original_price") val originalPrice: Int,
     @ColumnInfo(name = "price_on_sale") val priceOnSale: Int,
-    @ColumnInfo(name = "sizes") val sizes: String
+    @ColumnInfo(name = "sizes") val sizes: String,
 )
 
 data class ProductImages(
     @PropertyName("imageUrl")
-    val imageUrl: String = ""
+    val imageUrl: String = "",
 )
 
 data class ProductSizes(
     @PropertyName("size")
-    val size: String = ""
+    val size: String = "",
 )

@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.diploma.work.diplomathesis.navigation.AppNavHost
 import com.diploma.work.design.theme.DiplomaThesisTheme
+import com.diploma.work.diplomathesis.navigation.AppNavHost
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

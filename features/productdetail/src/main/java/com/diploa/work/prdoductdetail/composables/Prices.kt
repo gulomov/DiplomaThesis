@@ -15,25 +15,28 @@ import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small50
 
 @Composable
-internal fun Prices(originalPrice: String, priceOnSale: String) {
+internal fun Prices(
+    originalPrice: String,
+    priceOnSale: String,
+) {
     Row(modifier = Modifier.padding(start = normal100)) {
         Text(
             text = originalPrice,
             modifier = Modifier.padding(small50),
             style =
-            TextStyle(
-                color = Color.Gray,
-                fontSize = fontSize16,
-                textDecoration = TextDecoration.LineThrough,
-            ),
+                TextStyle(
+                    color = Color.Gray,
+                    fontSize = fontSize16,
+                    textDecoration = TextDecoration.LineThrough,
+                ),
         )
         Text(
             text = priceOnSale,
             style =
-            TextStyle(
-                color = MaterialTheme.colorScheme.error,
-                fontSize = fontSize18,
-            ),
+                TextStyle(
+                    color = MaterialTheme.colorScheme.error,
+                    fontSize = fontSize18,
+                ),
         )
     }
 }

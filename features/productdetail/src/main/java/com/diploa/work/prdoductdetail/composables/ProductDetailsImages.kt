@@ -39,22 +39,23 @@ internal fun ProductDetailsImages(
             itemContent = {
                 AsyncImage(
                     model =
-                    ImageRequest.Builder(LocalContext.current)
-                        .data(productImages[it].imageUrl)
-                        .build(),
+                        ImageRequest.Builder(LocalContext.current)
+                            .data(productImages[it].imageUrl)
+                            .build(),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .height(productsCarouselImageSize)
-                        .align(Alignment.Center),
+                    modifier =
+                        Modifier
+                            .height(productsCarouselImageSize)
+                            .align(Alignment.Center),
                 )
             },
         )
         Surface(
             modifier =
-            Modifier
-                .padding(small100)
-                .align(Alignment.BottomCenter),
+                Modifier
+                    .padding(small100)
+                    .align(Alignment.BottomCenter),
             shape = CircleShape,
         ) {
             IndicatorDots(

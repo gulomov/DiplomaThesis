@@ -19,7 +19,7 @@ import com.diploma.work.design.theme.small100
 @Composable
 fun ProductSize(
     sizes: List<ProductSizes>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(modifier = modifier) {
         items(sizes) {
@@ -31,19 +31,20 @@ fun ProductSize(
 @Composable
 fun ProductSize(
     size: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = size,
         color = Color.White,
         fontWeight = FontWeight.Bold,
         fontSize = fontSize16,
-        modifier = modifier
-            .padding(start = normal100)
-            .background(
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(small100),
-            )
-            .padding(small100),
+        modifier =
+            modifier
+                .padding(start = normal100)
+                .background(
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(small100),
+                )
+                .padding(small100),
     )
 }

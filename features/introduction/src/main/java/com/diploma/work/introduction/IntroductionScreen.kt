@@ -45,23 +45,25 @@ import kotlinx.coroutines.launch
 @Composable
 fun IntroductionScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState()
     val pageCount = 3
 
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(normal100),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(normal100),
     ) {
         Column {
             Spacer(modifier = Modifier.height(large100))
             HorizontalPager(
                 pageCount = pageCount,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.CenterHorizontally),
                 state = pagerState,
                 contentPadding = PaddingValues(small100),
                 pageSpacing = small100,
@@ -73,36 +75,42 @@ fun IntroductionScreen(
             PagerButtons(
                 pagerState = pagerState,
                 pageCount = pageCount,
-                navController = navController
+                navController = navController,
             )
         }
     }
 }
 
 @Composable
-fun IntroductionContent(page: Int, modifier: Modifier = Modifier) {
+fun IntroductionContent(
+    page: Int,
+    modifier: Modifier = Modifier,
+) {
     Card(modifier = modifier.fillMaxWidth()) {
         Column {
-            val imageResources = when (page) {
-                0 -> R.drawable.ic_intro_one
-                1 -> R.drawable.ic_intro_two
-                2 -> R.drawable.ic_intro_three
-                else -> 0
-            }
+            val imageResources =
+                when (page) {
+                    0 -> R.drawable.ic_intro_one
+                    1 -> R.drawable.ic_intro_two
+                    2 -> R.drawable.ic_intro_three
+                    else -> 0
+                }
 
-            val textTitle = when (page) {
-                0 -> R.string.introduction_welcome_title
-                1 -> R.string.introduction_sales_info_title
-                2 -> R.string.introduction_enjoy_your_time_title
-                else -> 0
-            }
+            val textTitle =
+                when (page) {
+                    0 -> R.string.introduction_welcome_title
+                    1 -> R.string.introduction_sales_info_title
+                    2 -> R.string.introduction_enjoy_your_time_title
+                    else -> 0
+                }
 
-            val textBody = when (page) {
-                0 -> R.string.introduction_welcome_text
-                1 -> R.string.introduction_sales_info_text
-                2 -> R.string.introduction_enjoy_your_time_text
-                else -> 0
-            }
+            val textBody =
+                when (page) {
+                    0 -> R.string.introduction_welcome_text
+                    1 -> R.string.introduction_sales_info_text
+                    2 -> R.string.introduction_enjoy_your_time_text
+                    else -> 0
+                }
 
             Spacer(modifier = Modifier.height(normal100))
             Image(
@@ -120,9 +128,10 @@ fun IntroductionContent(page: Int, modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(id = textBody),
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = normal100, end = normal100),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = normal100, end = normal100),
             )
             Spacer(modifier = Modifier.height(normal100))
         }
@@ -131,7 +140,11 @@ fun IntroductionContent(page: Int, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PagerIndicators(pagerState: PagerState, pageCount: Int, modifier: Modifier = Modifier) {
+fun PagerIndicators(
+    pagerState: PagerState,
+    pageCount: Int,
+    modifier: Modifier = Modifier,
+) {
     Row(
         modifier
             .height(pagerIndicatorSize)
@@ -142,10 +155,11 @@ fun PagerIndicators(pagerState: PagerState, pageCount: Int, modifier: Modifier =
             val color =
                 if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
             Box(
-                modifier = Modifier
-                    .padding(small100)
-                    .background(color, CircleShape)
-                    .size(small150),
+                modifier =
+                    Modifier
+                        .padding(small100)
+                        .background(color, CircleShape)
+                        .size(small150),
             )
         }
     }
@@ -165,10 +179,11 @@ fun PagerButtons(
     Row(modifier = modifier.fillMaxWidth()) {
         if (pagerState.currentPage > 0) {
             MainButton(
-                modifier = Modifier
-                    .padding(small100)
-                    .wrapContentWidth()
-                    .weight(1f),
+                modifier =
+                    Modifier
+                        .padding(small100)
+                        .wrapContentWidth()
+                        .weight(1f),
                 onClick = {
                     coroutineScope.launch {
                         val previousPage = pagerState.currentPage - 1
@@ -187,10 +202,11 @@ fun PagerButtons(
             )
         }
         MainButton(
-            modifier = Modifier
-                .padding(small100)
-                .wrapContentWidth()
-                .weight(1f),
+            modifier =
+                Modifier
+                    .padding(small100)
+                    .wrapContentWidth()
+                    .weight(1f),
             onClick = {
                 coroutineScope.launch {
                     val nextPage = pagerState.currentPage + 1
@@ -215,16 +231,21 @@ fun PagerButtons(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroductionNextButtonText(pagerState: PagerState, modifier: Modifier = Modifier) {
+fun IntroductionNextButtonText(
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+) {
     Text(
-        text = when (pagerState.currentPage) {
-            pagerState.initialPage -> stringResource(
-                id = R.string.introduction_button_start,
-            )
+        text =
+            when (pagerState.currentPage) {
+                pagerState.initialPage ->
+                    stringResource(
+                        id = R.string.introduction_button_start,
+                    )
 
-            1 -> stringResource(id = R.string.introduction_button_next)
-            else -> stringResource(id = R.string.introduction_button_finish)
-        },
+                1 -> stringResource(id = R.string.introduction_button_next)
+                else -> stringResource(id = R.string.introduction_button_finish)
+            },
         textAlign = TextAlign.Center,
         modifier = modifier.fillMaxWidth(),
     )

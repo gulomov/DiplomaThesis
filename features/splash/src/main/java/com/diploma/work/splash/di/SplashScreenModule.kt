@@ -11,12 +11,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object SplashScreenModule {
-
     @Provides
     @Singleton
-    fun splashScreenRepository(
-        sharedPreferencesManager: SharedPreferencesManager,
-    ): SplashScreenRepository {
+    fun splashScreenRepository(sharedPreferencesManager: SharedPreferencesManager): SplashScreenRepository {
         return SplashScreenRepository(sharedPreferencesManager)
     }
 }

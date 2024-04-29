@@ -29,11 +29,10 @@ fun MainHorizontalPager(
     com.google.accompanist.pager.HorizontalPager(
         count = itemsCount,
         state = pagerState,
-        itemSpacing = small100
+        itemSpacing = small100,
     ) { page ->
         itemContent(page)
     }
-
 }
 
 @Composable
@@ -46,15 +45,16 @@ fun IndicatorDots(
     unSelected: Color = MaterialTheme.colorScheme.onPrimary,
 ) {
     LazyRow(
-        modifier = modifier
-            .wrapContentWidth()
-            .wrapContentHeight()
-            .padding(small50)
+        modifier =
+            modifier
+                .wrapContentWidth()
+                .wrapContentHeight()
+                .padding(small50),
     ) {
         items(totalDots) {
             IndicatorDot(
                 size = dotSize,
-                color = if (it == selectedIndex) selectedColor else unSelected
+                color = if (it == selectedIndex) selectedColor else unSelected,
             )
         }
     }
@@ -64,12 +64,13 @@ fun IndicatorDots(
 fun IndicatorDot(
     size: Dp,
     color: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier
-            .size(size)
-            .clip(CircleShape)
-            .background(color)
+        modifier =
+            modifier
+                .size(size)
+                .clip(CircleShape)
+                .background(color),
     )
 }

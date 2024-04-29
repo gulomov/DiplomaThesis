@@ -35,7 +35,7 @@ fun AutoSlidingCarousel(
         delay(autoSlideDuration)
         pagerState.animateScrollToPage(
             page = (pagerState.currentPage + NEXT_PAGE) % itemsCount,
-            animationSpec = tween(5000) // FIXME: This should be reconsidered
+            animationSpec = tween(5000), // FIXME: This should be reconsidered
         )
     }
 
@@ -47,15 +47,16 @@ fun AutoSlidingCarousel(
         )
 
         Surface(
-            modifier = Modifier
-                .padding(small100)
-                .align(Alignment.BottomCenter),
+            modifier =
+                Modifier
+                    .padding(small100)
+                    .align(Alignment.BottomCenter),
             shape = CircleShape,
         ) {
             IndicatorDots(
                 totalDots = itemsCount,
                 selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
-                dotSize = small100
+                dotSize = small100,
             )
         }
     }

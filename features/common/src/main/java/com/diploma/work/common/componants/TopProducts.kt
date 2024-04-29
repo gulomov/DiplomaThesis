@@ -3,7 +3,6 @@ package com.diploma.work.common.componants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,7 +40,7 @@ import com.diploma.work.repository.data.TopProductItem
 fun TopProductsLazyRow(
     productList: List<TopProductItem>,
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         Text(
@@ -81,8 +80,9 @@ fun TopProducts(
 ) {
     Card(
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
-        modifier = modifier
-            .padding(normal100),
+        modifier =
+            modifier
+                .padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
@@ -94,25 +94,26 @@ fun TopProducts(
                     model = topProductsItem.images?.first()?.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(topProductsImageWidthSize)
-                        .height(topProductsImageHeightSize)
-                        .padding(small50)
-                        .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
+                    modifier =
+                        Modifier
+                            .width(topProductsImageWidthSize)
+                            .height(topProductsImageHeightSize)
+                            .padding(small50)
+                            .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
                 )
                 Text(
                     text = "${topProductsItem.salePercentage}%",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     modifier =
-                    Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = small50, end = small50)
-                        .background(
-                            color = MaterialTheme.colorScheme.error,
-                            shape = RoundedCornerShape(topEnd = small100)
-                        )
-                        .padding(small50),
+                        Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(top = small50, end = small50)
+                            .background(
+                                color = MaterialTheme.colorScheme.error,
+                                shape = RoundedCornerShape(topEnd = small100),
+                            )
+                            .padding(small50),
                 )
             }
             Text(
@@ -123,11 +124,11 @@ fun TopProducts(
             Text(
                 text = "${topProductsItem.saleStartsDate} - ${topProductsItem.saleEndsDate}",
                 modifier =
-                Modifier.padding(
-                    start = normal100,
-                    top = normal100,
-                    bottom = normal100,
-                ),
+                    Modifier.padding(
+                        start = normal100,
+                        top = normal100,
+                        bottom = normal100,
+                    ),
             )
         }
     }

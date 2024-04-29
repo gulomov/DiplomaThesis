@@ -22,7 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
-import com.diploma.work.design.theme.large100
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.recommendationImageHeightSize
 import com.diploma.work.design.theme.recommendationImageWidthSize
@@ -39,12 +38,12 @@ internal fun RecommendationsInHome(
     val pagerState = rememberPagerState()
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = modifier
+        modifier = modifier,
     ) {
         Text(
             text = stringResource(id = R.string.homeScreenRecommendationsTitle),
             modifier = Modifier.padding(start = normal100, top = normal100),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         Spacer(modifier = Modifier.width(small100))
         HorizontalPager(
@@ -52,14 +51,15 @@ internal fun RecommendationsInHome(
             state = pagerState,
             contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
             pageSpacing = small100,
-            pageSize = PageSize.Fixed(recommendationImageWidthSize)
+            pageSize = PageSize.Fixed(recommendationImageWidthSize),
         ) { page ->
             // FIXME: Change size
             Card(
-                modifier = Modifier
-                    .padding(normal100)
-                    .width(recommendationImageWidthSize),
-                shape = RoundedCornerShape(normal100)
+                modifier =
+                    Modifier
+                        .padding(normal100)
+                        .width(recommendationImageWidthSize),
+                shape = RoundedCornerShape(normal100),
             ) {
                 Recommendation(item = recommendations[page])
             }
@@ -70,21 +70,23 @@ internal fun RecommendationsInHome(
 @Composable
 fun Recommendation(
     item: RecommendationItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier
-            .width(recommendationImageWidthSize)
-            .height(recommendationImageHeightSize)
+        modifier =
+            modifier
+                .width(recommendationImageWidthSize)
+                .height(recommendationImageHeightSize),
     ) {
         AsyncImage(
             model = item.image,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(recommendationImageHeightSize)
-                .align(Alignment.Center)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(recommendationImageHeightSize)
+                    .align(Alignment.Center),
         )
     }
 }

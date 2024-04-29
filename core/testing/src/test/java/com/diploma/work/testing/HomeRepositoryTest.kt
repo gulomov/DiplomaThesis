@@ -9,12 +9,10 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.whenever
 
 class HomeRepositoryTest {
-
     @Mock
     private lateinit var database: FirebaseDatabase
     private lateinit var homeRepository: HomeRepository
@@ -26,14 +24,15 @@ class HomeRepositoryTest {
     }
 
     @Test
-    fun `getNewsInfo returns correct data`() = runBlocking {
-        flowOf(Resource.Success(NewsInfo())).apply {
-            whenever(homeRepository.getNewsInfo()).thenReturn(this)
+    fun `getNewsInfo returns correct data`() =
+        runBlocking {
+            flowOf(Resource.Success(NewsInfo())).apply {
+                whenever(homeRepository.getNewsInfo()).thenReturn(this)
+            }
+
+            val results = mutableListOf<Resource<NewsInfo>>()
+            homeRepository.getNewsInfo().collect { results.add(it) }
+
+            assert(results.first() is Resource.Success)
         }
-
-        val results = mutableListOf<Resource<NewsInfo>>()
-        homeRepository.getNewsInfo().collect { results.add(it) }
-
-        assert(results.first() is Resource.Success)
-    }
 }

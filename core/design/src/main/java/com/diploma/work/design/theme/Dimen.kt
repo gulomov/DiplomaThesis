@@ -3,7 +3,6 @@ package com.diploma.work.design.theme
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 val small50 = 4.dp
 val small100 = 8.dp
 val small150 = 12.dp

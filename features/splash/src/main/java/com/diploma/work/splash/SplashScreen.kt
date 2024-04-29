@@ -26,16 +26,18 @@ fun SplashScreen(
     navController: NavController,
     viewModel: SplashScreenViewModel = hiltViewModel(),
 ) {
-    val scale = remember {
-        androidx.compose.animation.core.Animatable(0f)
-    }
+    val scale =
+        remember {
+            androidx.compose.animation.core.Animatable(0f)
+        }
 
     LaunchedEffect(key1 = true) {
         scale.animateTo(
             targetValue = 0.7f,
-            animationSpec = tween(durationMillis = 800, easing = {
-                OvershootInterpolator(4f).getInterpolation(it)
-            }),
+            animationSpec =
+                tween(durationMillis = 800, easing = {
+                    OvershootInterpolator(4f).getInterpolation(it)
+                }),
         )
         delay(1000L)
         if (!viewModel.wasIntroductionShown()) {
@@ -51,7 +53,7 @@ fun SplashScreen(
         }
     }
 
-    Scaffold() { innerPaddingModifier ->
+    Scaffold { innerPaddingModifier ->
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize().padding(innerPaddingModifier),

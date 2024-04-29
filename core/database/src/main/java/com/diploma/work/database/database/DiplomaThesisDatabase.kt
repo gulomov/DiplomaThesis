@@ -16,11 +16,13 @@ import com.diploma.work.database.entity.TopProductsListEntity
         ProductListEntity::class,
         NewsInfoEntity::class,
         HomeRecommendationsEntity::class,
-        TopProductsListEntity::class
-    ], version = 1
+        TopProductsListEntity::class,
+    ],
+    version = 1,
 )
 @TypeConverters(Converters::class)
 abstract class DiplomaThesisDatabase : RoomDatabase() {
     abstract fun ProductDao(): ProductsDao
+
     abstract fun HomeScreenDao(): HomeScreenDao
 }

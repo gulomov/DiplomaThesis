@@ -14,7 +14,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.diploma.work.design.composables.ThesisTopBar
 import com.diploma.work.introduction.navigation.introductionScreen
-import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
@@ -22,9 +21,7 @@ import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.splash.navigation.splashScreen
 
 @Composable
-fun AppNavHost(
-    navController: NavHostController = rememberNavController(),
-) {
+fun AppNavHost(navController: NavHostController = rememberNavController()) {
     val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
     val topBarVisibility = rememberSaveable { (mutableStateOf(false)) }
     val topBarBackArrowVisibility = rememberSaveable { (mutableStateOf(true)) }
@@ -56,10 +53,12 @@ fun AppNavHost(
     }
     Scaffold(
         topBar = {
-            if (topBarVisibility.value) ThesisTopBar(
-                backArrowVisibility = topBarBackArrowVisibility.value,
-                navController = navController,
-            )
+            if (topBarVisibility.value) {
+                ThesisTopBar(
+                    backArrowVisibility = topBarBackArrowVisibility.value,
+                    navController = navController,
+                )
+            }
         },
         bottomBar = {},
     ) {

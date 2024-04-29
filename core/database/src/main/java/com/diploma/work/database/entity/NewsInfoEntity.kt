@@ -9,5 +9,5 @@ data class NewsInfoEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "image") val image: String?,
     @ColumnInfo(name = "body") val body: String?,
-    @ColumnInfo(name = "title") val title: String?
+    @ColumnInfo(name = "title") val title: String?,
 )

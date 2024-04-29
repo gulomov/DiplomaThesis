@@ -17,34 +17,36 @@ import javax.inject.Inject
 private const val PRODUCT_ID = "productId"
 
 @HiltViewModel
-class ProductDetailsViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    getProductDetailsUseCase: GetProductDetailsUseCase,
-    private val getTopProductsUseCase: GetTopProductsUseCase
-) : ViewModel() {
-    private val _productDetail = MutableStateFlow(ProductDetailsData())
-    val productDetails = _productDetail.asStateFlow()
+class ProductDetailsViewModel
+    @Inject
+    constructor(
+        savedStateHandle: SavedStateHandle,
+        getProductDetailsUseCase: GetProductDetailsUseCase,
+        private val getTopProductsUseCase: GetTopProductsUseCase,
+    ) : ViewModel() {
+        private val _productDetail = MutableStateFlow(ProductDetailsData())
+        val productDetails = _productDetail.asStateFlow()
 
-    private val _topProductsList = MutableStateFlow(listOf<TopProductItem>())
-    val topProductsList = _topProductsList.asStateFlow()
+        private val _topProductsList = MutableStateFlow(listOf<TopProductItem>())
+        val topProductsList = _topProductsList.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            getProductDetailsUseCase(checkNotNull(savedStateHandle[PRODUCT_ID])).collect {
-                _productDetail.value = it
+        init {
+            viewModelScope.launch {
+                getProductDetailsUseCase(checkNotNull(savedStateHandle[PRODUCT_ID])).collect {
+                    _productDetail.value = it
+                }
             }
         }
-    }
 
-    fun getTopProductsList() {
-        viewModelScope.launch {
-            getTopProductsUseCase().collect { data ->
-                if (data.isNotEmpty()) {
-                    _topProductsList.value = data
-                } else {
-                    Timber.e("Top products is empty")
+        fun getTopProductsList() {
+            viewModelScope.launch {
+                getTopProductsUseCase().collect { data ->
+                    if (data.isNotEmpty()) {
+                        _topProductsList.value = data
+                    } else {
+                        Timber.e("Top products is empty")
+                    }
                 }
             }
         }
     }
-}

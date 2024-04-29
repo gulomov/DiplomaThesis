@@ -18,29 +18,33 @@ import com.diploma.work.design.theme.normal150
 import com.diploma.work.design.theme.small100
 
 @Composable
-internal fun ProductTitleAndSale(productTitle: String, salePercentage: Int) {
+internal fun ProductTitleAndSale(
+    productTitle: String,
+    salePercentage: Int,
+) {
     Row(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = productTitle,
-            modifier = Modifier
-                .padding(horizontal = normal100, vertical = normal150)
-                .weight(1f),
+            modifier =
+                Modifier
+                    .padding(horizontal = normal100, vertical = normal150)
+                    .weight(1f),
             fontWeight = FontWeight.Bold,
             fontSize = fontSize20,
         )
         Text(
-            text = "${salePercentage}%",
+            text = "$salePercentage%",
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = fontSize16,
             modifier =
-            Modifier
-                .padding(normal100)
-                .background(
-                    color = MaterialTheme.colorScheme.error,
-                    shape = RoundedCornerShape(small100),
-                )
-                .padding(horizontal = normal100, vertical = small100),
+                Modifier
+                    .padding(normal100)
+                    .background(
+                        color = MaterialTheme.colorScheme.error,
+                        shape = RoundedCornerShape(small100),
+                    )
+                    .padding(horizontal = normal100, vertical = small100),
         )
     }
 }

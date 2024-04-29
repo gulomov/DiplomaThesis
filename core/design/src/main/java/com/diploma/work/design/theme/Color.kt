@@ -2,7 +2,7 @@ package com.diploma.work.design.theme
 
 import androidx.compose.ui.graphics.Color
 
-//Light Colors
+// Light Colors
 val primary_light = Color(0xFF6750A4)
 val primaryContainer_light = Color(0xFFEADDFF)
 val onPrimary_light = Color(0xFFFFFFFF)
@@ -35,7 +35,7 @@ val outlineVariant_light = Color(0xFFCAC4D0)
 val background_light = Color(0xFFFFFFFF)
 val onBackground_light = Color(0xFF7A8797)
 
-//Dark Colors
+// Dark Colors
 val primary_dark = Color(0xFFD0BCFF)
 val primaryContainer_dark = Color(0xFF4F378B)
 val onPrimary_dark = Color(0xFF381E72)
