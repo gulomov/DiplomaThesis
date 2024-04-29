@@ -9,10 +9,10 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun MainButton(
-    modifier: Modifier,
-    shape: CornerBasedShape = MaterialTheme.shapes.medium,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    shape: CornerBasedShape = MaterialTheme.shapes.medium,
 ) {
     Button(
         modifier = modifier,

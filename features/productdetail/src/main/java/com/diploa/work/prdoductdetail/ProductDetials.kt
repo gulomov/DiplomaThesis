@@ -1,5 +1,8 @@
 package com.diploa.work.prdoductdetail
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
@@ -33,6 +36,7 @@ import coil.request.ImageRequest
 import com.diploa.work.prdoductdetail.composables.ProductSize
 import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.design.composables.IndicatorDots
+import com.diploma.work.design.composables.MainButton
 import com.diploma.work.design.composables.MainHorizontalPager
 import com.diploma.work.design.theme.fontSize16
 import com.diploma.work.design.theme.fontSize18
@@ -53,6 +57,7 @@ fun ProductDetails(
     viewModel: ProductDetailsViewModel = hiltViewModel(),
 ) {
     val productDetails by viewModel.productDetails.collectAsState()
+    val context = LocalContext.current
 
     productDetails.images?.let { data ->
         Column(modifier = modifier.fillMaxWidth()) {
@@ -123,8 +128,28 @@ fun ProductDetails(
                     ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
+            MainButton(
+                modifier =
+                    Modifier
+                        .padding(normal100)
+                        .fillMaxWidth(),
+                onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },
+                content = {
+                    Text(text = stringResource(id = R.string.show_in_the_map))
+                },
+            )
         }
     }
+}
+
+private fun openGoogleMaps(
+    content: Context,
+    address: String,
+) = address.let {
+    val intentUri = Uri.parse("geo:0,0?q=${Uri.encode(address)}")
+    val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
+    mapIntent.setPackage("com.google.android.apps.maps")
+    content.startActivity(mapIntent)
 }
 
 @OptIn(ExperimentalPagerApi::class)
