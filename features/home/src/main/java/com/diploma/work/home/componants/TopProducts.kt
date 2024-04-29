@@ -41,7 +41,7 @@ fun TopProductTitle() {
 
 @ExperimentalMaterial3Api
 @Composable
-fun TopProductsInHome(
+fun TopProducts(
     topProductsItem: TopProductItem,
     productOnClick: (String) -> Unit,
     modifier: Modifier = Modifier,

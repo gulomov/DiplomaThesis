@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,6 +46,7 @@ import com.diploma.work.design.theme.fontSize20
 import com.diploma.work.design.theme.newsCarouselImageSize
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
+import com.diploma.work.design.theme.productsCarouselImageSize
 import com.diploma.work.design.theme.small100
 import com.diploma.work.design.theme.small50
 import com.diploma.work.prdoductdetail.R
@@ -60,15 +63,16 @@ fun ProductDetails(
     val context = LocalContext.current
 
     productDetails.images?.let { data ->
-        Column(modifier = modifier.fillMaxWidth()) {
+        Column(modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())) {
             ProductDetailsImages(productImages = data)
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = productDetails.title.orEmpty(),
-                    modifier =
-                        Modifier
-                            .padding(horizontal = normal100, vertical = normal150)
-                            .weight(1f),
+                    modifier = Modifier
+                        .padding(horizontal = normal100, vertical = normal150)
+                        .weight(1f),
                     fontWeight = FontWeight.Bold,
                     fontSize = fontSize20,
                 )
@@ -78,13 +82,13 @@ fun ProductDetails(
                     fontWeight = FontWeight.Bold,
                     fontSize = fontSize16,
                     modifier =
-                        Modifier
-                            .padding(normal100)
-                            .background(
-                                color = MaterialTheme.colorScheme.error,
-                                shape = RoundedCornerShape(small100),
-                            )
-                            .padding(horizontal = normal100, vertical = small100),
+                    Modifier
+                        .padding(normal100)
+                        .background(
+                            color = MaterialTheme.colorScheme.error,
+                            shape = RoundedCornerShape(small100),
+                        )
+                        .padding(horizontal = normal100, vertical = small100),
                 )
             }
             Row(modifier = Modifier.padding(start = normal100)) {
@@ -92,47 +96,47 @@ fun ProductDetails(
                     text = productDetails.originalPrice.toString(),
                     modifier = Modifier.padding(small50),
                     style =
-                        TextStyle(
-                            color = Color.Gray,
-                            fontSize = fontSize16,
-                            textDecoration = TextDecoration.LineThrough,
-                        ),
+                    TextStyle(
+                        color = Color.Gray,
+                        fontSize = fontSize16,
+                        textDecoration = TextDecoration.LineThrough,
+                    ),
                 )
                 Text(
                     text = productDetails.priceOnSale.toString(),
                     style =
-                        TextStyle(
-                            color = MaterialTheme.colorScheme.error,
-                            fontSize = fontSize18,
-                        ),
+                    TextStyle(
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = fontSize18,
+                    ),
                 )
             }
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())
             Text(
                 text =
-                    stringResource(
-                        id = R.string.sales_period,
-                        productDetails.saleStartsDate.orEmpty(),
-                        productDetails.saleEndsDate.orEmpty(),
-                    ),
+                stringResource(
+                    id = R.string.sales_period,
+                    productDetails.saleStartsDate.orEmpty(),
+                    productDetails.saleEndsDate.orEmpty(),
+                ),
                 modifier =
-                    Modifier
-                        .padding(horizontal = normal100, vertical = normal150),
+                Modifier
+                    .padding(horizontal = normal100, vertical = normal150),
             )
             Text(
                 text =
-                    stringResource(
-                        id = R.string.sale_on_address,
-                        productDetails.address.orEmpty(),
-                    ),
+                stringResource(
+                    id = R.string.sale_on_address,
+                    productDetails.address.orEmpty(),
+                ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
             MainButton(
                 modifier =
-                    Modifier
-                        .padding(normal100)
-                        .fillMaxWidth(),
+                Modifier
+                    .padding(normal100)
+                    .fillMaxWidth(),
                 onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },
                 content = {
                     Text(text = stringResource(id = R.string.show_in_the_map))
@@ -167,23 +171,22 @@ fun ProductDetailsImages(
             itemContent = {
                 AsyncImage(
                     model =
-                        ImageRequest.Builder(LocalContext.current)
-                            .data(productImages[it].imageUrl)
-                            .build(),
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(productImages[it].imageUrl)
+                        .build(),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier =
-                        Modifier
-                            .height(newsCarouselImageSize)
-                            .align(Alignment.Center),
+                    modifier = Modifier
+                        .height(productsCarouselImageSize)
+                        .align(Alignment.Center),
                 )
             },
         )
         Surface(
             modifier =
-                Modifier
-                    .padding(small100)
-                    .align(Alignment.BottomCenter),
+            Modifier
+                .padding(small100)
+                .align(Alignment.BottomCenter),
             shape = CircleShape,
         ) {
             IndicatorDots(

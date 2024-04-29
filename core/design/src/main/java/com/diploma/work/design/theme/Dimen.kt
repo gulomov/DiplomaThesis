@@ -30,6 +30,7 @@ val pagerIndicatorSize = 50.dp
 val iconSize = 24.dp
 
 val newsCarouselImageSize = 200.dp
+val productsCarouselImageSize = 300.dp
 
 val recommendationImageWidthSize = 150.dp
 val recommendationImageHeightSize = 100.dp

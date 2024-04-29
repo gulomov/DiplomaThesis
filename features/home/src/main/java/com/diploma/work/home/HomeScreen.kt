@@ -19,7 +19,7 @@ import com.diploma.work.home.componants.GRIT_CELLS
 import com.diploma.work.home.componants.NewsInHome
 import com.diploma.work.home.componants.RecommendationsInHome
 import com.diploma.work.home.componants.TopProductTitle
-import com.diploma.work.home.componants.TopProductsInHome
+import com.diploma.work.home.componants.TopProducts
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import okhttp3.internal.toImmutableList
 
@@ -58,7 +58,7 @@ fun HomeScreen(
             TopProductTitle()
         }
         items(topProducts) {
-            TopProductsInHome(
+            TopProducts(
                 topProductsItem = it,
                 productOnClick = { productId ->
                     val route = PRODUCTION_DETAIL.replace("{productId}", productId)
