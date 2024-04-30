@@ -6,6 +6,7 @@ import androidx.room.TypeConverters
 import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.dao.ProductsDao
+import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
 import com.diploma.work.database.entity.ProductListEntity
@@ -17,6 +18,7 @@ import com.diploma.work.database.entity.TopProductsListEntity
         NewsInfoEntity::class,
         HomeRecommendationsEntity::class,
         TopProductsListEntity::class,
+        FavoriteProductsEntity::class,
     ],
     version = 1,
 )
