@@ -60,7 +60,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 )
             }
         },
-        bottomBar = {},
+        bottomBar = { BottomNavigationBar(navController = navController) },
     ) {
         NavHost(
             navController = navController,

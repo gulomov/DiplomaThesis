@@ -6,4 +6,6 @@ object ScreenRoute {
     const val INTRODUCTION = "introduction"
     const val HOME = "home"
     const val PRODUCTION_DETAIL = "detail/{productId}"
+    const val FAVORITE = "favorite"
 }
+
