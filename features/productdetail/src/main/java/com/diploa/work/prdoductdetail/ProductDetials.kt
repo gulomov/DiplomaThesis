@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.diploa.work.prdoductdetail.composables.Prices
+import com.diploma.work.common.componants.Prices
 import com.diploa.work.prdoductdetail.composables.ProductDetailsImages
 import com.diploa.work.prdoductdetail.composables.ProductSize
 import com.diploa.work.prdoductdetail.composables.ProductTitleAndSale
@@ -30,7 +30,6 @@ import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
 import com.diploma.work.prdoductdetail.R
 import com.google.accompanist.pager.ExperimentalPagerApi
-import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -74,8 +73,9 @@ fun ProductDetails(
                 productDetails.salePercentage ?: 0,
             )
             Prices(
-                productDetails.originalPrice.toString(),
-                productDetails.priceOnSale.toString(),
+                originalPrice = productDetails.originalPrice.toString(),
+                priceOnSale = productDetails.priceOnSale.toString(),
+                modifier = Modifier.padding(start = normal100)
             )
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())

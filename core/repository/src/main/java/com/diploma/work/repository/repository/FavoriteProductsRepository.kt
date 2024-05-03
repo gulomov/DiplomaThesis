@@ -12,9 +12,7 @@ class FavoriteProductsRepository @Inject constructor(
     private val roomDao: ProductsDao,
 ) {
     suspend fun saveToFavoriteProduct(favoriteProduct: FavoriteProduct) =
-        roomDao.saveToFavoriteProducts(
-            favoriteProduct.asEntity()
-        )
+        roomDao.saveToFavoriteProducts(favoriteProduct.asEntity())
 
     suspend fun deleteFromFavoriteProducts(productId: Int) =
         roomDao.deleteFromFavoriteProducts(productId)
@@ -23,4 +21,21 @@ class FavoriteProductsRepository @Inject constructor(
         roomDao.getFavouriteProduct(productId).map {
             it?.id == productId
         }.firstOrNull() ?: false
+
+    fun getFavorites() = roomDao.getFavouriteProducts().map {
+        it.map { data ->
+            FavoriteProduct(
+                address = data.address,
+                id = data.id,
+                images = Converters().toImagesList(data.imageUrl),
+                title = data.title,
+                salePercentage = data.salePercentage,
+                saleStartsDate = data.saleStartsDate,
+                saleEndsDate = data.saleEndsDate,
+                originalPrice = data.originalPrice,
+                priceOnSale = data.priceOnSale,
+                sizes = Converters().toSizesList(data.sizes)
+            )
+        }
+    }
 }

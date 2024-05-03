@@ -44,7 +44,7 @@ fun TopProductsLazyRow(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(id = R.string.TopProductsTitle),
+            text = stringResource(id = R.string.topProductsTitle),
             modifier = Modifier.padding(normal100),
             fontWeight = FontWeight.Bold,
         )
@@ -62,15 +62,6 @@ fun TopProductsLazyRow(
     }
 }
 
-@Composable
-fun TopProductTitle() {
-    Text(
-        text = stringResource(id = R.string.TopProductsTitle),
-        modifier = Modifier.padding(normal100),
-        fontWeight = FontWeight.Bold,
-    )
-}
-
 @ExperimentalMaterial3Api
 @Composable
 fun TopProducts(
@@ -80,9 +71,7 @@ fun TopProducts(
 ) {
     Card(
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
-        modifier =
-            modifier
-                .padding(normal100),
+        modifier = modifier.padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
@@ -94,26 +83,27 @@ fun TopProducts(
                     model = topProductsItem.images?.first()?.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier =
-                        Modifier
-                            .width(topProductsImageWidthSize)
-                            .height(topProductsImageHeightSize)
-                            .padding(small50)
-                            .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
+                    modifier = Modifier
+                        .width(topProductsImageWidthSize)
+                        .height(topProductsImageHeightSize)
+                        .padding(small50)
+                        .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
                 )
                 Text(
-                    text = "${topProductsItem.salePercentage}%",
+                    text = stringResource(
+                        id = R.string.topProductsPercentage,
+                        topProductsItem.salePercentage.toString()
+                    ),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    modifier =
-                        Modifier
-                            .align(Alignment.TopEnd)
-                            .padding(top = small50, end = small50)
-                            .background(
-                                color = MaterialTheme.colorScheme.error,
-                                shape = RoundedCornerShape(topEnd = small100),
-                            )
-                            .padding(small50),
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(top = small50, end = small50)
+                        .background(
+                            color = MaterialTheme.colorScheme.error,
+                            shape = RoundedCornerShape(topEnd = small100),
+                        )
+                        .padding(small50),
                 )
             }
             Text(
@@ -123,12 +113,11 @@ fun TopProducts(
             )
             Text(
                 text = "${topProductsItem.saleStartsDate} - ${topProductsItem.saleEndsDate}",
-                modifier =
-                    Modifier.padding(
-                        start = normal100,
-                        top = normal100,
-                        bottom = normal100,
-                    ),
+                modifier = Modifier.padding(
+                    start = normal100,
+                    top = normal100,
+                    bottom = normal100,
+                ),
             )
         }
     }

@@ -8,10 +8,9 @@ import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 class Converters {
-    private val moshi =
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
+    private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     private val imagesListType =
         Types.newParameterizedType(List::class.java, ProductImages::class.java)
@@ -22,22 +21,15 @@ class Converters {
     private val sizesAdapter = moshi.adapter<List<ProductSizes>>(sizesListType)
 
     @TypeConverter
-    fun fromImagesList(images: List<ProductImages>): String {
-        return imagesAdapter.toJson(images)
-    }
+    fun fromImagesList(images: List<ProductImages>): String = imagesAdapter.toJson(images)
 
     @TypeConverter
-    fun toImagesList(imagesJson: String): List<ProductImages> {
-        return imagesAdapter.fromJson(imagesJson) ?: emptyList()
-    }
+    fun toImagesList(imagesJson: String) = imagesAdapter.fromJson(imagesJson) ?: emptyList()
+
 
     @TypeConverter
-    fun fromSizesList(sizes: List<ProductSizes>): String {
-        return sizesAdapter.toJson(sizes)
-    }
+    fun fromSizesList(sizes: List<ProductSizes>): String = sizesAdapter.toJson(sizes)
 
     @TypeConverter
-    fun toSizesList(sizesJson: String): List<ProductSizes> {
-        return sizesAdapter.fromJson(sizesJson) ?: emptyList()
-    }
+    fun toSizesList(sizesJson: String) = sizesAdapter.fromJson(sizesJson) ?: emptyList()
 }
