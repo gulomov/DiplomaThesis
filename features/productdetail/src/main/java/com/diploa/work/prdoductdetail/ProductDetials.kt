@@ -30,6 +30,7 @@ import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
 import com.diploma.work.prdoductdetail.R
 import com.google.accompanist.pager.ExperimentalPagerApi
+import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -41,6 +42,7 @@ fun ProductDetails(
     val context = LocalContext.current
     val productDetails by viewModel.productDetails.collectAsState()
     val topProducts by viewModel.topProductsList.collectAsState()
+    val isProductSavedIntoFavorites by viewModel.isProductInFavorites.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.getTopProductsList()
@@ -49,11 +51,24 @@ fun ProductDetails(
     productDetails.images?.let { data ->
         Column(
             modifier =
-                modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState()),
+            modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
         ) {
-            ProductDetailsImages(productImages = data)
+            ProductDetailsImages(
+                productImages = data,
+                isProductSavedIntoFavorites = isProductSavedIntoFavorites,
+                saveProductIntoFavoritesClicked = {
+                    if (it) {
+                        viewModel.saveProductToFavorites(productDetails)
+                    } else {
+                        productDetails.id?.let { productId ->
+                            viewModel.deleteFromFavoriteProducts(
+                                productId
+                            )
+                        }
+                    }
+                })
             ProductTitleAndSale(
                 productDetails.title.orEmpty(),
                 productDetails.salePercentage ?: 0,
@@ -66,28 +81,28 @@ fun ProductDetails(
             ProductSize(productDetails.sizes.orEmpty())
             Text(
                 text =
-                    stringResource(
-                        id = R.string.sales_period,
-                        productDetails.saleStartsDate.orEmpty(),
-                        productDetails.saleEndsDate.orEmpty(),
-                    ),
+                stringResource(
+                    id = R.string.sales_period,
+                    productDetails.saleStartsDate.orEmpty(),
+                    productDetails.saleEndsDate.orEmpty(),
+                ),
                 modifier =
-                    Modifier
-                        .padding(horizontal = normal100, vertical = normal150),
+                Modifier
+                    .padding(horizontal = normal100, vertical = normal150),
             )
             Text(
                 text =
-                    stringResource(
-                        id = R.string.sale_on_address,
-                        productDetails.address.orEmpty(),
-                    ),
+                stringResource(
+                    id = R.string.sale_on_address,
+                    productDetails.address.orEmpty(),
+                ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
             MainButton(
                 modifier =
-                    Modifier
-                        .padding(normal100)
-                        .fillMaxWidth(),
+                Modifier
+                    .padding(normal100)
+                    .fillMaxWidth(),
                 onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },
                 content = {
                     Text(text = stringResource(id = R.string.show_in_the_map))

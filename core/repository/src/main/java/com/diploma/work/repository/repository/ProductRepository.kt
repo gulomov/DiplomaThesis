@@ -12,6 +12,7 @@ class ProductRepository @Inject constructor(
     fun getProductDetails(productId: String) =
         roomDao.getTopProductDetail(productId).map {
             ProductDetailsData(
+                id = it.id,
                 address = it.address,
                 images = Converters().toImagesList(it.imageUrl),
                 title = it.title,

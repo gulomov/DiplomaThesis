@@ -31,3 +31,4 @@ data class TopProductItem(
     @PropertyName("sizes")
     val sizes: List<ProductSizes>? = null,
 )
+

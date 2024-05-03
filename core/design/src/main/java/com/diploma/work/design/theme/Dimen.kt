@@ -10,6 +10,8 @@ val small150 = 12.dp
 val normal100 = 16.dp
 val normal150 = 24.dp
 
+val normal175 = 26.dp
+
 val large100 = 32.dp
 val large125 = 40.dp
 val large150 = 48.dp

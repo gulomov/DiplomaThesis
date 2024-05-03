@@ -14,8 +14,14 @@ interface ProductsDao {
     fun getTopProductDetail(productId: String): Flow<TopProductsListEntity>
 
     @Query("SELECT * FROM favorite_products")
-    fun getFavouriteProducts(): Flow<List<TopProductsListEntity>>
+    fun getFavouriteProducts(): Flow<List<FavoriteProductsEntity>>
+
+    @Query("SELECT * FROM favorite_products WHERE id = :productId")
+    fun getFavouriteProduct(productId: Int): Flow<FavoriteProductsEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveFavoriteProducts(favoriteProductsEntity: FavoriteProductsEntity)
+    suspend fun saveToFavoriteProducts(favoriteProductsEntity: FavoriteProductsEntity)
+
+    @Query("DELETE FROM favorite_products WHERE id = :id")
+    suspend fun deleteFromFavoriteProducts(id: Int)
 }
