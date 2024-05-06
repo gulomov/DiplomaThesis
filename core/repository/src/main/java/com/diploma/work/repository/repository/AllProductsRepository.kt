@@ -3,8 +3,11 @@ package com.diploma.work.repository.repository
 import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.ProductsDao
 import com.diploma.work.database.entity.AllProductsListEntity
+import com.diploma.work.database.entity.BrandsListEntity
 import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.AllProductsList
+import com.diploma.work.repository.data.BrandsItem
+import com.diploma.work.repository.data.BrandsList
 import com.diploma.work.repository.generic.fetchFromDatabase
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
@@ -61,4 +64,38 @@ class AllProductsRepository @Inject constructor(
             )
         }
     }
+
+    suspend fun fetchAndSaveBrandsFromFirebase() {
+        fetchFromDatabase<BrandsList>(
+            "home/brands",
+            firebaseDatabase
+        ).collect { data ->
+            withContext(Dispatchers.IO) {
+                val existingEntries = roomDao.getAllBrandsList().associateBy { it.brandId }
+                data?.brandsList?.map {
+                    val existing = existingEntries[it.brandId]
+                    if (existing == null || existing.brandId != it.brandId) {
+                        roomDao.saveToBrandsEntity(
+                            BrandsListEntity(
+                                brandId = it.brandId ?: 0,
+                                brand = it.brand.toString(),
+                                imageUrl = it.imageUrl.toString()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun getBrands() = roomDao.getAllBrandsFlow().map { allBrands ->
+        allBrands.map {
+            BrandsItem(
+                brandId = it.brandId, imageUrl = it.imageUrl, brand = it.brand
+
+            )
+        }
+    }
+
+
 }

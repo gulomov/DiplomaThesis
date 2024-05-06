@@ -7,6 +7,7 @@ import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.dao.ProductsDao
 import com.diploma.work.database.entity.AllProductsListEntity
+import com.diploma.work.database.entity.BrandsListEntity
 import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
@@ -21,7 +22,8 @@ import com.google.common.eventbus.AllowConcurrentEvents
         HomeRecommendationsEntity::class,
         TopProductsListEntity::class,
         FavoriteProductsEntity::class,
-        AllProductsListEntity::class
+        AllProductsListEntity::class,
+        BrandsListEntity::class
     ],
     version = 1,
 )

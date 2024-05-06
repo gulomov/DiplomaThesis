@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.diploma.work.database.entity.AllProductsListEntity
+import com.diploma.work.database.entity.BrandsListEntity
 import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.TopProductsListEntity
 import kotlinx.coroutines.flow.Flow
@@ -34,4 +35,13 @@ interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveToAllProductsEntity(allProductsListEntity: AllProductsListEntity)
+
+    @Query("SELECT * FROM brands_list")
+    fun getAllBrandsFlow(): Flow<List<BrandsListEntity>>
+
+    @Query("SELECT * FROM brands_list")
+    fun getAllBrandsList(): List<BrandsListEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveToBrandsEntity(brandsListEntity: BrandsListEntity)
 }
