@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
+    implementation(project(":core:navigation"))
     implementation(project(":features:common"))
 
     androidCore()

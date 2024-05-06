@@ -1,3 +1,4 @@
+import libs.AccompanistPager.accompanistPager
 import libs.AndroidCode.androidCore
 import libs.Coil.coil
 import libs.Compose.compose
@@ -38,6 +39,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:navigation"))
 
+    accompanistPager()
     androidCore()
     coil()
     compose()
