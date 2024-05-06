@@ -7,9 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.diploa.work.prdoductdetail.ProductDetails
 import com.diploma.work.favorites.FavoritesScreen
+import com.diploma.work.gallery.GalleryScreen
 import com.diploma.work.home.HomeScreen
 import com.diploma.work.home.news.NewsDetailScreen
 import com.diploma.work.navigation.ScreenRoute.FAVORITE
+import com.diploma.work.navigation.ScreenRoute.GALLERY
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
@@ -40,5 +42,18 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
     }
     composable(FAVORITE) {
         FavoritesScreen(navController = navController)
+    }
+
+    composable(
+        route = GALLERY,
+        arguments = listOf(
+            navArgument("brand") {
+                type = NavType.StringType
+                nullable = true
+                defaultValue = "all"
+            },
+        ),
+    ) {
+        GalleryScreen(navController = navController)
     }
 }

@@ -74,6 +74,7 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":features:productdetail"))
     implementation(project(":features:favorites"))
+    implementation(project(":features:gallery"))
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))

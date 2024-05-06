@@ -6,11 +6,13 @@ import androidx.room.TypeConverters
 import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.dao.ProductsDao
+import com.diploma.work.database.entity.AllProductsListEntity
 import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.HomeRecommendationsEntity
 import com.diploma.work.database.entity.NewsInfoEntity
 import com.diploma.work.database.entity.ProductListEntity
 import com.diploma.work.database.entity.TopProductsListEntity
+import com.google.common.eventbus.AllowConcurrentEvents
 
 @Database(
     entities = [
@@ -19,6 +21,7 @@ import com.diploma.work.database.entity.TopProductsListEntity
         HomeRecommendationsEntity::class,
         TopProductsListEntity::class,
         FavoriteProductsEntity::class,
+        AllProductsListEntity::class
     ],
     version = 1,
 )

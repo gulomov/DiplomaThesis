@@ -8,5 +8,6 @@ object ScreenRoute {
     const val PRODUCTION_DETAIL = "detail/{productId}"
     const val FAVORITE = "favorite"
     const val NEWS_DETAILS = "news/{newsId}"
+    const val GALLERY = "gallery/{brand}"
 }
 

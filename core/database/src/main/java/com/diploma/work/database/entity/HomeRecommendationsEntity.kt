@@ -8,4 +8,5 @@ import androidx.room.PrimaryKey
 data class HomeRecommendationsEntity(
     @PrimaryKey val id: Int = 0,
     @ColumnInfo("image_url") val imageUrl: String,
+    @ColumnInfo("brand") val brand: String
 )

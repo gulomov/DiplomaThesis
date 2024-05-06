@@ -18,7 +18,6 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.diploma.work.design.theme.newsCarouselImageSize
-import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
 
 @Composable

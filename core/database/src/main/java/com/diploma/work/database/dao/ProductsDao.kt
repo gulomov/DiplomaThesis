@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.diploma.work.database.entity.AllProductsListEntity
 import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.TopProductsListEntity
 import kotlinx.coroutines.flow.Flow
@@ -24,4 +25,13 @@ interface ProductsDao {
 
     @Query("DELETE FROM favorite_products WHERE id = :id")
     suspend fun deleteFromFavoriteProducts(id: Int)
+
+    @Query("SELECT * FROM all_products_list")
+    fun getAllProductsFlow(): Flow<List<AllProductsListEntity>>
+
+    @Query("SELECT * FROM all_products_list")
+    fun getAllProductsList(): List<AllProductsListEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveToAllProductsEntity(allProductsListEntity: AllProductsListEntity)
 }

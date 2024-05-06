@@ -4,12 +4,12 @@ import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.database.entity.ProductSizes
 import com.google.firebase.database.PropertyName
 
-data class TopProductsList(
-    @PropertyName("topProductsList")
-    val topProductsList: List<TopProductItem>? = emptyList(),
+data class AllProductsList(
+    @PropertyName("allProductsList")
+    val allProductsList: List<AllProductsItem>? = emptyList(),
 )
 
-data class TopProductItem(
+data class AllProductsItem(
     @PropertyName("address")
     val address: String? = null,
     @PropertyName("id")
@@ -33,4 +33,3 @@ data class TopProductItem(
     @PropertyName("brand")
     val brand: String? = null
 )
-

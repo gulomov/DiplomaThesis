@@ -20,9 +20,7 @@ import javax.inject.Inject
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 5
 
-class HomeRepository
-@Inject
-constructor(
+class HomeRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase,
     private val roomDao: HomeScreenDao,
 ) {
@@ -62,6 +60,7 @@ constructor(
                             HomeRecommendationsEntity(
                                 id = it.id ?: 0,
                                 imageUrl = it.image.orEmpty(),
+                                brand = it.brand.toString()
                             ),
                         )
                     }
@@ -92,6 +91,7 @@ constructor(
                                 originalPrice = it.originalPrice ?: 0,
                                 priceOnSale = it.priceOnSale ?: 0,
                                 sizes = Converters().fromSizesList(it.sizes.orEmpty()),
+                                brand = it.brand.toString()
                             ),
                         )
                     }
