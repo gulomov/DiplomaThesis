@@ -92,10 +92,7 @@ class AllProductsRepository @Inject constructor(
         allBrands.map {
             BrandsItem(
                 brandId = it.brandId, imageUrl = it.imageUrl, brand = it.brand
-
             )
         }
     }
-
-
 }

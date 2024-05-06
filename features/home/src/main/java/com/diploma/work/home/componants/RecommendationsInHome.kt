@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
+import com.diploma.work.common.componants.BrandImage
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.recommendationImageHeightSize
 import com.diploma.work.design.theme.recommendationImageWidthSize
@@ -55,38 +56,13 @@ internal fun RecommendationsInHome(
         ) { page ->
             // FIXME: Change size
             Card(
-                modifier =
-                    Modifier
-                        .padding(normal100)
-                        .width(recommendationImageWidthSize),
+                modifier = Modifier
+                    .padding(normal100)
+                    .width(recommendationImageWidthSize),
                 shape = RoundedCornerShape(normal100),
             ) {
-                Recommendation(item = recommendations[page])
+                BrandImage(imageUrl = recommendations[page].image.toString())
             }
         }
-    }
-}
-
-@Composable
-fun Recommendation(
-    item: RecommendationItem,
-    modifier: Modifier = Modifier,
-) {
-    Box(
-        modifier =
-            modifier
-                .width(recommendationImageWidthSize)
-                .height(recommendationImageHeightSize),
-    ) {
-        AsyncImage(
-            model = item.image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(recommendationImageHeightSize)
-                    .align(Alignment.Center),
-        )
     }
 }
