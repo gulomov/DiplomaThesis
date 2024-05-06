@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.Dp
 import com.diploma.work.design.theme.small100
 import com.diploma.work.design.theme.small50
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 
 @OptIn(ExperimentalPagerApi::class)
@@ -26,7 +27,7 @@ fun MainHorizontalPager(
     itemContent: @Composable (index: Int) -> Unit,
     pagerState: PagerState,
 ) {
-    com.google.accompanist.pager.HorizontalPager(
+    HorizontalPager(
         count = itemsCount,
         state = pagerState,
         itemSpacing = small100,

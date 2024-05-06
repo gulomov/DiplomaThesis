@@ -18,6 +18,7 @@ import com.diploma.work.navigation.ScreenRoute.FAVORITE
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
+import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.splash.navigation.splashScreen
 
@@ -54,6 +55,11 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         }
 
         PRODUCTION_DETAIL -> {
+            topBarBackArrowVisibility.value = true
+            bottomBarVisible.value = true
+        }
+
+        NEWS_DETAILS->{
             topBarBackArrowVisibility.value = true
             bottomBarVisible.value = true
         }

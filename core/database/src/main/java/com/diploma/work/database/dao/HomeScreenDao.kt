@@ -37,4 +37,7 @@ interface HomeScreenDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveTopProductsList(topProductsListEntity: TopProductsListEntity)
+
+    @Query("SELECT * FROM news_info WHERE id = :id ")
+    fun getNewsDetail(id: Int) : Flow<NewsInfoEntity>
 }

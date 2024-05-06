@@ -8,6 +8,7 @@ data class NewsInfo(
 )
 
 data class NewsItem(
+    @PropertyName("id") val id: Int? = null,
     @PropertyName("image") val image: String? = null,
     @PropertyName("body") val body: String? = null,
     @PropertyName("title") val title: String? = null,

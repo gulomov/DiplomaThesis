@@ -49,8 +49,7 @@ fun ProductDetails(
 
     productDetails.images?.let { data ->
         Column(
-            modifier =
-            modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState()),
         ) {
@@ -80,8 +79,7 @@ fun ProductDetails(
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())
             Text(
-                text =
-                stringResource(
+                text = stringResource(
                     id = R.string.sales_period,
                     productDetails.saleStartsDate.orEmpty(),
                     productDetails.saleEndsDate.orEmpty(),
@@ -91,16 +89,14 @@ fun ProductDetails(
                     .padding(horizontal = normal100, vertical = normal150),
             )
             Text(
-                text =
-                stringResource(
+                text = stringResource(
                     id = R.string.sale_on_address,
                     productDetails.address.orEmpty(),
                 ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
             MainButton(
-                modifier =
-                Modifier
+                modifier = Modifier
                     .padding(normal100)
                     .fillMaxWidth(),
                 onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },

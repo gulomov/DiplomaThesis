@@ -1,5 +1,6 @@
 package com.diploma.work.home.componants
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.diploma.work.design.composables.AutoSlidingCarousel
@@ -24,6 +26,7 @@ import com.diploma.work.design.theme.newsCarouselImageSize
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
 import com.diploma.work.home.R
+import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.repository.data.NewsItem
 import com.google.accompanist.pager.ExperimentalPagerApi
 
@@ -31,13 +34,14 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 internal fun NewsInHome(
     news: List<NewsItem>,
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
         modifier =
-            modifier
-                .fillMaxWidth(),
+        modifier
+            .fillMaxWidth(),
     ) {
         Spacer(modifier = Modifier.width(normal100))
         Text(
@@ -48,9 +52,9 @@ internal fun NewsInHome(
         Spacer(modifier = Modifier.width(small100))
         Card(
             modifier =
-                Modifier
-                    .padding(normal100)
-                    .fillMaxWidth(),
+            Modifier
+                .padding(normal100)
+                .fillMaxWidth(),
             shape = RoundedCornerShape(normal100),
         ) {
             news.let { newsInfo ->
@@ -58,7 +62,12 @@ internal fun NewsInHome(
                     AutoSlidingCarousel(
                         itemsCount = newsInfo.size,
                         itemContent = {
-                            NewsItem(news = newsInfo, index = it)
+                            NewsItem(news = newsInfo, index = it, newsItemClicked = { newsId ->
+                                val route = ScreenRoute.NEWS_DETAILS.replace(
+                                    "{newsId}", newsId.toString()
+                                )
+                                navController.navigate(route)
+                            })
                         },
                     )
                 }
@@ -72,24 +81,26 @@ fun NewsItem(
     index: Int,
     news: List<NewsItem>,
     modifier: Modifier = Modifier,
+    newsItemClicked: (Int) -> Unit,
 ) {
-    Box(modifier = modifier) {
+    Box(modifier = modifier.clickable(onClick = {
+        newsItemClicked.invoke(news[index].id ?: 0)
+    })) {
         AsyncImage(
-            model =
-                ImageRequest.Builder(LocalContext.current).data(news[index].image)
-                    .build(),
+            model = ImageRequest.Builder(LocalContext.current).data(news[index].image)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier =
-                Modifier
-                    .height(newsCarouselImageSize)
-                    .align(Alignment.Center),
+            Modifier
+                .height(newsCarouselImageSize)
+                .align(Alignment.Center),
         )
         Column(
             modifier =
-                Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(normal100),
+            Modifier
+                .align(Alignment.BottomStart)
+                .padding(normal100),
         ) {
             news[index].body?.let {
                 Text(

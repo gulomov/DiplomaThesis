@@ -36,7 +36,7 @@ fun HomeScreen(
         modifier = modifier,
     ) {
         item {
-            NewsInHome(news = news.toImmutableList())
+            NewsInHome(news = news.toImmutableList(), navController = navController)
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
