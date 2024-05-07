@@ -3,6 +3,7 @@ package com.diploma.work.gallery
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
+import com.diploma.work.common.domain.GetFavoriteProductsIdsUseCase
 import com.diploma.work.gallery.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
@@ -21,6 +22,7 @@ class GalleryScreenViewModel @Inject constructor(
     private val fetchAllProductsFromFirebaseAndSaveUseCase: FetchAllProductsFromFirebaseAndSaveUseCase,
     private val fetchBrandsFromFirebaseAndSaveUseCase: FetchBrandsFromFirebaseAndSaveUseCase,
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase,
+    private val getFavoriteProductsIdsUseCase: GetFavoriteProductsIdsUseCase,
     private val getBrandsUseCase: GetBrandsUseCase,
     private val getAllProductsUseCase: GetAllProductsUseCase
 ) : ViewModel() {
@@ -30,9 +32,13 @@ class GalleryScreenViewModel @Inject constructor(
     private val _products = MutableStateFlow(listOf(AllProductsItem()))
     val products = _products.asStateFlow()
 
+    private val _favoriteIds = MutableStateFlow(listOf<Int>())
+    val favoriteIds = _favoriteIds.asStateFlow()
+
     init {
         fetchAllProducts()
         fetchBrands()
+
     }
 
     fun getBrands() = viewModelScope.launch {
@@ -49,9 +55,15 @@ class GalleryScreenViewModel @Inject constructor(
         getAllProductsUseCase().collect {
             if (it.isNotEmpty()) {
                 _products.value = it
-            }else{
+            } else {
                 Timber.e("Products list is empty")
             }
+        }
+    }
+
+    fun getFavoriteProductsIds() {
+        viewModelScope.launch {
+            _favoriteIds.value = getFavoriteProductsIdsUseCase()
         }
     }
 

@@ -1,7 +1,6 @@
 package com.diploma.work.gallery
 
 import GenericProductItem
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,10 +32,12 @@ fun GalleryScreen(
 ) {
     val brands by viewModel.brandsList.collectAsState()
     val products by viewModel.products.collectAsState()
+    val favoriteIds by viewModel.favoriteIds.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.getBrands()
         viewModel.getAllProducts()
+        viewModel.getFavoriteProductsIds()
     }
     Column(
         horizontalAlignment = Alignment.Start,
@@ -71,7 +72,8 @@ fun GalleryScreen(
                         productPercentage = product.salePercentage.toString(),
                         title = product.title.toString(),
                         originalPrice = product.originalPrice.toString(),
-                        priceOnSale = product.priceOnSale.toString()
+                        priceOnSale = product.priceOnSale.toString(),
+                        isFavorite = favoriteIds.contains(product.id)
                     )
                 }
             })

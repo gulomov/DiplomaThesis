@@ -56,6 +56,7 @@ fun FavoritesScreen(
                     originalPrice = favoriteProduct.originalPrice.toString(),
                     priceOnSale = favoriteProduct.priceOnSale.toString(),
                     modifier = Modifier,
+                    isFavorite = true
                 )
             }
         })

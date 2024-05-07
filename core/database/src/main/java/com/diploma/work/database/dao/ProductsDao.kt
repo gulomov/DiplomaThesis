@@ -21,6 +21,9 @@ interface ProductsDao {
     @Query("SELECT * FROM favorite_products WHERE id = :productId")
     fun getFavouriteProduct(productId: Int): Flow<FavoriteProductsEntity?>
 
+    @Query("SELECT favorite_products.id FROM favorite_products")
+    suspend fun getFavoriteProductIds(): List<Int>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveToFavoriteProducts(favoriteProductsEntity: FavoriteProductsEntity)
 

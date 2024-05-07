@@ -1,8 +1,5 @@
-@file:OptIn(com.google.accompanist.pager.ExperimentalPagerApi::class)
-
 package com.diploma.work.common.componants
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,8 +31,9 @@ import com.google.accompanist.pager.rememberPagerState
 @Composable
 fun GenericProductImages(
     productPercentage: String,
+    isFavorite: Boolean,
     imageUrls: List<String>,
-    onDeleteClick: () -> Unit,
+    onSaveClick: (Boolean) -> Unit,
 ) {
     val pagerState = rememberPagerState()
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
@@ -64,11 +62,15 @@ fun GenericProductImages(
                 .padding(small50),
         )
         Image(
-            painter = painterResource(R.drawable.ic_bookmark),
+            painter = if (isFavorite) {
+                painterResource(R.drawable.ic_bookmark)
+            } else {
+                painterResource(R.drawable.ic_bookmark_border)
+            },
             contentDescription = "Favorite",
             modifier = Modifier
                 .padding(end = small50, bottom = small50)
-                .clickable(onClick = { onDeleteClick.invoke() })
+                .clickable(onClick = { onSaveClick.invoke(false) })
                 .align(Alignment.BottomEnd)
         )
         Surface(

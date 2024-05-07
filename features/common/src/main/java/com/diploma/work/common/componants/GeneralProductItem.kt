@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.diploma.work.common.componants.GenericProductImages
 import com.diploma.work.common.componants.Prices
 import com.diploma.work.design.theme.normal100
@@ -28,6 +29,7 @@ fun <T> GenericProductItem(
     title: String,
     originalPrice: String,
     priceOnSale: String,
+    isFavorite: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -41,8 +43,9 @@ fun <T> GenericProductItem(
         ) {
             GenericProductImages(
                 imageUrls = productImagesList,
+                isFavorite = isFavorite,
                 productPercentage = productPercentage,
-                onDeleteClick = { onDeleteClick(item) }
+                onSaveClick = { onDeleteClick(item) }
             )
             Spacer(modifier = Modifier.height(small100))
             Text(
