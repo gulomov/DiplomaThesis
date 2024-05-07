@@ -12,7 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +41,12 @@ fun GenericProductImages(
 ) {
     val pagerState = rememberPagerState()
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+    var isProductSaved by remember { mutableStateOf(isFavorite) }
+
+    LaunchedEffect(isFavorite) {
+        isProductSaved = isFavorite
+    }
+
     Box {
         MainHorizontalPager(
             pagerState = pagerState,
@@ -62,15 +72,18 @@ fun GenericProductImages(
                 .padding(small50),
         )
         Image(
-            painter = if (isFavorite) {
-                painterResource(R.drawable.ic_bookmark)
-            } else {
+            painter = if (!isProductSaved) {
                 painterResource(R.drawable.ic_bookmark_border)
+            } else {
+                painterResource(R.drawable.ic_bookmark)
             },
             contentDescription = "Favorite",
             modifier = Modifier
                 .padding(end = small50, bottom = small50)
-                .clickable(onClick = { onSaveClick.invoke(false) })
+                .clickable(onClick = {
+                    isProductSaved = isProductSaved == false
+                    onSaveClick.invoke(isProductSaved)
+                })
                 .align(Alignment.BottomEnd)
         )
         Surface(

@@ -32,4 +32,17 @@ data class AllProductsItem(
     val sizes: List<ProductSizes>? = null,
     @PropertyName("brand")
     val brand: String? = null
-)
+) {
+    fun asFavoriteProduct() = FavoriteProduct(
+        address = address,
+        id = id,
+        images = images,
+        title = title,
+        salePercentage = salePercentage,
+        saleStartsDate = saleStartsDate,
+        saleEndsDate = saleEndsDate,
+        originalPrice = originalPrice,
+        priceOnSale = priceOnSale,
+        sizes = sizes
+    )
+}

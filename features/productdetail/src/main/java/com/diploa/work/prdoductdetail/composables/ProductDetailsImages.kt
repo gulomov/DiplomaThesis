@@ -71,7 +71,7 @@ internal fun ProductDetailsImages(
                 modifier = Modifier
                     .clickable(onClick = {
                         isProductSaved = isProductSaved == false
-                        saveProductIntoFavoritesClicked(isProductSaved == true)
+                        saveProductIntoFavoritesClicked(isProductSaved)
                     })
             )
         }

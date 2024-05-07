@@ -62,11 +62,14 @@ fun GalleryScreen(
                             val route = PRODUCTION_DETAIL.replace("{productId}", it.id.toString())
                             navController.navigate(route)
                         },
-                        onDeleteClick = {
-                            product.id?.let { id ->
-                                viewModel.deleteFromFavoriteProducts(id)
+                        onSaveOrDeleteClick = {
+                            if (!it) {
+                                product.id?.let { id ->
+                                    viewModel.deleteFromFavoriteProducts(id)
+                                }
+                            } else {
+                                viewModel.saveToFavoriteProduct(product)
                             }
-                            // FIXME: Implement logic for adding/removing to/from database
                         },
                         productImagesList = product.images?.map { it.imageUrl } ?: emptyList(),
                         productPercentage = product.salePercentage.toString(),

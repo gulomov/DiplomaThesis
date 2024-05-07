@@ -23,7 +23,7 @@ import com.diploma.work.design.theme.small100
 fun <T> GenericProductItem(
     item: T,
     onClick: (T) -> Unit,
-    onDeleteClick: (T) -> Unit,
+    onSaveOrDeleteClick: (Boolean) -> Unit,
     productImagesList: List<String>,
     productPercentage: String,
     title: String,
@@ -45,7 +45,9 @@ fun <T> GenericProductItem(
                 imageUrls = productImagesList,
                 isFavorite = isFavorite,
                 productPercentage = productPercentage,
-                onSaveClick = { onDeleteClick(item) }
+                onSaveClick = {
+                    onSaveOrDeleteClick(it)
+                }
             )
             Spacer(modifier = Modifier.height(small100))
             Text(

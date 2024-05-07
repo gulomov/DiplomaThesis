@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetFavoriteProductsIdsUseCase
+import com.diploma.work.common.domain.SaveToFavoriteProductUseCase
 import com.diploma.work.gallery.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
@@ -24,7 +25,8 @@ class GalleryScreenViewModel @Inject constructor(
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase,
     private val getFavoriteProductsIdsUseCase: GetFavoriteProductsIdsUseCase,
     private val getBrandsUseCase: GetBrandsUseCase,
-    private val getAllProductsUseCase: GetAllProductsUseCase
+    private val getAllProductsUseCase: GetAllProductsUseCase,
+    private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase
 ) : ViewModel() {
     private val _brandsList = MutableStateFlow(listOf(BrandsItem()))
     val brandsList = _brandsList.asStateFlow()
@@ -78,4 +80,9 @@ class GalleryScreenViewModel @Inject constructor(
     fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
         deleteFromFavoriteProductsUseCase(productId)
     }
+
+    fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
+        saveToFavoriteProductUseCase(product.asFavoriteProduct())
+    }
+
 }
