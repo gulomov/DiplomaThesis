@@ -33,7 +33,7 @@ fun BrandsInGallery(
         modifier = modifier,
         pageCount = brandsList.size,
         state = pagerState,
-        contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
+        contentPadding = PaddingValues(small100),
         pageSpacing = small100,
         pageSize = PageSize.Fixed(recommendationImageWidthSize),
     ) { page ->

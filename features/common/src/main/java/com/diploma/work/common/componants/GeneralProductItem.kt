@@ -17,6 +17,7 @@ import com.diploma.work.common.componants.GenericProductImages
 import com.diploma.work.common.componants.Prices
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small150
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +35,7 @@ fun <T> GenericProductItem(
 ) {
     Card(
         onClick = { onClick(item) },
-        modifier = modifier.padding(normal100),
+        modifier = modifier.padding(horizontal = normal100, vertical = small150),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(

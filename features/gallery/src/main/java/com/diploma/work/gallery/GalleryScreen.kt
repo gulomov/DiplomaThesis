@@ -3,6 +3,7 @@ package com.diploma.work.gallery
 import GenericProductItem
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -22,7 +23,10 @@ import com.diploma.work.common.componants.EmptyStateImage
 import com.diploma.work.design.theme.GRID_CELLS
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.gallery.components.BrandsInGallery
+import com.diploma.work.gallery.components.ProductsInGallery
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
+import com.diploma.work.repository.data.AllProductsItem
+import com.diploma.work.repository.data.BrandsItem
 
 @Composable
 fun GalleryScreen(
@@ -47,41 +51,7 @@ fun GalleryScreen(
             viewModel.loadProductsByBrands(brandName = it)
         })
         Spacer(modifier = Modifier.height(normal100))
-        Box {
-            if (brands.isEmpty()) {
-                EmptyStateImage(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(normal100)
-                        .align(Alignment.Center)
-                )
-            }
-            LazyVerticalGrid(modifier = Modifier, columns = GridCells.Fixed(GRID_CELLS), content = {
-                items(products) { product ->
-                    GenericProductItem(
-                        item = product,
-                        onClick = {
-                            val route = PRODUCTION_DETAIL.replace("{productId}", it.id.toString())
-                            navController.navigate(route)
-                        },
-                        onSaveOrDeleteClick = {
-                            if (!it) {
-                                product.id?.let { id ->
-                                    viewModel.deleteFromFavoriteProducts(id)
-                                }
-                            } else {
-                                viewModel.saveToFavoriteProduct(product)
-                            }
-                        },
-                        productImagesList = product.images?.map { it.imageUrl } ?: emptyList(),
-                        productPercentage = product.salePercentage.toString(),
-                        title = product.title.toString(),
-                        originalPrice = product.originalPrice.toString(),
-                        priceOnSale = product.priceOnSale.toString(),
-                        isFavorite = favoriteIds.contains(product.id)
-                    )
-                }
-            })
-        }
+        ProductsInGallery(brands, products, navController, viewModel, favoriteIds)
     }
 }
+
