@@ -61,7 +61,12 @@ internal fun RecommendationsInHome(
                     .width(recommendationImageWidthSize),
                 shape = RoundedCornerShape(normal100),
             ) {
-                BrandImage(imageUrl = recommendations[page].image.toString())
+                BrandImage(
+                    imageUrl = recommendations[page].image.toString(),
+                    modifier
+                        .width(recommendationImageWidthSize)
+                        .height(recommendationImageHeightSize),
+                )
             }
         }
     }

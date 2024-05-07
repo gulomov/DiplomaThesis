@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ProductRepository @Inject constructor(
     private val roomDao: ProductsDao,
 ) {
-    fun getProductDetails(productId: String) =
+    fun getTopProductDetails(productId: String) =
         roomDao.getTopProductDetail(productId).map {
             ProductDetailsData(
                 id = it.id,
@@ -24,4 +24,19 @@ class ProductRepository @Inject constructor(
                 sizes = Converters().toSizesList(it.sizes),
             )
         }
+
+    fun getProductDetails(productId: String) = roomDao.getProductDetail(productId).map {
+        ProductDetailsData(
+            id = it.id,
+            address = it.address,
+            images = Converters().toImagesList(it.imageUrl),
+            title = it.title,
+            salePercentage = it.salePercentage,
+            saleStartsDate = it.saleStartsDate,
+            saleEndsDate = it.saleEndsDate,
+            priceOnSale = it.priceOnSale,
+            originalPrice = it.originalPrice,
+            sizes = Converters().toSizesList(it.sizes),
+        )
+    }
 }

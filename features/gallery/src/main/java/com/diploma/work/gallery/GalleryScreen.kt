@@ -43,7 +43,9 @@ fun GalleryScreen(
         horizontalAlignment = Alignment.Start,
         modifier = modifier,
     ) {
-        BrandsInGallery(brands)
+        BrandsInGallery(brands, brandClick = {
+            viewModel.loadProductsByBrands(brandName = it)
+        })
         Spacer(modifier = Modifier.height(normal100))
         Box {
             if (brands.isEmpty()) {

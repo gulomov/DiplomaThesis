@@ -19,8 +19,6 @@ fun BrandImage(
 ) {
     Box(
         modifier = modifier
-            .width(recommendationImageWidthSize)
-            .height(recommendationImageHeightSize),
     ) {
         AsyncImage(
             model = imageUrl,

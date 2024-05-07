@@ -15,6 +15,8 @@ interface ProductsDao {
     @Query("SELECT * FROM top_products_list WHERE id = :productId")
     fun getTopProductDetail(productId: String): Flow<TopProductsListEntity>
 
+    @Query("SELECT * FROM all_products_list WHERE id = :productId")
+    fun getProductDetail(productId: String): Flow<AllProductsListEntity>
     @Query("SELECT * FROM favorite_products")
     fun getFavouriteProducts(): Flow<List<FavoriteProductsEntity>>
 

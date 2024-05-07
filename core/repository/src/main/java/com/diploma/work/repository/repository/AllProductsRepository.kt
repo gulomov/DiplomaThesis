@@ -11,6 +11,7 @@ import com.diploma.work.repository.data.BrandsList
 import com.diploma.work.repository.generic.fetchFromDatabase
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -61,9 +62,27 @@ class AllProductsRepository @Inject constructor(
                 saleEndsDate = it.saleEndsDate,
                 priceOnSale = it.priceOnSale,
                 originalPrice = it.originalPrice,
+                brand = it.brand
             )
         }
     }
+
+    suspend fun getProductsByBrandName(brandName: String) =
+        roomDao.getAllProductsFlow().map { allProducts ->
+            allProducts.filter { it.brand == brandName }
+        }.first().map {
+            AllProductsItem(
+                id = it.id,
+                images = Converters().toImagesList(it.imageUrl),
+                title = it.title,
+                salePercentage = it.salePercentage,
+                saleStartsDate = it.saleStartsDate,
+                saleEndsDate = it.saleEndsDate,
+                priceOnSale = it.priceOnSale,
+                originalPrice = it.originalPrice,
+                brand = it.brand
+            )
+        }
 
     suspend fun fetchAndSaveBrandsFromFirebase() {
         fetchFromDatabase<BrandsList>(

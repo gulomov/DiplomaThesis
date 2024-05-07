@@ -9,10 +9,12 @@ import com.diploma.work.gallery.domain.FetchAllProductsFromFirebaseAndSaveUseCas
 import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
 import com.diploma.work.gallery.domain.GetBrandsUseCase
+import com.diploma.work.gallery.domain.GetProductsByBrandNameUseCase
 import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.BrandsItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -26,13 +28,14 @@ class GalleryScreenViewModel @Inject constructor(
     private val getFavoriteProductsIdsUseCase: GetFavoriteProductsIdsUseCase,
     private val getBrandsUseCase: GetBrandsUseCase,
     private val getAllProductsUseCase: GetAllProductsUseCase,
+    private val getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase
 ) : ViewModel() {
     private val _brandsList = MutableStateFlow(listOf(BrandsItem()))
     val brandsList = _brandsList.asStateFlow()
 
     private val _products = MutableStateFlow(listOf(AllProductsItem()))
-    val products = _products.asStateFlow()
+    val products: StateFlow<List<AllProductsItem>> = _products
 
     private val _favoriteIds = MutableStateFlow(listOf<Int>())
     val favoriteIds = _favoriteIds.asStateFlow()
@@ -61,6 +64,11 @@ class GalleryScreenViewModel @Inject constructor(
                 Timber.e("Products list is empty")
             }
         }
+    }
+
+    fun loadProductsByBrands(brandName: String) = viewModelScope.launch {
+        _products.value = getProductsByBrandNameUseCase(brandName)
+        getFavoriteProductsIds()
     }
 
     fun getFavoriteProductsIds() {
