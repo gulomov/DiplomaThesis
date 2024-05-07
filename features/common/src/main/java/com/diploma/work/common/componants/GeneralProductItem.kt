@@ -54,7 +54,8 @@ fun <T> GenericProductItem(
                 text = title,
                 modifier = Modifier
                     .padding(small100)
-                    .align(Alignment.Start)
+                    .align(Alignment.Start),
+                maxLines = 1
             )
             Prices(
                 originalPrice = originalPrice,

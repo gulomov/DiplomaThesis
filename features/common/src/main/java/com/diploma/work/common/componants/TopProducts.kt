@@ -91,7 +91,7 @@ fun TopProducts(
                 )
                 Text(
                     text = stringResource(
-                        id = R.string.topProductsPercentage,
+                        id = R.string.productsSalePercentage,
                         topProductsItem.salePercentage.toString()
                     ),
                     color = Color.White,

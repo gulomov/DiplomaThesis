@@ -57,7 +57,7 @@ fun GenericProductImages(
         )
         Text(
             text = stringResource(
-                id = R.string.topProductsPercentage,
+                id = R.string.productsSalePercentage,
                 productPercentage
             ),
             color = Color.White,

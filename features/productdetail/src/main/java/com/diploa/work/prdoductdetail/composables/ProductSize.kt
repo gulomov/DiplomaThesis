@@ -15,13 +15,21 @@ import com.diploma.work.database.entity.ProductSizes
 import com.diploma.work.design.theme.fontSize16
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small150
 
 @Composable
 fun ProductSize(
     sizes: List<ProductSizes>,
     modifier: Modifier = Modifier,
 ) {
-    LazyRow(modifier = modifier) {
+    LazyRow(
+        modifier = modifier
+            .padding(start = small150)
+            .background(
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                shape = RoundedCornerShape(small100),
+            )
+    ) {
         items(sizes) {
             ProductSize(size = it.size)
         }
@@ -38,13 +46,6 @@ fun ProductSize(
         color = Color.White,
         fontWeight = FontWeight.Bold,
         fontSize = fontSize16,
-        modifier =
-            modifier
-                .padding(start = normal100)
-                .background(
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(small100),
-                )
-                .padding(small100),
+        modifier = modifier.padding(small100),
     )
 }
