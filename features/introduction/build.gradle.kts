@@ -43,6 +43,8 @@ dependencies {
     implementation(project(":core:repository"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))
+    implementation(project(":features:common"))
+
     androidCore()
     accompanistPager()
     coil()

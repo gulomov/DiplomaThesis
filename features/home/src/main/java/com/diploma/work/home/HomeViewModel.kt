@@ -2,6 +2,7 @@ package com.diploma.work.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.common.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.common.domain.GetTopProductsUseCase
 import com.diploma.work.home.domain.FetchNewsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
@@ -23,6 +24,7 @@ class HomeViewModel @Inject constructor(
     private val fetchNewsFromFirebaseAndSaveUseCase: FetchNewsFromFirebaseAndSaveUseCase,
     private val fetchRecommendationsFromFirebaseAndSaveUseCase: FetchRecommendationsFromFirebaseAndSaveUseCase,
     private val fetchTopProductsFromFirebaseAndSaveUseCase: FetchTopProductsFromFirebaseAndSaveUseCase,
+    private val fetchAllProductsFromFirebaseAndSaveUseCase: FetchAllProductsFromFirebaseAndSaveUseCase,
     private val getHomeNewsInfoUseCase: GetHomeScreenNewsUseCase,
     private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase,
     private val getTopProductsUseCase: GetTopProductsUseCase,
@@ -40,6 +42,7 @@ class HomeViewModel @Inject constructor(
         fetchAndSaveNews()
         fetchAndSaveRecommendations()
         fetchAndSaveTopProducts()
+        fetchAllProducts()
     }
 
     fun getNews() {
@@ -78,18 +81,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun fetchAndSaveNews() =
-        viewModelScope.launch {
-            fetchNewsFromFirebaseAndSaveUseCase()
-        }
+    private fun fetchAndSaveNews() = viewModelScope.launch {
+        fetchNewsFromFirebaseAndSaveUseCase()
+    }
 
-    private fun fetchAndSaveRecommendations() =
-        viewModelScope.launch {
-            fetchRecommendationsFromFirebaseAndSaveUseCase()
-        }
+    private fun fetchAndSaveRecommendations() = viewModelScope.launch {
+        fetchRecommendationsFromFirebaseAndSaveUseCase()
+    }
 
-    private fun fetchAndSaveTopProducts() =
-        viewModelScope.launch {
-            fetchTopProductsFromFirebaseAndSaveUseCase()
-        }
+    private fun fetchAndSaveTopProducts() = viewModelScope.launch {
+        fetchTopProductsFromFirebaseAndSaveUseCase()
+    }
+
+    private fun fetchAllProducts() = viewModelScope.launch {
+        fetchAllProductsFromFirebaseAndSaveUseCase()
+    }
 }

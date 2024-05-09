@@ -26,26 +26,22 @@ class AllProductsRepository @Inject constructor(
             firebaseDatabase
         ).collect { data ->
             withContext(Dispatchers.IO) {
-                val existingEntries = roomDao.getAllProductsList().associateBy { it.id }
                 data?.allProductsList?.map {
-                    val existing = existingEntries[it.id]
-                    if (existing == null || existing.id != it.id) {
-                        roomDao.saveToAllProductsEntity(
-                            AllProductsListEntity(
-                                address = it.address.orEmpty(),
-                                id = it.id ?: 0,
-                                imageUrl = Converters().fromImagesList(it.images.orEmpty()),
-                                title = it.title.orEmpty(),
-                                salePercentage = it.salePercentage ?: 0,
-                                saleStartsDate = it.saleStartsDate.orEmpty(),
-                                saleEndsDate = it.saleEndsDate.orEmpty(),
-                                originalPrice = it.originalPrice ?: 0,
-                                priceOnSale = it.priceOnSale ?: 0,
-                                sizes = Converters().fromSizesList(it.sizes.orEmpty()),
-                                brand = it.brand.toString()
-                            )
+                    roomDao.saveToAllProductsEntity(
+                        AllProductsListEntity(
+                            address = it.address.orEmpty(),
+                            id = it.id ?: 0,
+                            imageUrl = Converters().fromImagesList(it.images.orEmpty()),
+                            title = it.title.orEmpty(),
+                            salePercentage = it.salePercentage ?: 0,
+                            saleStartsDate = it.saleStartsDate.orEmpty(),
+                            saleEndsDate = it.saleEndsDate.orEmpty(),
+                            originalPrice = it.originalPrice ?: 0,
+                            priceOnSale = it.priceOnSale ?: 0,
+                            sizes = Converters().fromSizesList(it.sizes.orEmpty()),
+                            brand = it.brand.toString()
                         )
-                    }
+                    )
                 }
             }
         }
@@ -90,18 +86,14 @@ class AllProductsRepository @Inject constructor(
             firebaseDatabase
         ).collect { data ->
             withContext(Dispatchers.IO) {
-                val existingEntries = roomDao.getAllBrandsList().associateBy { it.brandId }
                 data?.brandsList?.map {
-                    val existing = existingEntries[it.brandId]
-                    if (existing == null || existing.brandId != it.brandId) {
-                        roomDao.saveToBrandsEntity(
-                            BrandsListEntity(
-                                brandId = it.brandId ?: 0,
-                                brand = it.brand.toString(),
-                                imageUrl = it.imageUrl.toString()
-                            )
+                    roomDao.saveToBrandsEntity(
+                        BrandsListEntity(
+                            brandId = it.brandId ?: 0,
+                            brand = it.brand.toString(),
+                            imageUrl = it.imageUrl.toString()
                         )
-                    }
+                    )
                 }
             }
         }

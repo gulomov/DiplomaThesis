@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetFavoriteProductsIdsUseCase
 import com.diploma.work.common.domain.SaveToFavoriteProductUseCase
-import com.diploma.work.gallery.domain.FetchAllProductsFromFirebaseAndSaveUseCase
+import com.diploma.work.common.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
 import com.diploma.work.gallery.domain.GetBrandsUseCase
