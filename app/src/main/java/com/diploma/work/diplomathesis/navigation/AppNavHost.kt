@@ -20,6 +20,7 @@ import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
 import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
+import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 import com.diploma.work.splash.navigation.splashScreen
 
 @Composable
@@ -60,6 +61,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         }
 
         NEWS_DETAILS->{
+            topBarBackArrowVisibility.value = true
+            bottomBarVisible.value = true
+        }
+        RECOMMENDATION_DETAILS->{
             topBarBackArrowVisibility.value = true
             bottomBarVisible.value = true
         }

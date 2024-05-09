@@ -80,8 +80,8 @@ internal fun NewsInHome(
 fun NewsItem(
     index: Int,
     news: List<NewsItem>,
-    modifier: Modifier = Modifier,
     newsItemClicked: (Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.clickable(onClick = {
         newsItemClicked.invoke(news[index].id ?: 0)

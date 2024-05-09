@@ -14,6 +14,7 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.diploma.work.common.componants.BrandImage
 import com.diploma.work.design.theme.normal100
@@ -28,12 +30,15 @@ import com.diploma.work.design.theme.recommendationImageHeightSize
 import com.diploma.work.design.theme.recommendationImageWidthSize
 import com.diploma.work.design.theme.small100
 import com.diploma.work.home.R
+import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.repository.data.RecommendationItem
+import timber.log.Timber
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecommendationsInHome(
     recommendations: List<RecommendationItem>,
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState()
@@ -60,6 +65,13 @@ internal fun RecommendationsInHome(
                     .padding(normal100)
                     .width(recommendationImageWidthSize),
                 shape = RoundedCornerShape(normal100),
+                onClick = {
+                    Timber.d("brand name: ${recommendations[page].brand}")
+                    val route = ScreenRoute.RECOMMENDATION_DETAILS.replace(
+                        "{brandName}", recommendations[page].brand.toString()
+                    )
+                    navController.navigate(route)
+                }
             ) {
                 BrandImage(
                     imageUrl = recommendations[page].image.toString(),

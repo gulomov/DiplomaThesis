@@ -10,11 +10,13 @@ import com.diploma.work.favorites.FavoritesScreen
 import com.diploma.work.gallery.GalleryScreen
 import com.diploma.work.home.HomeScreen
 import com.diploma.work.home.news.NewsDetailScreen
+import com.diploma.work.home.recommendations.RecommendationsDetail
 import com.diploma.work.navigation.ScreenRoute.FAVORITE
 import com.diploma.work.navigation.ScreenRoute.GALLERY
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
+import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 
 fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(HOME) {
@@ -39,6 +41,16 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
         ),
     ) {
         NewsDetailScreen(navController = navController)
+    }
+    composable(
+        route = RECOMMENDATION_DETAILS,
+        arguments = listOf(
+            navArgument("brandName") {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        RecommendationsDetail(navController = navController)
     }
     composable(FAVORITE) {
         FavoritesScreen(navController = navController)

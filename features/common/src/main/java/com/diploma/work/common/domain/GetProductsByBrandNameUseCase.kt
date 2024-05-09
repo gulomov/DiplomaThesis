@@ -1,4 +1,4 @@
-package com.diploma.work.gallery.domain
+package com.diploma.work.common.domain
 
 import com.diploma.work.repository.repository.AllProductsRepository
 import javax.inject.Inject

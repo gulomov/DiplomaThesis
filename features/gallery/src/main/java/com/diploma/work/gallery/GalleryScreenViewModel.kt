@@ -9,7 +9,7 @@ import com.diploma.work.gallery.domain.FetchAllProductsFromFirebaseAndSaveUseCas
 import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
 import com.diploma.work.gallery.domain.GetBrandsUseCase
-import com.diploma.work.gallery.domain.GetProductsByBrandNameUseCase
+import com.diploma.work.common.domain.GetProductsByBrandNameUseCase
 import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.BrandsItem
 import dagger.hilt.android.lifecycle.HiltViewModel

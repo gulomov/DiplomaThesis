@@ -113,7 +113,7 @@ class HomeRepository @Inject constructor(
 
     fun getRecommendations() = roomDao.getHomeRecommendationsFlow().map { recommendations ->
         recommendations.map {
-            RecommendationItem(id = it.id, image = it.imageUrl)
+            RecommendationItem(id = it.id, image = it.imageUrl, brand = it.brand)
         }
     }
 

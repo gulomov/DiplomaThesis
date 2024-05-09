@@ -40,7 +40,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
-            RecommendationsInHome(recommendations = recommendations)
+            RecommendationsInHome(recommendations = recommendations, navController = navController)
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
