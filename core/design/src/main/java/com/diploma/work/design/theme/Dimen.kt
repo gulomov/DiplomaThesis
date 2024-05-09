@@ -38,6 +38,9 @@ val productsCarouselImageSize = 350.dp
 val recommendationImageWidthSize = 150.dp
 val recommendationImageHeightSize = 100.dp
 
+val BrandsInGalleryImageWidthSize = 100.dp
+val BrandsInGalleryImageHeightSize = 80.dp
+
 val topProductsImageWidthSize = 200.dp
 val topProductsImageHeightSize = 200.dp
 

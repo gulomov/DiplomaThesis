@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.diploma.work.design.composables.ThesisTopBar
 import com.diploma.work.introduction.navigation.introductionScreen
 import com.diploma.work.navigation.ScreenRoute.FAVORITE
+import com.diploma.work.navigation.ScreenRoute.GALLERY
 import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.INTRODUCTION
 import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
@@ -32,6 +33,17 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     when (navBackStackEntry?.destination?.route) {
+        INTRO_SPLASH -> {
+            topBarVisibility.value = false
+            topBarBackArrowVisibility.value = false
+            bottomBarVisible.value = false
+        }
+
+        INTRODUCTION -> {
+            topBarVisibility.value = false
+            bottomBarVisible.value = false
+        }
+
         HOME -> {
             topBarVisibility.value = true
             topBarBackArrowVisibility.value = false
@@ -44,15 +56,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             bottomBarVisible.value = true
         }
 
-        INTRO_SPLASH -> {
-            topBarVisibility.value = false
+        GALLERY -> {
+            topBarVisibility.value = true
             topBarBackArrowVisibility.value = false
-            bottomBarVisible.value = false
-        }
-
-        INTRODUCTION -> {
-            topBarVisibility.value = false
-            bottomBarVisible.value = false
+            bottomBarVisible.value = true
         }
 
         PRODUCTION_DETAIL -> {
@@ -60,11 +67,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             bottomBarVisible.value = true
         }
 
-        NEWS_DETAILS->{
+        NEWS_DETAILS -> {
             topBarBackArrowVisibility.value = true
             bottomBarVisible.value = true
         }
-        RECOMMENDATION_DETAILS->{
+
+        RECOMMENDATION_DETAILS -> {
             topBarBackArrowVisibility.value = true
             bottomBarVisible.value = true
         }

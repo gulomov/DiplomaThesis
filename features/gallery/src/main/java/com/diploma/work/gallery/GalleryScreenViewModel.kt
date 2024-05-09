@@ -67,7 +67,13 @@ class GalleryScreenViewModel @Inject constructor(
     }
 
     fun loadProductsByBrands(brandName: String) = viewModelScope.launch {
-        _products.value = getProductsByBrandNameUseCase(brandName)
+        getProductsByBrandNameUseCase(brandName).apply {
+            if (this.isEmpty()) {
+                getAllProducts()
+            } else {
+                _products.value = this
+            }
+        }
         getFavoriteProductsIds()
     }
 
