@@ -1,4 +1,4 @@
-package com.diploa.work.prdoductdetail.composables
+package com.diploma.work.prdoductdetail.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

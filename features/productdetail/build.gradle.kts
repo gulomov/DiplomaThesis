@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
     implementation(project(":features:common"))
+    implementation(project(":features:booking"))
 
     logback()
     androidCore()

@@ -1,9 +1,11 @@
-package com.diploa.work.prdoductdetail
+package com.diploma.work.prdoductdetail
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,20 +17,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.diploma.work.common.componants.Prices
-import com.diploa.work.prdoductdetail.composables.ProductDetailsImages
-import com.diploa.work.prdoductdetail.composables.ProductSize
-import com.diploa.work.prdoductdetail.composables.ProductTitleAndSale
+import com.diploma.work.prdoductdetail.composables.ProductDetailsImages
+import com.diploma.work.prdoductdetail.composables.ProductSize
+import com.diploma.work.prdoductdetail.composables.ProductTitleAndSale
 import com.diploma.work.common.componants.TopProductsLazyRow
 import com.diploma.work.design.composables.MainButton
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.normal150
-import com.diploma.work.prdoductdetail.R
+import com.diploma.work.prdoductdetail.composables.PriceAndBooking
+import com.diploma.work.repository.data.ProductDetailsData
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalPagerApi::class)
@@ -71,11 +75,7 @@ fun ProductDetails(
                 productDetails.title.orEmpty(),
                 productDetails.salePercentage ?: 0,
             )
-            Prices(
-                originalPrice = productDetails.originalPrice.toString(),
-                priceOnSale = productDetails.priceOnSale.toString(),
-                modifier = Modifier.padding(start = normal100)
-            )
+            PriceAndBooking(productDetails)
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())
             Text(

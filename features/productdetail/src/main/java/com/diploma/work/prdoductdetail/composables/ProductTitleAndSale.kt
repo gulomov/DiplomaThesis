@@ -1,4 +1,4 @@
-package com.diploa.work.prdoductdetail.composables
+package com.diploma.work.prdoductdetail.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -28,8 +28,7 @@ internal fun ProductTitleAndSale(
     Row(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = productTitle,
-            modifier =
-            Modifier
+            modifier = Modifier
                 .padding(horizontal = normal100, vertical = normal150)
                 .weight(1f)
                 .align(Alignment.CenterVertically),
@@ -41,8 +40,7 @@ internal fun ProductTitleAndSale(
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = fontSize16,
-            modifier =
-            Modifier
+            modifier = Modifier
                 .padding(normal100)
                 .background(
                     color = MaterialTheme.colorScheme.error,

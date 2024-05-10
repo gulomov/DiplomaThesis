@@ -1,4 +1,4 @@
-package com.diploa.work.prdoductdetail.domain
+package com.diploma.work.prdoductdetail.domain
 
 import com.diploma.work.repository.repository.ProductRepository
 import javax.inject.Inject

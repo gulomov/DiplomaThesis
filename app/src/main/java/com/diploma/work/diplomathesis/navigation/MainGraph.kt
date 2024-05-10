@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.diploa.work.prdoductdetail.ProductDetails
+import com.diploma.work.prdoductdetail.ProductDetails
 import com.diploma.work.favorites.FavoritesScreen
 import com.diploma.work.gallery.GalleryScreen
 import com.diploma.work.home.HomeScreen

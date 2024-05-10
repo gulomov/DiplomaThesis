@@ -1,9 +1,9 @@
-package com.diploa.work.prdoductdetail
+package com.diploma.work.prdoductdetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.diploa.work.prdoductdetail.domain.GetProductDetailsUseCase
+import com.diploma.work.prdoductdetail.domain.GetProductDetailsUseCase
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetTopProductsUseCase
 import com.diploma.work.common.domain.IsProductInFavoritesUseCase

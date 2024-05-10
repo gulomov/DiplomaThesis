@@ -44,7 +44,6 @@ android {
         }
 
         getByName("debug") {
-            storeFile = file("../keystore/debug.keystore")
         }
     }
 

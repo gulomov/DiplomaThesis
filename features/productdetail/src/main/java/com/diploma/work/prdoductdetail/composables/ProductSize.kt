@@ -1,4 +1,4 @@
-package com.diploa.work.prdoductdetail.composables
+package com.diploma.work.prdoductdetail.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.diploma.work.database.entity.ProductSizes
+import com.diploma.work.design.composables.MainButton
 import com.diploma.work.design.theme.fontSize16
-import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
 import com.diploma.work.design.theme.small150
 
@@ -29,6 +29,7 @@ fun ProductSize(
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 shape = RoundedCornerShape(small100),
             )
+
     ) {
         items(sizes) {
             ProductSize(size = it.size)
