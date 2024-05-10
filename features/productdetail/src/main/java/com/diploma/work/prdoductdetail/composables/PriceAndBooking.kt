@@ -14,7 +14,10 @@ import com.diploma.work.prdoductdetail.R
 import com.diploma.work.repository.data.ProductDetailsData
 
 @Composable
-internal fun PriceAndBooking(productDetails: ProductDetailsData) {
+internal fun PriceAndBooking(
+    productDetails: ProductDetailsData,
+    bookingClicked: () -> Unit
+) {
     Row {
         Prices(
             originalPrice = productDetails.originalPrice.toString(),
@@ -25,7 +28,7 @@ internal fun PriceAndBooking(productDetails: ProductDetailsData) {
                 .align(Alignment.CenterVertically),
         )
         MainButton(
-            onClick = { /*TODO*/ },
+            onClick = bookingClicked,
             content = { Text(text = stringResource(R.string.want_book)) },
             modifier = Modifier
                 .padding(end = normal100)

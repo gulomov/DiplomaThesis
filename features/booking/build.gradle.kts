@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:design"))
+    implementation(project(":core:design"))
     coil()
     compose()
     hilt()

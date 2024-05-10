@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_book_text">Book?</string>
+    <string name="button_nope_text">Nope!</string>
+</resources>
