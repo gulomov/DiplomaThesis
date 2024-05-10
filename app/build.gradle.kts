@@ -35,20 +35,6 @@ android {
         }
     }
 
-    buildTypes {
-        debug {
-            isDebuggable = true
-        }
-        release {
-            isMinifyEnabled = false
-            isShrinkResources = true
-            signingConfig = signingConfigs.getByName("release")
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-    }
     signingConfigs {
         create("release") {
             storeFile = file("../keystore/DT.keystore")
@@ -62,6 +48,19 @@ android {
         }
     }
 
+    buildTypes {
+        debug {
+            isDebuggable = true
+        }
+        release {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
