@@ -27,7 +27,7 @@ android {
         compileSdk = DefaultConfig.compileSdkVersion
         targetSdk = DefaultConfig.targetSdkVersion
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
