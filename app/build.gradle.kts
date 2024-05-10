@@ -41,12 +41,27 @@ android {
         }
         release {
             isMinifyEnabled = false
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
         }
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("../keystore/DT.keystore")
+            storePassword = "Jalol9050"
+            keyPassword = "Jalol9050"
+            keyAlias = "key0"
+        }
+
+        getByName("debug") {
+            storeFile = file("../keystore/debug.keystore")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
