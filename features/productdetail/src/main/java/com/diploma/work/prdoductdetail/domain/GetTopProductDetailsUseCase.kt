@@ -1,10 +1,10 @@
 package com.diploma.work.prdoductdetail.domain
 
-import com.diploma.work.repository.repository.ProductRepository
+import com.diploma.work.repository.repository.ProductDetailsRepository
 import javax.inject.Inject
 
 class GetTopProductDetailsUseCase @Inject constructor(
-    private val productRepository: ProductRepository,
+    private val productDetailsRepository: ProductDetailsRepository,
 ) {
-    operator fun invoke(productId: String) = productRepository.getTopProductDetails(productId)
+    operator fun invoke(productId: String) = productDetailsRepository.getTopProductDetails(productId)
 }

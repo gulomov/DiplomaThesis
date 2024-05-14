@@ -6,7 +6,7 @@ import com.diploma.work.repository.data.ProductDetailsData
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ProductRepository @Inject constructor(
+class ProductDetailsRepository @Inject constructor(
     private val roomDao: ProductsDao,
 ) {
     fun getTopProductDetails(productId: String) =

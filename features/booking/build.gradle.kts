@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:design"))
+    implementation(project(":core:repository"))
 
     coil()
     compose()
