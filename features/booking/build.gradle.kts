@@ -1,6 +1,7 @@
 import libs.Coil.coil
 import libs.Compose.compose
 import libs.Hilt.hilt
+import libs.Timber.timber
 
 plugins {
     id("com.android.library")
@@ -34,7 +35,9 @@ android {
 dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:design"))
+
     coil()
     compose()
     hilt()
+    timber()
 }

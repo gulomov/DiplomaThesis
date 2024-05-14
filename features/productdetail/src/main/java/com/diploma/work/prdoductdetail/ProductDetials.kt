@@ -44,7 +44,7 @@ import com.diploma.work.repository.data.ProductDetailsData
 import com.google.accompanist.pager.ExperimentalPagerApi
 import timber.log.Timber
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProductDetails(
     navController: NavController,
@@ -55,16 +55,15 @@ fun ProductDetails(
     val productDetails by viewModel.productDetails.collectAsState()
     val topProducts by viewModel.topProductsList.collectAsState()
     val isProductSavedIntoFavorites by viewModel.isProductInFavorites.collectAsState()
-    var showBottomSheet by remember { mutableStateOf(false) }
-
+    val startBookingLogic by viewModel.startBookingLogic.collectAsState()
     LaunchedEffect(Unit) {
         viewModel.getTopProductsList()
     }
 
-    if (showBottomSheet) {
-        BookingScreen() {
-            showBottomSheet = false
-        }
+    if (startBookingLogic) {
+        BookingScreen(
+            onDismissBottomSheet = { viewModel.startBookingLogic(shouldShowBookingLogic = false) },
+            onConfirmBottomSheet = { viewModel.startBookingLogic(shouldShowBookingLogic = false) })
     }
 
     productDetails.images?.let { data ->
@@ -92,7 +91,7 @@ fun ProductDetails(
                 productDetails.salePercentage ?: 0,
             )
             PriceAndBooking(productDetails, bookingClicked = {
-                showBottomSheet = true
+                viewModel.startBookingLogic(shouldShowBookingLogic = true)
             })
             Spacer(modifier = Modifier.height(normal150))
             ProductSize(productDetails.sizes.orEmpty())

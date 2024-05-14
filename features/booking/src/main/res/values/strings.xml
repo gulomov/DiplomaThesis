@@ -2,4 +2,6 @@
 <resources>
     <string name="button_book_text">Book?</string>
     <string name="button_nope_text">Nope!</string>
+    <string name="data_picker_confirm_button">Confirm</string>
+    <string name="data_picker_dismiss_button">Dismiss</string>
 </resources>

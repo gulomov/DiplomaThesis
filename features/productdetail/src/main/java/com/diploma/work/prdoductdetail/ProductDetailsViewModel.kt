@@ -37,6 +37,9 @@ class ProductDetailsViewModel @Inject constructor(
     private val _isProductInFavorites = MutableStateFlow<Boolean?>(null)
     val isProductInFavorites = _isProductInFavorites.asStateFlow()
 
+    private val _startBookingLogic = MutableStateFlow(false)
+    val startBookingLogic = _startBookingLogic.asStateFlow()
+
     init {
         viewModelScope.launch {
             getProductDetailsUseCase(checkNotNull(savedStateHandle[PRODUCT_ID])).collect {
@@ -71,6 +74,10 @@ class ProductDetailsViewModel @Inject constructor(
 
     fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
         deleteFromFavoriteProductsUseCase(productId)
+    }
+
+    fun startBookingLogic(shouldShowBookingLogic: Boolean) {
+        _startBookingLogic.value = shouldShowBookingLogic
     }
 
 }
