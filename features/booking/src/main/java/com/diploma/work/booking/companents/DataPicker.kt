@@ -29,10 +29,6 @@ internal fun DataPicker(
         yearRange = 2024..2024,
     )
 
-    val dateFormatter = remember {
-        DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    }
-
     DatePickerDialog(
         modifier = modifier,
         onDismissRequest = { onDismissClicked() },
@@ -40,10 +36,6 @@ internal fun DataPicker(
             TextButton(
                 onClick = {
                     datePickerState.selectedDateMillis?.let {
-                        val selectedDate = Instant.ofEpochMilli(it)
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate()
-                            .format(dateFormatter)
                         onConfirmClicked(datePickerState.selectedDateMillis ?: 0)
                     }
                 },

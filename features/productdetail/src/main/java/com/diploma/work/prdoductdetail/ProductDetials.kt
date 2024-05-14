@@ -50,10 +50,20 @@ fun ProductDetails(
     }
 
     if (startBookingLogic) {
-        BookingScreen(
-            onCloseBooking = { viewModel.checkIfProductBooked() },
-            productId = productDetails.id ?: 0
-        )
+        if (isProductBooked)
+            BookingScreen(
+                onCloseBooking = { viewModel.checkIfProductBooked() },
+                productId = productDetails.id ?: 0,
+                showBottomSheet = true,
+                showDatePicker = false,
+            ) else {
+            BookingScreen(
+                onCloseBooking = { viewModel.checkIfProductBooked() },
+                productId = productDetails.id ?: 0,
+                showBottomSheet = false,
+                showDatePicker = true,
+            )
+        }
     }
 
     productDetails.images?.let { data ->
