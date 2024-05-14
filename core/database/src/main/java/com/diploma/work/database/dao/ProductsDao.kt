@@ -57,4 +57,7 @@ interface ProductsDao {
 
     @Query("SELECT * FROM booked_products WHERE productId = :productId")
     fun getBookedProductById(productId: Int): Flow<BookedProductEntity>
+
+    @Query("SELECT * FROM booked_products")
+    fun getBookedProducts(): Flow<List<BookedProductEntity>>
 }

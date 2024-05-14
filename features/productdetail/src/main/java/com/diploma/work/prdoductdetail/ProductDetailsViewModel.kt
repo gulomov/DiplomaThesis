@@ -8,6 +8,7 @@ import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetTopProductsUseCase
 import com.diploma.work.common.domain.IsProductInFavoritesUseCase
 import com.diploma.work.common.domain.SaveToFavoriteProductUseCase
+import com.diploma.work.prdoductdetail.domain.IsProductBookedUseCase
 import com.diploma.work.repository.data.ProductDetailsData
 import com.diploma.work.repository.data.TopProductItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,13 +22,15 @@ private const val PRODUCT_ID = "productId"
 
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    getProductDetailsUseCase: GetProductDetailsUseCase,
+    private val savedStateHandle: SavedStateHandle,
+    private val getProductDetailsUseCase: GetProductDetailsUseCase,
     private val isProductInFavoritesUseCase: IsProductInFavoritesUseCase,
     private val getTopProductsUseCase: GetTopProductsUseCase,
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase,
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase,
+    private val isProductBookedUseCase: IsProductBookedUseCase,
 ) : ViewModel() {
+    private val productId by lazy { checkNotNull(savedStateHandle.get<String>(PRODUCT_ID)) }
     private val _productDetail = MutableStateFlow(ProductDetailsData())
     val productDetails = _productDetail.asStateFlow()
 
@@ -40,20 +43,13 @@ class ProductDetailsViewModel @Inject constructor(
     private val _startBookingLogic = MutableStateFlow(false)
     val startBookingLogic = _startBookingLogic.asStateFlow()
 
+    private val _isProductBooked = MutableStateFlow(false)
+    val isProductBooked = _isProductBooked.asStateFlow()
+
     init {
-        viewModelScope.launch {
-            getProductDetailsUseCase(checkNotNull(savedStateHandle[PRODUCT_ID])).collect {
-                _productDetail.value = it
-            }
-
-        }
-        checkProductIsFavorite(checkNotNull(savedStateHandle[PRODUCT_ID]))
-    }
-
-    private fun checkProductIsFavorite(productId: String) {
-        viewModelScope.launch {
-            _isProductInFavorites.value = isProductInFavoritesUseCase(productId.toInt())
-        }
+        getProductDetail(productId)
+        checkProductIsFavorite(productId)
+        isProductBooked(productId)
     }
 
     fun getTopProductsList() {
@@ -78,6 +74,25 @@ class ProductDetailsViewModel @Inject constructor(
 
     fun startBookingLogic(shouldShowBookingLogic: Boolean) {
         _startBookingLogic.value = shouldShowBookingLogic
+    }
+
+    fun checkIfProductBooked() {
+        _startBookingLogic.value = false
+        isProductBooked(productId)
+    }
+
+    private fun getProductDetail(productId: String) = viewModelScope.launch {
+        getProductDetailsUseCase(productId).collect {
+            _productDetail.value = it
+        }
+    }
+
+    private fun isProductBooked(productId: String) = viewModelScope.launch {
+        _isProductBooked.value = isProductBookedUseCase(productId.toInt()) == true
+    }
+
+    private fun checkProductIsFavorite(productId: String) = viewModelScope.launch {
+        _isProductInFavorites.value = isProductInFavoritesUseCase(productId.toInt())
     }
 
 }

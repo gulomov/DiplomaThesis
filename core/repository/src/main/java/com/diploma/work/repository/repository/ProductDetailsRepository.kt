@@ -3,6 +3,7 @@ package com.diploma.work.repository.repository
 import com.diploma.work.database.converter.Converters
 import com.diploma.work.database.dao.ProductsDao
 import com.diploma.work.repository.data.ProductDetailsData
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -39,4 +40,11 @@ class ProductDetailsRepository @Inject constructor(
             sizes = Converters().toSizesList(it.sizes),
         )
     }
+
+    suspend fun isProductBooked(productId: Int): Boolean? {
+        return roomDao.getBookedProducts()
+            .map { products -> products.any { it.productId == productId } }
+            .firstOrNull()
+    }
 }
+

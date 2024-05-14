@@ -8,18 +8,17 @@ import timber.log.Timber
 
 @Composable
 fun BookingScreen(
-    onDismissBottomSheet: () -> Unit,
-    onConfirmBottomSheet: () -> Unit,
+    onCloseBooking: () -> Unit,
+    productId: Int,
     modifier: Modifier = Modifier,
     viewModel: BookingScreenViewModel = hiltViewModel()
 ) {
     DataPicker(
         modifier = modifier,
         onConfirmClicked = {
-            Timber.d("Confirmation date: $it")
-            onConfirmBottomSheet()
-            viewModel.closeCalendar()
+            onCloseBooking()
+            viewModel.saveBookedProduct(productId, it)
         },
-        onDismissClicked = { onDismissBottomSheet() }
+        onDismissClicked = { onCloseBooking() }
     )
 }

@@ -4,7 +4,7 @@ import com.diploma.work.repository.data.BookedProduct
 import com.diploma.work.repository.repository.BookedProductsRepository
 import javax.inject.Inject
 
-class SaveBookedProduct @Inject constructor(
+class SaveBookedProductUseCase @Inject constructor(
     private val bookedProductsRepository: BookedProductsRepository
 ) {
     suspend operator fun invoke(bookedProduct: BookedProduct) =

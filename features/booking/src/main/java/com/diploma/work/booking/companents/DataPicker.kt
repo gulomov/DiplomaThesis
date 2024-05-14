@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DataPicker(
-    onConfirmClicked: (String) -> Unit,
+    onConfirmClicked: (Long) -> Unit,
     onDismissClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -44,7 +44,7 @@ internal fun DataPicker(
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate()
                             .format(dateFormatter)
-                        onConfirmClicked(selectedDate)
+                        onConfirmClicked(datePickerState.selectedDateMillis ?: 0)
                     }
                 },
                 enabled = datePickerState.selectedDateMillis != null
