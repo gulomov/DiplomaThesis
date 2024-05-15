@@ -38,6 +38,7 @@
             <option value="$PROJECT_DIR$/features/introduction" />
             <option value="$PROJECT_DIR$/features/productdetail" />
             <option value="$PROJECT_DIR$/features/splash" />
+            <option value="$PROJECT_DIR$/server" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
