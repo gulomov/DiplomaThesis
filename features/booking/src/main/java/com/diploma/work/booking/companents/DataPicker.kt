@@ -7,14 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.diploma.work.booking.R
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +34,10 @@ internal fun DataPicker(
                         onConfirmClicked(datePickerState.selectedDateMillis ?: 0)
                     }
                 },
-                enabled = datePickerState.selectedDateMillis != null
+                enabled = datePickerState.selectedDateMillis?.let {
+                    it >= System.currentTimeMillis()
+                } == true
+
             ) {
                 Text(text = stringResource(R.string.data_picker_confirm_button))
             }

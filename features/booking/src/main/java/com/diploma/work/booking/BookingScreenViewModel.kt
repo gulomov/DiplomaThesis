@@ -22,18 +22,9 @@ class BookingScreenViewModel @Inject constructor(
     private val saveBookedProductUseCase: SaveBookedProductUseCase,
     private val getBookedProductById: GetBookedProductByIdUseCase,
 ) : ViewModel() {
-    private val _showDatePicker = MutableStateFlow(false)
-    val showDatePicker = _showDatePicker.asStateFlow()
-
-    private val _showBottomSheetModal = MutableStateFlow(false)
-    val showBottomSheetModal = _showBottomSheetModal.asStateFlow()
 
     private val _bookedProductDate = MutableStateFlow<Long>(0)
     val bookedProductDate = _bookedProductDate.asStateFlow()
-
-    init {
-        showDatePicker()
-    }
 
     fun saveBookedProduct(productId: Int, bookedDate: Long) = viewModelScope.launch {
         saveBookedProductUseCase(BookedProduct(productId, bookedDate))
@@ -43,15 +34,5 @@ class BookingScreenViewModel @Inject constructor(
         getBookedProductById(productId).firstOrNull()?.bookedDate.apply {
             _bookedProductDate.value = this ?: 0
         }
-        showBottomSheetModal()
     }
-
-    private fun showDatePicker() {
-        _showDatePicker.value = true
-    }
-
-    private fun showBottomSheetModal() {
-        _showBottomSheetModal.value = true
-    }
-
 }
