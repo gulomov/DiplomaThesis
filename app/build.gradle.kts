@@ -91,6 +91,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))
+    implementation(project(":kmpsharedmodule"))
 
     logback()
     androidCore()
