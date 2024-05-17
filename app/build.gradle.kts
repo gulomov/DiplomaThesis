@@ -1,14 +1,3 @@
-import libs.AccompanistPager.accompanistPager
-import libs.AndroidCode.androidCore
-import libs.Coil.coil
-import libs.Compose.compose
-import libs.Firebase.firebase
-import libs.Hilt.hilt
-import libs.LogBack.logback
-import libs.Moshi.moshi
-import libs.Room.room
-import libs.Timber.timber
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -76,6 +65,7 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/gradle/incremental.annotation.processors"
         }
     }
 }
@@ -93,16 +83,40 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":kmpsharedmodule"))
 
-    logback()
-    androidCore()
-    accompanistPager()
-    coil()
-    compose()
-    firebase()
-    hilt()
-    moshi()
-    timber()
-    room()
+    implementation(libs.slf4j.api)
+    implementation(libs.logback.android)
+    implementation(libs.core.ktx)
+    implementation(libs.livedata.ktx)
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.runtime.ktx)
+    implementation(libs.webkit)
+    implementation(libs.accompanist.pager)
+    implementation(libs.coil.compose)
+    implementation(libs.ui.comopose)
+    implementation(libs.tooling)
+    implementation(libs.tooling.preview)
+    implementation(libs.tooling.manifest)
+    implementation(libs.material)
+    implementation(libs.navigation.compose)
+    implementation(libs.constraint.compose)
+    implementation(libs.foundation)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.auth)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.timber)
+
 }
 
 kapt {
