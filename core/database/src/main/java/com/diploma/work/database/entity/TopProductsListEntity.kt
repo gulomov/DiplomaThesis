@@ -3,7 +3,6 @@ package com.diploma.work.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.firebase.database.PropertyName
 
 @Entity(tableName = "top_products_list")
 data class TopProductsListEntity(
@@ -21,11 +20,9 @@ data class TopProductsListEntity(
 )
 
 data class ProductImages(
-    @PropertyName("imageUrl")
     val imageUrl: String = "",
 )
 
 data class ProductSizes(
-    @PropertyName("size")
     val size: String = "",
 )
