@@ -42,6 +42,13 @@ room = "2.5.0"
 # Timber
 timber = "5.0.1"
 
+# Plugins
+androidGradle = "8.4.0"
+kotlinAndroid = "1.8.22"
+hiltAdnroid = "2.44"
+googleServices = "4.3.15"
+ksp = "1.8.10-1.0.9"
+
 [libraries]
 # Android Core
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -102,5 +109,11 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
-
-
+android-application = { id = "com.android.application", version.ref = "androidGradle" }
+android-library = { id = "com.android.library", version.ref = "androidGradle" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinAndroid" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAdnroid" }
+google-service = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+build-gradle = { id = "com.android.tools.build:gradle", version.ref = "androidGradle" }
