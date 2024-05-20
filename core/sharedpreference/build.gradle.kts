@@ -1,10 +1,7 @@
-import libs.AndroidCode.androidCore
-import libs.Hilt.hilt
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -32,7 +29,9 @@ android {
 }
 
 dependencies {
-
-    androidCore()
-    hilt()
+    implementation(libs.core.ktx)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
 }
