@@ -1,15 +1,7 @@
-import libs.AccompanistPager.accompanistPager
-import libs.AndroidCode.androidCore
-import libs.Coil.coil
-import libs.Compose.compose
-import libs.Hilt.hilt
-import libs.Moshi.moshi
-import libs.Timber.timber
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -43,11 +35,30 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":features:common"))
 
-    androidCore()
-    accompanistPager()
-    coil()
-    compose()
-    hilt()
-    timber()
-    moshi()
+    implementation(libs.core.ktx)
+    implementation(libs.livedata.ktx)
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.runtime.ktx)
+    implementation(libs.webkit)
+    implementation(libs.accompanist.pager)
+    implementation(libs.coil.compose)
+    implementation(libs.ui.comopose)
+    implementation(libs.tooling)
+    implementation(libs.tooling.preview)
+    implementation(libs.tooling.manifest)
+    implementation(libs.material)
+    implementation(libs.navigation.compose)
+    implementation(libs.constraint.compose)
+    implementation(libs.foundation)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.timber)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -105,16 +105,15 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.auth)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
-    implementation(libs.hilt.navigation.compose)
-
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation(libs.timber)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.android.compiler)
 
 }
 

@@ -1,18 +1,7 @@
-import libs.AccompanistPager.accompanistPager
-import libs.AndroidCode.androidCore
-import libs.Coil.coil
-import libs.Compose.compose
-import libs.Firebase.firebase
-import libs.Hilt.hilt
-import libs.LogBack.logback
-import libs.Moshi.moshi
-import libs.Room.room
-import libs.Timber.timber
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -51,14 +40,44 @@ dependencies {
     implementation(project(":features:common"))
     implementation(project(":features:booking"))
 
-    logback()
-    androidCore()
-    accompanistPager()
-    coil()
-    compose()
-    firebase()
-    hilt()
-    moshi()
-    timber()
-    room()
+    implementation(libs.core.ktx)
+    implementation(libs.livedata.ktx)
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.runtime.ktx)
+    implementation(libs.webkit)
+    implementation(libs.ui.comopose)
+    implementation(libs.tooling)
+    implementation(libs.tooling.preview)
+    implementation(libs.tooling.manifest)
+    implementation(libs.material)
+    implementation(libs.navigation.compose)
+    implementation(libs.constraint.compose)
+    implementation(libs.foundation)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.android.compiler)
+    implementation(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.timber)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.auth)
+    implementation(libs.slf4j.api)
+    implementation(libs.logback.android)
+    implementation(libs.accompanist.pager)
+    implementation(libs.coil.compose)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
+    kapt(libs.room.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }
