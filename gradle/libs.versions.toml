@@ -47,7 +47,7 @@ androidGradle = "8.4.0"
 kotlinAndroid = "1.8.22"
 hiltAdnroid = "2.44"
 googleServices = "4.3.15"
-ksp = "1.8.10-1.0.9"
+ksp = "1.8.22-1.0.11"
 
 [libraries]
 # Android Core
