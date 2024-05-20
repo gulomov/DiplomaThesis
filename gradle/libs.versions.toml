@@ -21,7 +21,7 @@ firebase-bom = "32.1.0"
 firebase-auth = "22.1.2"
 
 # Hilt
-hilt = "2.45"
+hilt = "2.48"
 hilt-navigation-compose = "1.0.0"
 hilt-compiler = "1.0.0"
 
@@ -37,17 +37,29 @@ logback = "3.0.0"
 moshi = "1.15.0"
 
 # Room
-room = "2.5.0"
+room = "2.6.1"
 
 # Timber
 timber = "5.0.1"
 
+# Testing
+junit = "4.13.2"
+mockito-core = "3.9.0"
+mockito-kotlin = "3.2.0"
+robolectric = "4.6"
+coroutines-test = "1.6.0"
+firebase-test = "20.0.3"
+google-truth = "1.1.2"
+junit-ktx = "1.1.5"
+espresso-core = "3.3.0"
+
 # Plugins
 androidGradle = "8.4.0"
-kotlinAndroid = "1.8.22"
-hiltAdnroid = "2.44"
+kotlinAndroid = "1.9.24"
+hiltAdnroid = "2.48"
 googleServices = "4.3.15"
 ksp = "1.8.22-1.0.11"
+ktor = "2.3.11"
 
 [libraries]
 # Android Core
@@ -104,10 +116,21 @@ moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.re
 # Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-room-compiler = {group = "androidx.room", name ="room-compiler", version.ref = "room"}
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
 # Timber
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+# Testing
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+google-trueth = { module = "com.google.truth:truth", version.ref = "google-truth" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines-test" }
+firebase-test = { module = "com.google.firebase:firebase-database", version.ref = "firebase-test" }
+junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit-ktx" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
@@ -118,3 +141,5 @@ hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAdnro
 google-service = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 build-gradle = { id = "com.android.tools.build:gradle", version.ref = "androidGradle" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinAndroid" }

@@ -11,9 +11,9 @@ android {
 
     defaultConfig {
         applicationId = "com.diploma.work.diplomathesis"
-        minSdk = DefaultConfig.minSdkVersion
-        compileSdk = DefaultConfig.compileSdkVersion
-        targetSdk = DefaultConfig.targetSdkVersion
+        minSdk = 25
+        compileSdk = 34
+        targetSdk = 34
         versionCode = 1
         versionName = "0.0.2"
 
@@ -59,7 +59,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {

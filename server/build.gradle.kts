@@ -1,8 +1,6 @@
-import libs.Ktor.ktor
 
 plugins {
-    id("io.ktor.plugin") version "2.3.11"
-    id("org.jetbrains.kotlin.jvm")
+    alias(libs.plugins.ktor)
     application
 }
 group = "com.diploma.work.server"
@@ -13,5 +11,9 @@ application {
 }
 
 dependencies {
-    ktor()
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.server.call.logging)
+    implementation(libs.ktor.serialization)
+    implementation(libs.logback)
 }

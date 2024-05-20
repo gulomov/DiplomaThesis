@@ -8,8 +8,8 @@ android {
     namespace = "com.diploma.work.navigation"
 
     defaultConfig {
+        minSdk = 25
         compileSdk = 34
-        minSdk = 24
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -24,7 +24,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 

@@ -8,8 +8,8 @@ android {
     namespace = "com.diploma.work.gallery"
 
     defaultConfig {
-        minSdk = 24
-        compileSdk = 33
+        minSdk = 25
+        compileSdk = 34
     }
 
     compileOptions {
@@ -24,7 +24,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 

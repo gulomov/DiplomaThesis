@@ -8,13 +8,8 @@ android {
     namespace = "com.diploma.work.prdoductdetail"
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 25
         compileSdk = 34
-    }
-
-    defaultConfig {
-        minSdk = 24
-        compileSdk = 33
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -29,7 +24,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 

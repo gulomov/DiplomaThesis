@@ -1,13 +1,3 @@
-import libs.AccompanistPager.accompanistPager
-import libs.AndroidCode.androidCore
-import libs.Coil.coil
-import libs.Compose.compose
-import libs.Firebase.firebase
-import libs.Hilt.hilt
-import libs.Moshi.moshi
-import libs.Room.room
-import libs.Timber.timber
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -18,8 +8,8 @@ plugins {
 android {
     namespace = "com.diploma.work.database"
     defaultConfig {
-        minSdk = 24
-        compileSdk = 33
+        minSdk = 25
+        compileSdk = 34
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -34,7 +24,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 
