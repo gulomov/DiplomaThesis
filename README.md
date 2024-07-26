@@ -16,7 +16,8 @@ Jetpack Compose, MVVM architecture, and other useful tools.
 
 - **Kotlin**: Primary programming language used for Android development.
 - **Jetpack Compose**: Modern UI toolkit for building native Android UIs.
-- **MVVM (Model-View-ViewModel)**: Architectural pattern used to separate the UI from the business logic.
+- **MVVM (Model-View-ViewModel)**: Architectural pattern used to separate the UI from the business
+  logic.
 - **Firebase Realtime Database**: Base remote database where data saved
 - **Room Database**: Technology to save data in app
 - **Flow**: To provide a more functional and reactive approach to data handling
@@ -26,5 +27,5 @@ Jetpack Compose, MVVM architecture, and other useful tools.
 - [ ] Learn Ktor.
 - [ ] Move database from Firebase.
 - [ ] Create REST APIs to load data from remote database.
-- [ ] Start migrating to KM.
-
+- [ ] Start migrating to KM. (First version in Compose
+  Multiplatform https://github.com/gulomov/DTCompseMutliplatform)
