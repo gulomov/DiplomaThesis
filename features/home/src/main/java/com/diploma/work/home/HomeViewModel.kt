@@ -15,6 +15,7 @@ import com.diploma.work.repository.data.TopProductItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,71 +30,35 @@ class HomeViewModel @Inject constructor(
     private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase,
     private val getTopProductsUseCase: GetTopProductsUseCase,
 ) : ViewModel() {
-    private val _newsInfo = MutableStateFlow(listOf<NewsItem>())
-    val news = _newsInfo.asStateFlow()
-
-    private val _recommendationsList = MutableStateFlow(listOf<RecommendationItem>())
-    val recommendationsList = _recommendationsList.asStateFlow()
-
-    private val _topProductsList = MutableStateFlow(listOf<TopProductItem>())
-    val topProductsList = _topProductsList.asStateFlow()
+    val uiState = MutableStateFlow(HomeScreenUiState())
 
     init {
-        fetchAndSaveNews()
-        fetchAndSaveRecommendations()
-        fetchAndSaveTopProducts()
-        fetchAllProducts()
+        fetchAndSaveHomeScreenData()
+        combineFlow()
     }
 
-    fun getNews() {
+    private fun combineFlow() {
         viewModelScope.launch {
-            getHomeNewsInfoUseCase().collect { resource ->
-                if (resource.isNotEmpty()) {
-                    _newsInfo.value = resource
-                } else {
-                    Timber.e("News is empty")
-                }
+            combine(
+                getHomeNewsInfoUseCase(),
+                getHomeRecommendationsUseCase(),
+                getTopProductsUseCase()
+            ) { news, recommendations, topProducts ->
+                HomeScreenUiState(
+                    newsInfo = news,
+                    recommendationsList = recommendations,
+                    topProductsList = topProducts
+                )
+            }.collect {
+                uiState.value = it
             }
         }
     }
 
-    fun getRecommendationsList() {
-        viewModelScope.launch {
-            getHomeRecommendationsUseCase().collect { resource ->
-                if (resource.isNotEmpty()) {
-                    _recommendationsList.value = resource
-                } else {
-                    Timber.e("Recommendations is empty")
-                }
-            }
-        }
-    }
-
-    fun getTopProductsList() {
-        viewModelScope.launch {
-            getTopProductsUseCase().collect { data ->
-                if (data.isNotEmpty()) {
-                    _topProductsList.value = data
-                } else {
-                    Timber.e("Top products is empty")
-                }
-            }
-        }
-    }
-
-    private fun fetchAndSaveNews() = viewModelScope.launch {
+    private fun fetchAndSaveHomeScreenData() = viewModelScope.launch {
         fetchNewsFromFirebaseAndSaveUseCase()
-    }
-
-    private fun fetchAndSaveRecommendations() = viewModelScope.launch {
         fetchRecommendationsFromFirebaseAndSaveUseCase()
-    }
-
-    private fun fetchAndSaveTopProducts() = viewModelScope.launch {
         fetchTopProductsFromFirebaseAndSaveUseCase()
-    }
-
-    private fun fetchAllProducts() = viewModelScope.launch {
         fetchAllProductsFromFirebaseAndSaveUseCase()
     }
 }

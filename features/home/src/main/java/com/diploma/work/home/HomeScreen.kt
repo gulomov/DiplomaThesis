@@ -22,30 +22,25 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val news by viewModel.news.collectAsState()
-    val recommendations by viewModel.recommendationsList.collectAsState()
-    val topProducts by viewModel.topProductsList.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.getNews()
-        viewModel.getRecommendationsList()
-        viewModel.getTopProductsList()
-    }
+    val uiState by viewModel.uiState.collectAsState()
 
     LazyColumn(
         modifier = modifier,
     ) {
         item {
-            NewsInHome(news = news.toImmutableList(), navController = navController)
+            NewsInHome(news = uiState.newsInfo.toImmutableList(), navController = navController)
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
-            RecommendationsInHome(recommendations = recommendations, navController = navController)
+            RecommendationsInHome(
+                recommendations = uiState.recommendationsList,
+                navController = navController
+            )
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
             TopProductsLazyRow(
-                productList = topProducts,
+                productList = uiState.topProductsList,
                 navController = navController,
             )
         }
