@@ -6,7 +6,6 @@ buildscript {
 
     dependencies {
         classpath("com.google.gms:google-services:4.3.15")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
         classpath("com.android.tools.build:gradle:8.4.0")
     }
 } // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -18,4 +17,6 @@ plugins {
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.google.service) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.detekt) apply true
+
 }
