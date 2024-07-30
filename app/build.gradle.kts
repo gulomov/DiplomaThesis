@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.service)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -80,7 +81,6 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))
-    implementation(project(":kmpsharedmodule"))
 
     implementation(libs.slf4j.api)
     implementation(libs.logback.android)

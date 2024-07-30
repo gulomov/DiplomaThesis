@@ -11,6 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.diploma.work.booking.R
 
+private const val YEAR_2024 = 2024
+private const val YEAR_2025 = 2025
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DataPicker(
@@ -21,7 +24,7 @@ internal fun DataPicker(
 
     val datePickerState = rememberDatePickerState(
         initialDisplayedMonthMillis = System.currentTimeMillis(),
-        yearRange = 2024..2024,
+        yearRange = YEAR_2024..YEAR_2025,
     )
 
     DatePickerDialog(

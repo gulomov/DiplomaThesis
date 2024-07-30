@@ -54,11 +54,11 @@ junit-ktx = "1.1.5"
 espresso-core = "3.3.0"
 
 # Plugins
-androidGradle = "8.4.0"
-kotlinAndroid = "1.9.24"
+androidGradle = "8.4.2"
+kotlin = "2.0.0"
 hiltAdnroid = "2.48"
-googleServices = "4.3.15"
-ksp = "1.8.22-1.0.11"
+googleServices = "4.4.2"
+ksp = "2.0.0-1.0.23"
 ktor = "2.3.11"
 
 [libraries]
@@ -135,11 +135,10 @@ espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref =
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }
 android-library = { id = "com.android.library", version.ref = "androidGradle" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinAndroid" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAdnroid" }
 google-service = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-build-gradle = { id = "com.android.tools.build:gradle", version.ref = "androidGradle" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinAndroid" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -21,10 +22,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
 }
 
@@ -45,7 +42,7 @@ dependencies {
     implementation(libs.timber)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
 }
 
 kapt {
