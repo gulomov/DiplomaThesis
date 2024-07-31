@@ -7,5 +7,6 @@ import com.diploma.work.repository.data.TopProductItem
 data class HomeScreenUiState(
     val newsInfo: List<NewsItem> = emptyList(),
     val recommendationsList: List<RecommendationItem> = emptyList(),
-    val topProductsList: List<TopProductItem> = emptyList()
+    val topProductsList: List<TopProductItem> = emptyList(),
+    val loadingValue: Boolean = true
 )

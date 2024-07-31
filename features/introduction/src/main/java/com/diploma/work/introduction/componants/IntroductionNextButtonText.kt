@@ -19,11 +19,7 @@ internal fun IntroductionNextButtonText(
     Text(
         text =
         when (pagerState.currentPage) {
-            pagerState.initialPage ->
-                stringResource(
-                    id = R.string.introduction_button_start,
-                )
-
+            0 -> stringResource(id = R.string.introduction_button_start)
             1 -> stringResource(id = R.string.introduction_button_next)
             else -> stringResource(id = R.string.introduction_button_finish)
         },

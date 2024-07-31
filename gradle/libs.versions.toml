@@ -60,6 +60,7 @@ hiltAdnroid = "2.48"
 googleServices = "4.4.2"
 ksp = "2.0.0-1.0.23"
 ktor = "2.3.11"
+uiToolingPreviewAndroid = "1.6.8"
 
 [libraries]
 # Android Core
@@ -128,6 +129,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 firebase-test = { module = "com.google.firebase:firebase-database", version.ref = "firebase-test" }
 junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit-ktx" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }

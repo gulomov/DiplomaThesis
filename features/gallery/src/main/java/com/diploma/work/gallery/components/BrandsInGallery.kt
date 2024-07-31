@@ -31,11 +31,10 @@ fun BrandsInGallery(
     brandClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { brandsList.size })
 
     HorizontalPager(
         modifier = modifier,
-        pageCount = brandsList.size,
         state = pagerState,
         contentPadding = PaddingValues(small100),
         pageSpacing = small100,

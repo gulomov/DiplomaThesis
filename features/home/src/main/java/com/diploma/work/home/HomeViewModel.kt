@@ -47,7 +47,8 @@ class HomeViewModel @Inject constructor(
                 HomeScreenUiState(
                     newsInfo = news,
                     recommendationsList = recommendations,
-                    topProductsList = topProducts
+                    topProductsList = topProducts,
+                    loadingValue = false
                 )
             }.collect {
                 uiState.value = it
@@ -56,9 +57,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fetchAndSaveHomeScreenData() = viewModelScope.launch {
-        fetchNewsFromFirebaseAndSaveUseCase()
-        fetchRecommendationsFromFirebaseAndSaveUseCase()
         fetchTopProductsFromFirebaseAndSaveUseCase()
+        fetchRecommendationsFromFirebaseAndSaveUseCase()
         fetchAllProductsFromFirebaseAndSaveUseCase()
+        fetchNewsFromFirebaseAndSaveUseCase()
     }
 }

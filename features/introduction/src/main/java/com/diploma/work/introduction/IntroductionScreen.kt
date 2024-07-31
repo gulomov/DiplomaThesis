@@ -34,7 +34,7 @@ fun IntroductionScreen(
     modifier: Modifier = Modifier,
     viewModel: IntroductionViewModel = hiltViewModel(),
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { PAGER_COUNT })
 
     Box(
         modifier = modifier
@@ -44,7 +44,6 @@ fun IntroductionScreen(
         Column {
             Spacer(modifier = Modifier.height(large100))
             HorizontalPager(
-                pageCount = PAGER_COUNT,
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally),

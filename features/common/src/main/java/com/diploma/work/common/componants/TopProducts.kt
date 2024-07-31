@@ -1,8 +1,11 @@
 package com.diploma.work.common.componants
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,11 +27,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.diploma.work.common.R
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small150
 import com.diploma.work.design.theme.small50
 import com.diploma.work.design.theme.topProductsImageHeightSize
 import com.diploma.work.design.theme.topProductsImageWidthSize
@@ -42,13 +49,15 @@ fun TopProductsLazyRow(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(normal100)) {
         Text(
             text = stringResource(id = R.string.topProductsTitle),
-            modifier = Modifier.padding(normal100),
             fontWeight = FontWeight.Bold,
         )
-        LazyRow {
+        LazyRow(
+            contentPadding = PaddingValues(vertical = small150),
+            horizontalArrangement = Arrangement.spacedBy(small150)
+        ) {
             items(productList) {
                 TopProducts(
                     topProductsItem = it,
@@ -64,14 +73,14 @@ fun TopProductsLazyRow(
 
 @ExperimentalMaterial3Api
 @Composable
-fun TopProducts(
+private fun TopProducts(
     topProductsItem: TopProductItem,
     productOnClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
+        modifier = modifier,
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
-        modifier = modifier.padding(normal100),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
@@ -87,7 +96,7 @@ fun TopProducts(
                         .width(topProductsImageWidthSize)
                         .height(topProductsImageHeightSize)
                         .padding(small50)
-                        .clip(RoundedCornerShape(topEnd = small100, topStart = small100)),
+                        .clip(RoundedCornerShape(small100)),
                 )
                 Text(
                     text = stringResource(
@@ -121,4 +130,16 @@ fun TopProducts(
             )
         }
     }
+}
+
+@PreviewLightDark
+@Composable
+private fun TopProductsLazyRowPreview() {
+    val productList = listOf(
+        TopProductItem(),
+        TopProductItem(),
+        TopProductItem(),
+    )
+    TopProductsLazyRow(productList = productList, navController = rememberNavController())
+
 }

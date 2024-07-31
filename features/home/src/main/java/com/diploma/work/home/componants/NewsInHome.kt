@@ -1,6 +1,7 @@
 package com.diploma.work.home.componants
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,13 +20,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.diploma.work.design.composables.AutoSlidingCarousel
+import com.diploma.work.design.theme.DiplomaThesisTheme
 import com.diploma.work.design.theme.newsCarouselImageSize
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
+import com.diploma.work.design.theme.small150
 import com.diploma.work.home.R
 import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.repository.data.NewsItem
@@ -39,34 +46,30 @@ internal fun NewsInHome(
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier =
-        modifier
-            .fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(normal100),
+        verticalArrangement = Arrangement.spacedBy(small100)
     ) {
-        Spacer(modifier = Modifier.width(normal100))
         Text(
             text = stringResource(id = R.string.homeScreenNewsTitle),
-            modifier = Modifier.padding(normal100),
             fontWeight = FontWeight.Bold,
         )
-        Spacer(modifier = Modifier.width(small100))
         Card(
-            modifier =
-            Modifier
-                .padding(normal100)
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(top = small100),
             shape = RoundedCornerShape(normal100),
         ) {
             news.let { newsInfo ->
                 if (newsInfo.isNotEmpty()) {
                     AutoSlidingCarousel(
                         itemsCount = newsInfo.size,
-                        itemContent = {
-                            NewsItem(news = newsInfo, index = it, newsItemClicked = { newsId ->
-                                val route = ScreenRoute.NEWS_DETAILS.replace(
+                        itemContent = { index ->
+                            NewsItem(news = newsInfo, index = index, newsItemClicked = { newsId ->
+                                ScreenRoute.NEWS_DETAILS.replace(
                                     "{newsId}", newsId.toString()
-                                )
-                                navController.navigate(route)
+                                ).let {
+                                    navController.navigate(it)
+                                }
                             })
                         },
                     )
@@ -91,14 +94,12 @@ fun NewsItem(
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier =
-            Modifier
+            modifier = Modifier
                 .height(newsCarouselImageSize)
                 .align(Alignment.Center),
         )
         Column(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(normal100),
         ) {
@@ -118,4 +119,17 @@ fun NewsItem(
             Spacer(modifier = Modifier.width(small100))
         }
     }
+}
+
+@PreviewLightDark
+@Composable
+private fun NewsInHomePreview() {
+    val newsList = listOf(
+        NewsItem(id = 1, "image", "body", "title"),
+        NewsItem(id = 1, "image", "body", "title"),
+        NewsItem(id = 1, "image", "body", "title"),
+        NewsItem(id = 1, "image", "body", "title"),
+    )
+
+    NewsInHome(news = newsList, navController = rememberNavController())
 }
