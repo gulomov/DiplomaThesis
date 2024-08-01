@@ -16,8 +16,7 @@ class FavoritesViewModel @Inject constructor(
     private val getFavoriteProductsUseCase: GetFavoriteProductsUseCase,
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase
 ) : ViewModel() {
-    private val _favoriteProducts = MutableStateFlow(listOf<FavoriteProduct>())
-    val favoriteProducts = _favoriteProducts.asStateFlow()
+    val uiState = MutableStateFlow(FavoriteScreenState())
 
     init {
         getFavoriteItems()
@@ -25,7 +24,10 @@ class FavoritesViewModel @Inject constructor(
 
     private fun getFavoriteItems() = viewModelScope.launch {
         getFavoriteProductsUseCase().collect {
-            _favoriteProducts.value = it
+            uiState.value = FavoriteScreenState(
+                favoriteProducts = it,
+                loadingValue = false
+            )
         }
     }
 

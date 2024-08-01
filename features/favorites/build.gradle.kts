@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    implementation(libs.ui.tooling.preview.android)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
 }
