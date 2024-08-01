@@ -49,7 +49,9 @@ class RecommendationsDetailViewModel @Inject constructor(
 
     fun getFavoriteProductsIds() {
         viewModelScope.launch {
-            _favoriteIds.value = getFavoriteProductsIdsUseCase()
+            getFavoriteProductsIdsUseCase().collect {
+                _favoriteIds.value = it
+            }
         }
     }
 }

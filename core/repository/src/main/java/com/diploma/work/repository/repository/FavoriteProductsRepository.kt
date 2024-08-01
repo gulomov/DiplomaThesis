@@ -22,7 +22,7 @@ class FavoriteProductsRepository @Inject constructor(
             it?.id == productId
         }.firstOrNull() ?: false
 
-    suspend fun getFavoriteProductsIds() = roomDao.getFavoriteProductIds()
+    fun getFavoriteProductsIds() = roomDao.getFavoriteProductIds()
 
     fun getFavorites() = roomDao.getFavouriteProducts().map {
         it.map { data ->

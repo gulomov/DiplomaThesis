@@ -14,8 +14,7 @@ import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.BrandsItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -31,35 +30,52 @@ class GalleryScreenViewModel @Inject constructor(
     private val getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase
 ) : ViewModel() {
-    private val _brandsList = MutableStateFlow(listOf(BrandsItem()))
-    val brandsList = _brandsList.asStateFlow()
-
-    private val _products = MutableStateFlow(listOf(AllProductsItem()))
-    val products: StateFlow<List<AllProductsItem>> = _products
-
-    private val _favoriteIds = MutableStateFlow(listOf<Int>())
-    val favoriteIds = _favoriteIds.asStateFlow()
+    val uiState = MutableStateFlow(GalleryScreenUiState())
+    private val brandsList = MutableStateFlow(listOf(BrandsItem()))
+    private val products = MutableStateFlow(listOf(AllProductsItem()))
+    private val favoriteIds = MutableStateFlow(listOf<Int>())
 
     init {
         fetchAllProducts()
         fetchBrands()
-
+        getBrands()
+        getAllProducts()
+        combineFlow()
     }
 
-    fun getBrands() = viewModelScope.launch {
+    private fun combineFlow() {
+        viewModelScope.launch {
+            combine(
+                brandsList,
+                products,
+                favoriteIds
+            ) { brands, products, favoriteIds ->
+                GalleryScreenUiState(
+                    brands = brands,
+                    products = products,
+                    favoriteIds = favoriteIds,
+                    loadingValue = false,
+                )
+            }.collect {
+                uiState.value = it
+            }
+        }
+    }
+
+    private fun getBrands() = viewModelScope.launch {
         getBrandsUseCase().collect {
             if (it.isNotEmpty()) {
-                _brandsList.value = it
+                brandsList.value = it
             } else {
                 Timber.e("Brands is empty")
             }
         }
     }
 
-    fun getAllProducts() = viewModelScope.launch {
+    private fun getAllProducts() = viewModelScope.launch {
         getAllProductsUseCase().collect {
             if (it.isNotEmpty()) {
-                _products.value = it
+                products.value = it
             } else {
                 Timber.e("Products list is empty")
             }
@@ -71,15 +87,17 @@ class GalleryScreenViewModel @Inject constructor(
             if (this.isEmpty()) {
                 getAllProducts()
             } else {
-                _products.value = this
+                products.value = this
             }
         }
         getFavoriteProductsIds()
     }
 
-    fun getFavoriteProductsIds() {
+    private fun getFavoriteProductsIds() {
         viewModelScope.launch {
-            _favoriteIds.value = getFavoriteProductsIdsUseCase()
+            getFavoriteProductsIdsUseCase().collect {
+                favoriteIds.value = it
+            }
         }
     }
 
@@ -98,5 +116,4 @@ class GalleryScreenViewModel @Inject constructor(
     fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
         saveToFavoriteProductUseCase(product.asFavoriteProduct())
     }
-
 }
