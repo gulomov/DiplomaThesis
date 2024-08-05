@@ -10,7 +10,7 @@ import javax.inject.Inject
 class ProductDetailsRepository @Inject constructor(
     private val roomDao: ProductsDao,
 ) {
-    fun getTopProductDetails(productId: String) =
+    fun getTopProductDetails(productId: Int) =
         roomDao.getTopProductDetail(productId).map {
             ProductDetailsData(
                 id = it.id,
@@ -26,7 +26,7 @@ class ProductDetailsRepository @Inject constructor(
             )
         }
 
-    fun getProductDetails(productId: String) = roomDao.getProductDetail(productId).map {
+    fun getProductDetails(productId: Int) = roomDao.getProductDetail(productId).map {
         ProductDetailsData(
             id = it.id,
             address = it.address,

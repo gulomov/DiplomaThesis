@@ -22,8 +22,6 @@ internal fun PriceAndBooking(
     productDetails: ProductDetailsData,
     bookingClicked: () -> Unit
 ) {
-    Timber.d("isProductBooked: $isProductBooked")
-
     Row {
         Prices(
             originalPrice = productDetails.originalPrice.toString(),
@@ -34,17 +32,13 @@ internal fun PriceAndBooking(
                 .align(Alignment.CenterVertically),
         )
         if (!isProductBooked) {
-            MainButton(
-                onClick = bookingClicked,
-                content = { Text(text = stringResource(R.string.want_book)) },
-                modifier = Modifier
-                    .padding(end = normal100)
-                    .align(Alignment.CenterVertically),
-            )
+            R.string.want_book
         } else {
+            R.string.product_is_booked
+        }.let { textRes ->
             MainButton(
                 onClick = bookingClicked,
-                content = { Text(text = stringResource(R.string.product_is_booked)) },
+                content = { Text(text = stringResource(textRes)) },
                 modifier = Modifier
                     .padding(end = normal100)
                     .align(Alignment.CenterVertically),

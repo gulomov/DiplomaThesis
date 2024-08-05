@@ -1,5 +1,7 @@
 package com.diploma.work.diplomathesis.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 import com.diploma.work.splash.navigation.splashScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     val bottomBarVisible = rememberSaveable { (mutableStateOf(true)) }

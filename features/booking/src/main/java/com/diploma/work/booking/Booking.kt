@@ -10,48 +10,38 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diploma.work.booking.companents.BottomSheetConfirmation
 import com.diploma.work.booking.companents.DataPicker
+import com.diploma.work.repository.data.BookedProduct
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun BookingScreen(
+fun Booking(
     onCloseBooking: () -> Unit,
+    onSaveBookedProduct: (BookedProduct) -> Unit,
+    onRebookClicked: () -> Unit,
     productId: Int,
     showDatePicker: Boolean,
     showBottomSheet: Boolean,
+    bookedProductDate: Long,
     modifier: Modifier = Modifier,
-    viewModel: BookingScreenViewModel = hiltViewModel()
 ) {
-    viewModel.getBookedProductDetail(productId)
 
-    val showDatePickerStateFlow = remember { MutableStateFlow(showDatePicker) }
-    val showBottomSheetStateFlow = remember { MutableStateFlow(showBottomSheet) }
-
-    val showDatePickerState by showDatePickerStateFlow.collectAsState()
-    val showBottomSheetState by showBottomSheetStateFlow.collectAsState()
-    val bookedProductDate by viewModel.bookedProductDate.collectAsState()
-
-    if (showBottomSheetState) {
+    if (showBottomSheet) {
         BottomSheetConfirmation(
             bookedProductDate = bookedProductDate,
-            onDismissBottomSheet = {
-                onCloseBooking()
-            },
-            onRebookClicked = {
-                showDatePickerStateFlow.value = true
-                showBottomSheetStateFlow.value = false
-            }
+            onDismissBottomSheet = onCloseBooking,
+            onRebookClicked = onRebookClicked
         )
     }
 
-    if (showDatePickerState) {
+    if (showDatePicker) {
         DataPicker(
             modifier = modifier,
             onConfirmClicked = {
                 onCloseBooking()
-                viewModel.saveBookedProduct(productId, it)
+                onSaveBookedProduct(BookedProduct(productId, it))
             },
-            onDismissClicked = { onCloseBooking() }
+            onDismissClicked = onCloseBooking
         )
     }
 }

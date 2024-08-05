@@ -1,5 +1,7 @@
 package com.diploma.work.diplomathesis.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -18,6 +20,7 @@ import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(HOME) {
         HomeScreen(navController = navController)

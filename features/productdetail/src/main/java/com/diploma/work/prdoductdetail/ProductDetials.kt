@@ -3,6 +3,8 @@ package com.diploma.work.prdoductdetail
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -20,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.diploma.work.booking.BookingScreen
+import com.diploma.work.booking.Booking
 import com.diploma.work.prdoductdetail.composables.ProductDetailsImages
 import com.diploma.work.prdoductdetail.composables.ProductSize
 import com.diploma.work.prdoductdetail.composables.ProductTitleAndSale
@@ -31,6 +32,7 @@ import com.diploma.work.design.theme.normal150
 import com.diploma.work.prdoductdetail.composables.PriceAndBooking
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProductDetails(
@@ -39,47 +41,34 @@ fun ProductDetails(
     viewModel: ProductDetailsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val productDetails by viewModel.productDetails.collectAsState()
-    val topProducts by viewModel.topProductsList.collectAsState()
-    val isProductSavedIntoFavorites by viewModel.isProductInFavorites.collectAsState()
-    val startBookingLogic by viewModel.startBookingLogic.collectAsState()
-    val isProductBooked by viewModel.isProductBooked.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.getTopProductsList()
+    if (uiState.isBookingClicked) {
+        Booking(
+            onCloseBooking = viewModel::finishBookingLogic,
+            onSaveBookedProduct = viewModel::saveBookedProduct,
+            onRebookClicked = viewModel::onRebookClicked,
+            productId = uiState.productDetail?.id ?: 0,
+            bookedProductDate = uiState.bookedProductDate ?: 0,
+            showBottomSheet = uiState.showBookedBottomSheet,
+            showDatePicker = uiState.showDataPicker,
+        )
     }
 
-    if (startBookingLogic) {
-        if (isProductBooked)
-            BookingScreen(
-                onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productDetails.id ?: 0,
-                showBottomSheet = true,
-                showDatePicker = false,
-            ) else {
-            BookingScreen(
-                onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productDetails.id ?: 0,
-                showBottomSheet = false,
-                showDatePicker = true,
-            )
-        }
-    }
-
-    productDetails.images?.let { data ->
+    uiState.productDetail?.let { data ->
         Column(
             modifier = modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState()),
         ) {
             ProductDetailsImages(
-                productImages = data,
-                isProductSavedIntoFavorites = isProductSavedIntoFavorites,
+                productImages = data.images ?: emptyList(),
+                isProductSavedIntoFavorites = uiState.isProductInFavorites,
                 saveProductIntoFavoritesClicked = {
                     if (it) {
-                        viewModel.saveProductToFavorites(productDetails)
+                        viewModel.saveProductToFavorites(data)
                     } else {
-                        productDetails.id?.let { productId ->
+                        data.id?.let { productId ->
                             viewModel.deleteFromFavoriteProducts(
                                 productId
                             )
@@ -87,31 +76,28 @@ fun ProductDetails(
                     }
                 })
             ProductTitleAndSale(
-                productDetails.title.orEmpty(),
-                productDetails.salePercentage ?: 0,
+                data.title.orEmpty(),
+                data.salePercentage ?: 0,
             )
             PriceAndBooking(
-                isProductBooked = isProductBooked,
-                productDetails = productDetails,
-                bookingClicked = {
-                    viewModel.startBookingLogic(shouldShowBookingLogic = true)
-                })
+                isProductBooked = uiState.isProductBooked,
+                productDetails = data,
+                bookingClicked = viewModel::bookingClicked
+            )
             Spacer(modifier = Modifier.height(normal150))
-            ProductSize(productDetails.sizes.orEmpty())
+            ProductSize(data.sizes.orEmpty())
             Text(
                 text = stringResource(
                     id = R.string.sales_period,
-                    productDetails.saleStartsDate.orEmpty(),
-                    productDetails.saleEndsDate.orEmpty(),
+                    data.saleStartsDate.orEmpty(),
+                    data.saleEndsDate.orEmpty(),
                 ),
-                modifier =
-                Modifier
-                    .padding(horizontal = normal100, vertical = normal150),
+                modifier = Modifier.padding(horizontal = normal100, vertical = normal150),
             )
             Text(
                 text = stringResource(
                     id = R.string.sale_on_address,
-                    productDetails.address.orEmpty(),
+                    data.address.orEmpty(),
                 ),
                 modifier = Modifier.padding(horizontal = normal100),
             )
@@ -119,13 +105,13 @@ fun ProductDetails(
                 modifier = Modifier
                     .padding(normal100)
                     .fillMaxWidth(),
-                onClick = { openGoogleMaps(context, productDetails.address.orEmpty()) },
+                onClick = { openGoogleMaps(context, data.address.orEmpty()) },
                 content = {
                     Text(text = stringResource(id = R.string.show_in_the_map))
                 },
             )
             TopProductsLazyRow(
-                productList = topProducts,
+                productList = uiState.topProductsList,
                 navController = navController,
             )
         }
