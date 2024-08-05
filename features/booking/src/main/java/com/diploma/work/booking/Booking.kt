@@ -3,15 +3,10 @@ package com.diploma.work.booking
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.diploma.work.booking.companents.BottomSheetConfirmation
 import com.diploma.work.booking.companents.DataPicker
 import com.diploma.work.repository.data.BookedProduct
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

@@ -12,6 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,22 +23,30 @@ private const val BRAND_NAME = "brandName"
 @HiltViewModel
 class RecommendationsDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
+    private val getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase,
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase,
     private val getFavoriteProductsIdsUseCase: GetFavoriteProductsIdsUseCase,
 ) : ViewModel() {
-    private val _products = MutableStateFlow(listOf(AllProductsItem()))
-    val products: StateFlow<List<AllProductsItem>> = _products
-
-    private val _favoriteIds = MutableStateFlow(listOf<Int>())
-    val favoriteIds = _favoriteIds.asStateFlow()
+    val uiState = MutableStateFlow(RecommendationUiState())
 
     init {
         viewModelScope.launch {
-            _products.value =
-                getProductsByBrandNameUseCase(checkNotNull(savedStateHandle[BRAND_NAME]))
-            getFavoriteProductsIds()
+            combine(
+                flowOf(
+                    getProductsByBrandNameUseCase(
+                        checkNotNull(savedStateHandle[BRAND_NAME])
+                    )
+                ),
+                getFavoriteProductsIdsUseCase()
+            ) { products, favoriteId ->
+                RecommendationUiState(
+                    products = products,
+                    favoriteIds = favoriteId
+                )
+            }.collect {
+                uiState.value = it
+            }
         }
     }
 
@@ -45,13 +56,5 @@ class RecommendationsDetailViewModel @Inject constructor(
 
     fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
         saveToFavoriteProductUseCase(product.asFavoriteProduct())
-    }
-
-    fun getFavoriteProductsIds() {
-        viewModelScope.launch {
-            getFavoriteProductsIdsUseCase().collect {
-                _favoriteIds.value = it
-            }
-        }
     }
 }

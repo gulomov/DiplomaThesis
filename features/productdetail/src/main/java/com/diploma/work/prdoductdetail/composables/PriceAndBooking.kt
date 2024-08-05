@@ -14,7 +14,6 @@ import com.diploma.work.design.composables.MainButton
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.prdoductdetail.R
 import com.diploma.work.repository.data.ProductDetailsData
-import timber.log.Timber
 
 @Composable
 internal fun PriceAndBooking(
