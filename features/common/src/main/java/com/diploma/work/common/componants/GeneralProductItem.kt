@@ -12,12 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.diploma.work.common.componants.GenericProductImages
 import com.diploma.work.common.componants.Prices
-import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
-import com.diploma.work.design.theme.small150
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

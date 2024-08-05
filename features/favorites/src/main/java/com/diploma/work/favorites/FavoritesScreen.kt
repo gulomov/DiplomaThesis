@@ -41,9 +41,10 @@ fun FavoritesScreen(
             )
         }
         LazyVerticalGrid(
-            modifier = Modifier,
+            modifier = Modifier.padding(normal100),
             columns = GridCells.Fixed(GRID_CELLS),
             verticalArrangement = Arrangement.spacedBy(small100),
+            horizontalArrangement = Arrangement.spacedBy(small100),
             content = {
                 items(uiState.favoriteProducts) { favoriteProduct ->
                     GenericProductItem(
