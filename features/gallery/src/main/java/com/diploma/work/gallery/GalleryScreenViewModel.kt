@@ -40,6 +40,7 @@ class GalleryScreenViewModel @Inject constructor(
         fetchBrands()
         getBrands()
         getAllProducts()
+        getFavoriteProductsIds()
         combineFlow()
     }
 

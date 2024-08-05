@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,7 +26,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -49,13 +47,17 @@ fun TopProductsLazyRow(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.padding(normal100)) {
+    Column(modifier = modifier) {
         Text(
             text = stringResource(id = R.string.topProductsTitle),
             fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = normal100)
         )
         LazyRow(
-            contentPadding = PaddingValues(vertical = small150),
+            contentPadding = PaddingValues(
+                horizontal = normal100,
+                vertical = small150
+            ),
             horizontalArrangement = Arrangement.spacedBy(small150)
         ) {
             items(productList) {

@@ -3,6 +3,7 @@ package com.diploma.work.gallery.components
 import GenericProductItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -42,10 +43,11 @@ fun ProductsInGallery(
             )
         }
         LazyVerticalGrid(
-            modifier = Modifier.padding(horizontal = normal100),
+            modifier = Modifier,
             columns = GridCells.Fixed(GRID_CELLS),
             verticalArrangement = Arrangement.spacedBy(small100),
             horizontalArrangement = Arrangement.spacedBy(small100),
+            contentPadding = PaddingValues(normal100),
             content = {
                 items(products) { product ->
                     GenericProductItem(
