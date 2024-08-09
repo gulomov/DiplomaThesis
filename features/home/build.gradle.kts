@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.auth)
     implementation(libs.ui.tooling.preview.android)
+    implementation(libs.accompanist.persmission)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
     kapt(libs.room.compiler)

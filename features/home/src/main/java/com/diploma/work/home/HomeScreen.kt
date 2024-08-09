@@ -1,10 +1,12 @@
 package com.diploma.work.home
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -19,12 +21,18 @@ import androidx.navigation.compose.rememberNavController
 import com.diploma.work.common.componants.ProgressCircle
 import com.diploma.work.common.componants.TopProductsLazyRow
 import com.diploma.work.design.theme.DiplomaThesisTheme
-import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small150
 import com.diploma.work.home.componants.NewsInHome
 import com.diploma.work.home.componants.RecommendationsInHome
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import okhttp3.internal.toImmutableList
+import timber.log.Timber
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -32,6 +40,29 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val notificationPermissionState = rememberPermissionState(
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted->
+        if (isGranted) {
+            Timber.d("Permission is Granted")
+        }else{
+            Timber.d("Permission is not Granted")
+        }
+
+    }
+
+    LaunchedEffect(notificationPermissionState) {
+        if (!notificationPermissionState.status.isGranted
+            && notificationPermissionState.status.shouldShowRationale) {
+            Timber.d("Permission is not Granted")
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     if (uiState.loadingValue) {
         ProgressCircle()
@@ -53,6 +84,7 @@ fun HomeScreen(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @PreviewLightDark
 @Composable
 private fun HomeScreenPreview() {

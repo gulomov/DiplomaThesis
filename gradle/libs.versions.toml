@@ -53,6 +53,9 @@ google-truth = "1.1.2"
 junit-ktx = "1.1.5"
 espresso-core = "3.3.0"
 
+# Accompanist
+accompanost-permissions ="0.34.0"
+
 # Plugins
 androidGradle = "8.4.2"
 kotlin = "2.0.0"
@@ -118,6 +121,9 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 
 # Timber
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+# Accompanist Permission
+accompanist-persmission = { module = "com.google.accompanist:accompanist-permissions", version.ref ="accompanost-permissions"}
 
 # Testing
 junit = { module = "junit:junit", version.ref = "junit" }
