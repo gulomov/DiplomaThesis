@@ -28,6 +28,9 @@ android {
 dependencies {
     implementation(project(":core:sharedpreference"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:database"))
+    implementation(project(":core:repository"))
+    implementation(project(":features:common"))
 
     implementation(libs.core.ktx)
     implementation(libs.livedata.ktx)
@@ -44,6 +47,7 @@ dependencies {
     implementation(libs.foundation)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.timber)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
 }

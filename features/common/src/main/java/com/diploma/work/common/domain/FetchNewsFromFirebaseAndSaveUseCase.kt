@@ -1,4 +1,4 @@
-package com.diploma.work.home.domain
+package com.diploma.work.common.domain
 
 import com.diploma.work.repository.repository.HomeRepository
 import javax.inject.Inject
