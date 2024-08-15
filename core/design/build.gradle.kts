@@ -41,4 +41,5 @@ dependencies {
     implementation(libs.constraint.compose)
     implementation(libs.foundation)
     implementation(libs.timber)
+    implementation(libs.ui.tooling.preview.android)
 }
