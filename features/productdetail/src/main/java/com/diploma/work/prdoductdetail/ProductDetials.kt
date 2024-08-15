@@ -32,7 +32,6 @@ import com.diploma.work.design.theme.normal150
 import com.diploma.work.prdoductdetail.composables.PriceAndBooking
 import com.google.accompanist.pager.ExperimentalPagerApi
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProductDetails(

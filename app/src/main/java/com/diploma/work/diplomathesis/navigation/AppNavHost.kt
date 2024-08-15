@@ -59,26 +59,32 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
 
         FAVORITE -> {
             backArrowVisibility.value = false
+            searchIconVisibility.value = true
         }
 
         GALLERY -> {
             backArrowVisibility.value = false
+            searchIconVisibility.value = true
         }
 
         PRODUCTION_DETAIL -> {
             backArrowVisibility.value = true
+            searchIconVisibility.value = true
         }
 
         NEWS_DETAILS -> {
             backArrowVisibility.value = true
+            searchIconVisibility.value = true
         }
 
         RECOMMENDATION_DETAILS -> {
             backArrowVisibility.value = true
+            searchIconVisibility.value = true
         }
 
         SEARCH -> {
             backArrowVisibility.value = true
+            searchIconVisibility.value = false
         }
 
         else -> topBarVisibility.value = true

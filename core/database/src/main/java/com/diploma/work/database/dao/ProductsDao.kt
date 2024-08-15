@@ -60,4 +60,13 @@ interface ProductsDao {
 
     @Query("SELECT * FROM booked_products")
     fun getBookedProducts(): Flow<List<BookedProductEntity>>
+
+    @Query(
+        """
+    SELECT * FROM all_products_list 
+    WHERE (:searchQuery != '') 
+    AND title LIKE '%' || :searchQuery || '%'
+"""
+    )
+    fun searchProductsFlow(searchQuery: String): Flow<List<AllProductsListEntity>>
 }

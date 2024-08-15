@@ -8,7 +8,6 @@ import com.diploma.work.booking.companents.BottomSheetConfirmation
 import com.diploma.work.booking.companents.DataPicker
 import com.diploma.work.repository.data.BookedProduct
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Booking(
     onCloseBooking: () -> Unit,

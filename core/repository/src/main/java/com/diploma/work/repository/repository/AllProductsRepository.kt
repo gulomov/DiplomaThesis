@@ -106,4 +106,21 @@ class AllProductsRepository @Inject constructor(
             )
         }
     }
+
+    fun searchProductsFlow(searchQuery: String) =
+        roomDao.searchProductsFlow(searchQuery).map { products ->
+            products.map {
+                AllProductsItem(
+                    id = it.id,
+                    images = Converters().toImagesList(it.imageUrl),
+                    title = it.title,
+                    salePercentage = it.salePercentage,
+                    saleStartsDate = it.saleStartsDate,
+                    saleEndsDate = it.saleEndsDate,
+                    priceOnSale = it.priceOnSale,
+                    originalPrice = it.originalPrice,
+                    brand = it.brand
+                )
+            }
+        }
 }

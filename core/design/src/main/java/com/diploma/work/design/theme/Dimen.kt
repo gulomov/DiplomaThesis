@@ -29,6 +29,7 @@ val elevationNormal100 = 12.dp
 val dividerNormal100 = 1.dp
 
 val pagerIndicatorSize = 50.dp
+val searchImageSize = 50.dp
 
 val iconSize = 24.dp
 
