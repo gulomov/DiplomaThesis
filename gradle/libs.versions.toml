@@ -64,6 +64,9 @@ googleServices = "4.4.2"
 ksp = "2.0.0-1.0.23"
 ktor = "2.3.11"
 uiToolingPreviewAndroid = "1.6.8"
+junitVersion = "1.2.1"
+appcompat = "1.7.0"
+materialVersion = "1.12.0"
 
 [libraries]
 # Android Core
@@ -136,6 +139,9 @@ firebase-test = { module = "com.google.firebase:firebase-database", version.ref 
 junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit-ktx" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }

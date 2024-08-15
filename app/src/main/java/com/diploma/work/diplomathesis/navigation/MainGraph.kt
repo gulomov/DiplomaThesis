@@ -19,6 +19,9 @@ import com.diploma.work.navigation.ScreenRoute.HOME
 import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
+import com.diploma.work.navigation.ScreenRoute.SEARCH
+import com.diploma.work.search.SearchScreen
+import kotlinx.coroutines.flow.combine
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.mainGraph(navController: NavController) {
@@ -70,5 +73,9 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
         ),
     ) {
         GalleryScreen(navController = navController)
+    }
+
+    composable(SEARCH) {
+        SearchScreen(navController = navController)
     }
 }

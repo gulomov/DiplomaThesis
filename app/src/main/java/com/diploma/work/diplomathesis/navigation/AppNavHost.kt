@@ -23,6 +23,7 @@ import com.diploma.work.navigation.ScreenRoute.INTRO_SPLASH
 import com.diploma.work.navigation.ScreenRoute.NEWS_DETAILS
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
+import com.diploma.work.navigation.ScreenRoute.SEARCH
 import com.diploma.work.splash.navigation.splashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -76,6 +77,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             backArrowVisibility.value = true
         }
 
+        SEARCH -> {
+            backArrowVisibility.value = true
+        }
+
         else -> topBarVisibility.value = true
     }
     Scaffold(
@@ -84,6 +89,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 ThesisTopBar(
                     backArrowVisibility = backArrowVisibility.value,
                     searchingVisibility = searchIconVisibility.value,
+                    onSearchClicked = { navController.navigate(SEARCH) },
                     navController = navController,
                 )
         },

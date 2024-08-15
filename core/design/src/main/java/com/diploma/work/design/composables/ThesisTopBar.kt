@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 fun ThesisTopBar(
     backArrowVisibility: Boolean,
     searchingVisibility: Boolean,
+    onSearchClicked: () -> Unit,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
@@ -57,7 +58,7 @@ fun ThesisTopBar(
         },
         actions = {
             if (searchingVisibility) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = onSearchClicked) {
                     Icon(
                         imageVector = Icons.Filled.Search,
                         contentDescription = null,
@@ -74,7 +75,8 @@ private fun ThesisTopBarPreview() {
     MaterialTheme {
         ThesisTopBar(
             backArrowVisibility = true,
-            searchingVisibility = true
+            searchingVisibility = true,
+            onSearchClicked = {}
         )
     }
 }
