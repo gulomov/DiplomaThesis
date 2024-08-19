@@ -2,4 +2,6 @@
 <resources>
     <string name="search">Search</string>
     <string name="find">Find</string>
+    <string name="price">Price: %1$s</string>
+    <string name="end_date">Ends: %1$s</string>
 </resources>

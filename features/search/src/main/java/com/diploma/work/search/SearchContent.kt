@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.searchImageSize
@@ -38,7 +39,7 @@ internal fun SearchContent(
                 product = product,
                 onProductClicked = onProductClicked
             )
-            Divider(modifier = Modifier.padding(vertical = small150))
+            Divider()
         }
     }
 }
@@ -56,7 +57,10 @@ private fun SearchItem(
         ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Card(shape = RoundedCornerShape(small100)) {
+        Card(
+            shape = RoundedCornerShape(small100),
+            modifier = Modifier.padding(vertical = small150)
+        ) {
             AsyncImage(
                 model = product.images?.firstOrNull()?.imageUrl,
                 contentDescription = null,
@@ -66,7 +70,25 @@ private fun SearchItem(
         }
         Column(verticalArrangement = Arrangement.spacedBy(small100)) {
             Text(product.title.orEmpty())
-            Text(product.priceOnSale.toString())
+            PriceAndDate(
+                product.priceOnSale.toString(),
+                product.saleEndsDate.toString()
+            )
         }
+    }
+}
+
+@Composable
+private fun PriceAndDate(
+    priceOnSale: String,
+    saleEndsDate: String,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier.fillMaxWidth()) {
+        Text(
+            text = stringResource(R.string.price, priceOnSale),
+            modifier = Modifier.weight(1f)
+        )
+        Text(text = stringResource(R.string.end_date, saleEndsDate))
     }
 }
