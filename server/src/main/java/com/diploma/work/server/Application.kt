@@ -7,14 +7,13 @@ import io.ktor.server.netty.*
 import io.ktor.server.response.respondText
 
 fun main() {
-    embeddedServer(
-        Netty,
-        port = 8080
-    ) {
-        routing {
-            get("/") {
-                call.respondText("Hello, world!")
-            }
+    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+}
+
+fun Application.module() {
+    routing {
+        get("/") {
+            call.respondText("Welcom to Ktor")
         }
-    }.start(wait = true)
+    }
 }
