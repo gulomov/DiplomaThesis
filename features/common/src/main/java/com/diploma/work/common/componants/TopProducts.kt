@@ -87,6 +87,7 @@ private fun TopProducts(
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(small150),
             modifier = Modifier.fillMaxWidth(),
         ) {
             Box {
@@ -119,16 +120,12 @@ private fun TopProducts(
             }
             Text(
                 text = topProductsItem.title.orEmpty(),
-                modifier = Modifier.padding(start = normal100, top = normal100),
+                modifier = Modifier.padding(start = normal100),
                 textAlign = TextAlign.Center,
             )
             Text(
                 text = "${topProductsItem.saleStartsDate} - ${topProductsItem.saleEndsDate}",
-                modifier = Modifier.padding(
-                    start = normal100,
-                    top = normal100,
-                    bottom = normal100,
-                ),
+                modifier = Modifier.padding(start = normal100, bottom = small100),
             )
         }
     }
