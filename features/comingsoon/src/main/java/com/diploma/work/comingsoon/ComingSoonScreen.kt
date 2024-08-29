@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 fun ComingSoonScreen(
     modifier: Modifier = Modifier
 ) {
-    Text(text = "Soon")
+
 }
 
 @PreviewLightDark

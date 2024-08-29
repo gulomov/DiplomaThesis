@@ -7,7 +7,6 @@ import androidx.room.Query
 import com.diploma.work.database.entity.AllProductsListEntity
 import com.diploma.work.database.entity.BookedProductEntity
 import com.diploma.work.database.entity.BrandsListEntity
-import com.diploma.work.database.entity.FavoriteProductsEntity
 import com.diploma.work.database.entity.TopProductsListEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -18,21 +17,6 @@ interface ProductsDao {
 
     @Query("SELECT * FROM all_products_list WHERE id = :productId")
     fun getProductDetail(productId: Int): Flow<AllProductsListEntity>
-
-    @Query("SELECT * FROM favorite_products")
-    fun getFavouriteProducts(): Flow<List<FavoriteProductsEntity>>
-
-    @Query("SELECT * FROM favorite_products WHERE id = :productId")
-    fun getFavouriteProduct(productId: Int): Flow<FavoriteProductsEntity?>
-
-    @Query("SELECT favorite_products.id FROM favorite_products")
-    fun getFavoriteProductIds(): Flow<List<Int>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveToFavoriteProducts(favoriteProductsEntity: FavoriteProductsEntity)
-
-    @Query("DELETE FROM favorite_products WHERE id = :id")
-    suspend fun deleteFromFavoriteProducts(id: Int)
 
     @Query("SELECT * FROM all_products_list")
     fun getAllProductsFlow(): Flow<List<AllProductsListEntity>>

@@ -2,6 +2,8 @@ package com.diploma.work.diplomathesis.di
 
 import android.content.Context
 import androidx.room.Room
+import com.diploma.work.database.dao.ComingSoonDao
+import com.diploma.work.database.dao.FavoritesDao
 import com.diploma.work.database.dao.HomeScreenDao
 import com.diploma.work.database.dao.ProductsDao
 import com.diploma.work.database.database.DiplomaThesisDatabase
@@ -35,5 +37,15 @@ object DatabaseModule {
     @Provides
     fun provideHomeScreenDao(database: DiplomaThesisDatabase): HomeScreenDao {
         return database.HomeScreenDao()
+    }
+
+    @Provides
+    fun provideFavoritesDao(database: DiplomaThesisDatabase): FavoritesDao {
+        return database.FavoritesDao()
+    }
+
+    @Provides
+    fun provideComingSoonDao(database: DiplomaThesisDatabase): ComingSoonDao {
+        return database.ComingSoonDao()
     }
 }
