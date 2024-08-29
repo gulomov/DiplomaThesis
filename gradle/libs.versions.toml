@@ -1,5 +1,6 @@
 [versions]
 core-ktx = "1.9.0"
+activity-ktx = "1.9.1"
 lifecycle-ktx = "2.6.1"
 webkit = "1.6.1"
 runtime-ktx = "2.3.1"
@@ -54,7 +55,7 @@ junit-ktx = "1.1.5"
 espresso-core = "3.3.0"
 
 # Accompanist
-accompanost-permissions ="0.34.0"
+accompanost-permissions = "0.34.0"
 
 # Plugins
 androidGradle = "8.4.2"
@@ -71,6 +72,7 @@ materialVersion = "1.12.0"
 [libraries]
 # Android Core
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+activity-ktx = {module = "androidx.activity:activity-ktx", version.ref = "activity-ktx"}
 livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle-ktx" }
 viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-ktx" }
 runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "runtime-ktx" }
@@ -126,7 +128,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 # Accompanist Permission
-accompanist-persmission = { module = "com.google.accompanist:accompanist-permissions", version.ref ="accompanost-permissions"}
+accompanist-persmission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanost-permissions" }
 
 # Testing
 junit = { module = "junit:junit", version.ref = "junit" }

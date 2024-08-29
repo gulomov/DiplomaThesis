@@ -10,15 +10,15 @@ import timber.log.Timber
 class DiplomaThesisApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
         FirebaseApp.initializeApp(this)
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Timber.d("Fetching FCM registration token failed\", task.exception")
-                    return@addOnCompleteListener
-                }
-                val token = task.result
-                Timber.d("FCM Registration token: $token")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.e("Fetching FCM registration token failed\", task.exception")
+                return@addOnCompleteListener
             }
+            val token = task.result
+            Timber.d("FCM Registration token: $token")
+        }
     }
 }

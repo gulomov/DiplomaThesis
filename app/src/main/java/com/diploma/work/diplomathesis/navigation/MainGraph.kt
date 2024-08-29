@@ -23,11 +23,11 @@ import com.diploma.work.navigation.ScreenRoute.SEARCH
 import com.diploma.work.search.SearchScreen
 import kotlinx.coroutines.flow.combine
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(HOME) {
         HomeScreen(navController = navController)
     }
+
     composable(
         route = PRODUCTION_DETAIL,
         arguments = listOf(
@@ -38,6 +38,7 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
     ) {
         ProductDetails(navController = navController)
     }
+
     composable(
         route = NEWS_DETAILS,
         arguments = listOf(
@@ -48,6 +49,7 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
     ) {
         NewsDetailScreen(navController = navController)
     }
+
     composable(
         route = RECOMMENDATION_DETAILS,
         arguments = listOf(
@@ -58,6 +60,7 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
     ) {
         RecommendationsDetail(navController = navController)
     }
+
     composable(FAVORITE) {
         FavoritesScreen(navController = navController)
     }

@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.slf4j.api)
     implementation(libs.logback.android)
     implementation(libs.core.ktx)
+    implementation(libs.activity.ktx)
     implementation(libs.livedata.ktx)
     implementation(libs.viewmodel.ktx)
     implementation(libs.runtime.ktx)
