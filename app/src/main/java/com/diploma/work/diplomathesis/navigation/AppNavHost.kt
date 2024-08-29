@@ -29,25 +29,20 @@ import com.diploma.work.splash.navigation.splashScreen
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+
     val bottomBarVisible = rememberSaveable { (mutableStateOf(true)) }
     val topBarVisibility = rememberSaveable { (mutableStateOf(true)) }
     val backArrowVisibility = rememberSaveable { (mutableStateOf(true)) }
     val searchIconVisibility = rememberSaveable { (mutableStateOf(true)) }
 
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     when (navBackStackEntry?.destination?.route) {
-        INTRO_SPLASH -> {
+        INTRO_SPLASH, INTRODUCTION -> {
             topBarVisibility.value = false
+            bottomBarVisible.value = false
+            searchIconVisibility.value = false
             backArrowVisibility.value = false
-            bottomBarVisible.value = false
-            searchIconVisibility.value = false
-        }
-
-        INTRODUCTION -> {
-            topBarVisibility.value = false
-            bottomBarVisible.value = false
-            searchIconVisibility.value = false
         }
 
         HOME -> {
@@ -57,27 +52,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             backArrowVisibility.value = false
         }
 
-        FAVORITE -> {
+        FAVORITE, GALLERY -> {
             backArrowVisibility.value = false
             searchIconVisibility.value = true
         }
 
-        GALLERY -> {
-            backArrowVisibility.value = false
-            searchIconVisibility.value = true
-        }
-
-        PRODUCTION_DETAIL -> {
-            backArrowVisibility.value = true
-            searchIconVisibility.value = true
-        }
-
-        NEWS_DETAILS -> {
-            backArrowVisibility.value = true
-            searchIconVisibility.value = true
-        }
-
-        RECOMMENDATION_DETAILS -> {
+        PRODUCTION_DETAIL, NEWS_DETAILS, RECOMMENDATION_DETAILS -> {
             backArrowVisibility.value = true
             searchIconVisibility.value = true
         }
@@ -87,8 +67,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             searchIconVisibility.value = false
         }
 
-        else -> topBarVisibility.value = true
+        else -> {
+            topBarVisibility.value = true
+            bottomBarVisible.value = true
+        }
     }
+
     Scaffold(
         topBar = {
             if (topBarVisibility.value)
