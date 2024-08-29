@@ -3,4 +3,5 @@
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_favorite">Favorite</string>
     <string name="bottom_nav_gallery">Gallery</string>
+    <string name="bottom_nav_coming_soon">Soon</string>
 </resources>

@@ -1,18 +1,18 @@
 package com.diploma.work.diplomathesis.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.diploma.work.comingsoon.ComingSoonScreen
 import com.diploma.work.prdoductdetail.ProductDetails
 import com.diploma.work.favorites.FavoritesScreen
 import com.diploma.work.gallery.GalleryScreen
 import com.diploma.work.home.HomeScreen
 import com.diploma.work.home.news.NewsDetailScreen
 import com.diploma.work.home.recommendations.RecommendationsDetail
+import com.diploma.work.navigation.ScreenRoute.COMING_SOON
 import com.diploma.work.navigation.ScreenRoute.FAVORITE
 import com.diploma.work.navigation.ScreenRoute.GALLERY
 import com.diploma.work.navigation.ScreenRoute.HOME
@@ -21,7 +21,6 @@ import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 import com.diploma.work.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 import com.diploma.work.navigation.ScreenRoute.SEARCH
 import com.diploma.work.search.SearchScreen
-import kotlinx.coroutines.flow.combine
 
 fun NavGraphBuilder.mainGraph(navController: NavController) {
     composable(HOME) {
@@ -80,5 +79,9 @@ fun NavGraphBuilder.mainGraph(navController: NavController) {
 
     composable(SEARCH) {
         SearchScreen(navController = navController)
+    }
+
+    composable(COMING_SOON) {
+        ComingSoonScreen()
     }
 }

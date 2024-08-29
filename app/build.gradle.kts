@@ -90,6 +90,7 @@ dependencies {
     implementation(project(":features:favorites"))
     implementation(project(":features:gallery"))
     implementation(project(":features:search"))
+    implementation(project(":features:comingsoon"))
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))

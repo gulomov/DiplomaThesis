@@ -11,5 +11,6 @@ object ScreenRoute {
     const val RECOMMENDATION_DETAILS = "recommendations/{brandName}"
     const val GALLERY = "gallery/{brand}"
     const val SEARCH = "search"
+    const val COMING_SOON = "comingSoon"
 }
 

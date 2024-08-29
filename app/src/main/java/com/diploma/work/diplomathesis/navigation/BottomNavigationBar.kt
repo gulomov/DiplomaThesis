@@ -21,7 +21,6 @@ fun BottomNavigationBar(navController: NavController) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = contentColorFor(MaterialTheme.colorScheme.outline),
-        tonalElevation = 10.dp,
     ) {
         BottomNavItem.sections.forEach { sections ->
             NavigationBarItem(
