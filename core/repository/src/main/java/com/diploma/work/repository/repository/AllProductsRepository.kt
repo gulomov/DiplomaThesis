@@ -12,6 +12,7 @@ import com.diploma.work.repository.generic.fetchFromDatabase
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class AllProductsRepository @Inject constructor(
         fetchFromDatabase<AllProductsList>(
             "home/allProducts",
             firebaseDatabase
-        ).collect { data ->
+        ).flowOn(Dispatchers.IO).collect { data ->
             withContext(Dispatchers.IO) {
                 data?.allProductsList?.map {
                     roomDao.saveToAllProductsEntity(
@@ -84,7 +85,7 @@ class AllProductsRepository @Inject constructor(
         fetchFromDatabase<BrandsList>(
             "home/brands",
             firebaseDatabase
-        ).collect { data ->
+        ).flowOn(Dispatchers.IO).collect { data ->
             withContext(Dispatchers.IO) {
                 data?.brandsList?.map {
                     roomDao.saveToBrandsEntity(

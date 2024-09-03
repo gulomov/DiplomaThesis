@@ -14,6 +14,7 @@ import com.diploma.work.repository.data.TopProductsList
 import com.diploma.work.repository.generic.fetchFromDatabase
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -25,68 +26,72 @@ class HomeRepository @Inject constructor(
     private val roomDao: HomeScreenDao,
 ) {
     suspend fun fetchAndSaveNewsInfoFromFirebase() {
-        fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
-            newsInfo?.newsList?.let { newsList ->
-                withContext(Dispatchers.IO) {
-                    newsList.forEach {
-                        roomDao.saveNewsInfo(
-                            NewsInfoEntity(
-                                id = it.id ?: 0,
-                                image = it.image,
-                                body = it.body,
-                                title = it.title,
-                            ),
-                        )
+        fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase)
+            .flowOn(Dispatchers.IO)
+            .collect { newsInfo ->
+                newsInfo?.newsList?.let { newsList ->
+                    withContext(Dispatchers.IO) {
+                        newsList.forEach {
+                            roomDao.saveNewsInfo(
+                                NewsInfoEntity(
+                                    id = it.id ?: 0,
+                                    image = it.image,
+                                    body = it.body,
+                                    title = it.title,
+                                ),
+                            )
+                        }
                     }
                 }
             }
-        }
     }
 
     suspend fun fetchAndSaveHomeRecommendationsFromFirebase() {
         fetchFromDatabase<RecommendationsList>(
             "home/recommendations",
             firebaseDatabase,
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
-                data?.recommendationsList?.map {
-                    roomDao.saveHomeRecommendations(
-                        HomeRecommendationsEntity(
-                            id = it.id ?: 0,
-                            imageUrl = it.image.orEmpty(),
-                            brand = it.brand.toString()
-                        ),
-                    )
+        ).flowOn(Dispatchers.IO)
+            .collect { data ->
+                withContext(Dispatchers.IO) {
+                    data?.recommendationsList?.map {
+                        roomDao.saveHomeRecommendations(
+                            HomeRecommendationsEntity(
+                                id = it.id ?: 0,
+                                imageUrl = it.image.orEmpty(),
+                                brand = it.brand.toString()
+                            ),
+                        )
+                    }
                 }
             }
-        }
     }
 
     suspend fun fetchAndSaveTopProductsFromFirebase() {
         fetchFromDatabase<TopProductsList>(
             "home/topProducts",
             firebaseDatabase,
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
-                data?.topProductsList?.map {
-                    roomDao.saveTopProductsList(
-                        TopProductsListEntity(
-                            address = it.address.orEmpty(),
-                            id = it.id ?: 0,
-                            imageUrl = Converters().fromImagesList(it.images.orEmpty()),
-                            title = it.title.orEmpty(),
-                            salePercentage = it.salePercentage ?: 0,
-                            saleStartsDate = it.saleStartsDate.orEmpty(),
-                            saleEndsDate = it.saleEndsDate.orEmpty(),
-                            originalPrice = it.originalPrice ?: 0,
-                            priceOnSale = it.priceOnSale ?: 0,
-                            sizes = Converters().fromSizesList(it.sizes.orEmpty()),
-                            brand = it.brand.toString()
-                        ),
-                    )
+        ).flowOn(Dispatchers.IO)
+            .collect { data ->
+                withContext(Dispatchers.IO) {
+                    data?.topProductsList?.map {
+                        roomDao.saveTopProductsList(
+                            TopProductsListEntity(
+                                address = it.address.orEmpty(),
+                                id = it.id ?: 0,
+                                imageUrl = Converters().fromImagesList(it.images.orEmpty()),
+                                title = it.title.orEmpty(),
+                                salePercentage = it.salePercentage ?: 0,
+                                saleStartsDate = it.saleStartsDate.orEmpty(),
+                                saleEndsDate = it.saleEndsDate.orEmpty(),
+                                originalPrice = it.originalPrice ?: 0,
+                                priceOnSale = it.priceOnSale ?: 0,
+                                sizes = Converters().fromSizesList(it.sizes.orEmpty()),
+                                brand = it.brand.toString()
+                            ),
+                        )
+                    }
                 }
             }
-        }
     }
 
     fun getNewsInfo() = roomDao.getNewsInfoFlow().map { newsEntityList ->
@@ -130,3 +135,4 @@ class HomeRepository @Inject constructor(
         )
     }
 }
+

@@ -3,7 +3,7 @@ package com.diploma.work.repository.data
 import com.diploma.work.database.entity.ComingSoonProductEntity
 
 data class ComingSoonProductList(
-    val comingSoonProductList : List<ComingSoonProduct> = emptyList()
+    val comingSoonList : List<ComingSoonProduct> = emptyList()
 )
 
 data class ComingSoonProduct(
