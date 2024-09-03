@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -65,11 +65,6 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.ui.tooling.preview.android)
     implementation(libs.accompanist.persmission)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
-    kapt(libs.room.compiler)
-}
-
-kapt {
-    correctErrorTypes = true
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.room.compiler)
 }

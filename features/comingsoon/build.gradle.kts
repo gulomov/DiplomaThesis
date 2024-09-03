@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -25,6 +26,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:repository"))
+    implementation(project(":core:database"))
+
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.google.material)
@@ -36,5 +40,10 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.constraint.compose)
     implementation(libs.foundation)
+    implementation(libs.timber)
     implementation(libs.ui.tooling.preview.android)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.room.compiler)
 }
