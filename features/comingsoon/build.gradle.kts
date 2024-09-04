@@ -28,6 +28,7 @@ dependencies {
 
     implementation(project(":core:repository"))
     implementation(project(":core:database"))
+    implementation(project(":core:design"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
@@ -42,6 +43,7 @@ dependencies {
     implementation(libs.foundation)
     implementation(libs.timber)
     implementation(libs.ui.tooling.preview.android)
+    implementation(libs.coil.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)

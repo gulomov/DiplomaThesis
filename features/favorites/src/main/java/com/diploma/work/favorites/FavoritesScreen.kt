@@ -3,7 +3,10 @@ package com.diploma.work.favorites
 import GenericProductItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -41,10 +44,11 @@ fun FavoritesScreen(
             )
         }
         LazyVerticalGrid(
-            modifier = Modifier.padding(normal100),
+            modifier = Modifier,
             columns = GridCells.Fixed(GRID_CELLS),
             verticalArrangement = Arrangement.spacedBy(small100),
             horizontalArrangement = Arrangement.spacedBy(small100),
+            contentPadding = PaddingValues(normal100),
             content = {
                 items(uiState.favoriteProducts) { favoriteProduct ->
                     GenericProductItem(

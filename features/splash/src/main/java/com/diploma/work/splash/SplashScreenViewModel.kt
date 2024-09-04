@@ -3,6 +3,7 @@ package com.diploma.work.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diploma.work.common.domain.FetchAllProductsFromFirebaseAndSaveUseCase
+import com.diploma.work.common.domain.FetchComingSoonProductsUseCase
 import com.diploma.work.common.domain.FetchNewsFromFirebaseAndSaveUseCase
 import com.diploma.work.common.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
 import com.diploma.work.common.domain.FetchTopProductsFromFirebaseAndSaveUseCase
@@ -16,6 +17,7 @@ class SplashScreenViewModel @Inject constructor(
     private val fetchRecommendationsFromFirebaseAndSaveUseCase: FetchRecommendationsFromFirebaseAndSaveUseCase,
     private val fetchTopProductsFromFirebaseAndSaveUseCase: FetchTopProductsFromFirebaseAndSaveUseCase,
     private val fetchAllProductsFromFirebaseAndSaveUseCase: FetchAllProductsFromFirebaseAndSaveUseCase,
+    private val fetchComingSoonProductsUseCase: FetchComingSoonProductsUseCase,
     private val splashScreenRepository: SplashScreenRepository,
 ) : ViewModel() {
     init {
@@ -23,6 +25,7 @@ class SplashScreenViewModel @Inject constructor(
         fetchRecommendations()
         fetchTopProducts()
         fetchAllProducts()
+        fetchComingSoonProducts()
     }
 
     private fun fetchNews() {
@@ -46,6 +49,12 @@ class SplashScreenViewModel @Inject constructor(
     private fun fetchTopProducts() {
         viewModelScope.launch {
             fetchTopProductsFromFirebaseAndSaveUseCase()
+        }
+    }
+
+    private fun fetchComingSoonProducts() {
+        viewModelScope.launch {
+            fetchComingSoonProductsUseCase()
         }
     }
 
