@@ -21,7 +21,8 @@ using Kotlin, Jetpack Compose, MVVM architecture, and other useful tools.
 - **Room Database**: Local database for persistent storage within the app.
 - **Flow**: A coroutine-based API that enables a more functional and reactive approach to data
   handling.
-
+-  **CI/CD** Project is seamlessly integrated with a CI/CD pipeline (Bitrise), ensuring efficient and automated processes for building and deploying updates. 
+ 
 ## Project Structure
 
 ### Root Directory
