@@ -50,7 +50,7 @@ fun FavoritesScreen(
             horizontalArrangement = Arrangement.spacedBy(small100),
             contentPadding = PaddingValues(normal100),
             content = {
-                items(uiState.favoriteProducts) { favoriteProduct ->
+                items(uiState.favoriteProducts, key = { it.id ?: 0 }) { favoriteProduct ->
                     GenericProductItem(
                         item = favoriteProduct,
                         onClick = {
