@@ -21,17 +21,11 @@ interface ProductsDao {
     @Query("SELECT * FROM all_products_list")
     fun getAllProductsFlow(): Flow<List<AllProductsListEntity>>
 
-    @Query("SELECT * FROM all_products_list")
-    fun getAllProductsList(): List<AllProductsListEntity>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveToAllProductsEntity(allProductsListEntity: AllProductsListEntity)
 
     @Query("SELECT * FROM brands_list")
     fun getAllBrandsFlow(): Flow<List<BrandsListEntity>>
-
-    @Query("SELECT * FROM brands_list")
-    fun getAllBrandsList(): List<BrandsListEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveToBrandsEntity(brandsListEntity: BrandsListEntity)
