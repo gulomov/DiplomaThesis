@@ -43,6 +43,7 @@ class ProductDetailsViewModel @Inject constructor(
     private val showBookedBottomSheet = MutableStateFlow(false)
     private val showDataPicker = MutableStateFlow(false)
     private val isProductBooked = MutableStateFlow(false)
+    private val openGoogleMap = MutableStateFlow<String?>(null)
     private val bookedProductDate = MutableStateFlow<Long>(0)
 
     init {
@@ -61,7 +62,8 @@ class ProductDetailsViewModel @Inject constructor(
                 isProductBooked,
                 bookedProductDate,
                 showBookedBottomSheet,
-                showDataPicker
+                showDataPicker,
+                openGoogleMap
             ) { flows ->
                 ProductDetailUiState(
                     productDetail = flows[0] as ProductDetailsData?,
@@ -71,7 +73,8 @@ class ProductDetailsViewModel @Inject constructor(
                     isProductBooked = flows[4] as Boolean,
                     bookedProductDate = flows[5] as Long?,
                     showBookedBottomSheet = flows[6] as Boolean,
-                    showDataPicker = flows[7] as Boolean
+                    showDataPicker = flows[7] as Boolean,
+                    openGoogleMap = flows[8] as String?,
                 )
             }.collect {
                 uiState.value = it
@@ -106,6 +109,14 @@ class ProductDetailsViewModel @Inject constructor(
     fun onRebookClicked() {
         showBookedBottomSheet.value = false
         showDataPicker.value = true
+    }
+
+    fun onOpenGoogleMapClicked(address: String) {
+        openGoogleMap.value = address
+    }
+
+    fun resetOpenGoogleMap() {
+        openGoogleMap.value = null
     }
 
     private fun getBookedProductDetail() = viewModelScope.launch {
