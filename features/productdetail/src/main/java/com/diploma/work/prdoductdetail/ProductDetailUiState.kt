@@ -11,5 +11,6 @@ data class ProductDetailUiState(
     val isBookingClicked: Boolean = false,
     val isProductBooked: Boolean = false,
     val showBookedBottomSheet: Boolean = false,
-    val showDataPicker: Boolean = false
+    val showDataPicker: Boolean = false,
+    val openGoogleMap: String? = null
 )
