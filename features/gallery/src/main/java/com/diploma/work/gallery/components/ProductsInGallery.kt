@@ -13,14 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.diploma.work.common.componants.EmptyStateImage
 import com.diploma.work.database.entity.ProductImages
 import com.diploma.work.design.theme.GRID_CELLS
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
-import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.BrandsItem
 
@@ -28,7 +25,7 @@ import com.diploma.work.repository.data.BrandsItem
 fun ProductsInGallery(
     brands: List<BrandsItem>,
     products: List<AllProductsItem>,
-    navController: NavController,
+    onProductClick: (Int) -> Unit,
     onDeleteFromFavoriteProducts: (Int) -> Unit,
     onSaveToFavoriteProduct: (AllProductsItem) -> Unit,
     favoriteIds: List<Int>
@@ -49,17 +46,10 @@ fun ProductsInGallery(
             horizontalArrangement = Arrangement.spacedBy(small100),
             contentPadding = PaddingValues(normal100),
             content = {
-                items(products) { product ->
+                items(products, key = { it.id ?: 0 }) { product ->
                     GenericProductItem(
                         item = product,
-                        onClick = {
-                            val route =
-                                ScreenRoute.PRODUCTION_DETAIL.replace(
-                                    "{productId}",
-                                    it.id.toString()
-                                )
-                            navController.navigate(route)
-                        },
+                        onClick = { onProductClick(it.id ?: 0) },
                         onSaveOrDeleteClick = {
                             if (!it) {
                                 product.id?.let { id ->
@@ -107,8 +97,8 @@ private fun ProductsInGalleryPreview() {
     ProductsInGallery(
         brands = brands,
         products = products,
-        navController = rememberNavController(),
         favoriteIds = listOf(1, 2),
+        onProductClick = {},
         onDeleteFromFavoriteProducts = {},
         onSaveToFavoriteProduct = {}
     )

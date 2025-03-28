@@ -10,6 +10,7 @@ import com.diploma.work.gallery.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import com.diploma.work.gallery.domain.GetAllProductsUseCase
 import com.diploma.work.gallery.domain.GetBrandsUseCase
 import com.diploma.work.common.domain.GetProductsByBrandNameUseCase
+import com.diploma.work.navigation.ScreenRoute
 import com.diploma.work.repository.data.AllProductsItem
 import com.diploma.work.repository.data.BrandsItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,7 @@ class GalleryScreenViewModel @Inject constructor(
     private val brandsList = MutableStateFlow(listOf(BrandsItem()))
     private val products = MutableStateFlow(listOf(AllProductsItem()))
     private val favoriteIds = MutableStateFlow(listOf<Int>())
+    private val navigationRoute = MutableStateFlow<String?>(null)
 
     init {
         fetchAllProducts()
@@ -49,12 +51,14 @@ class GalleryScreenViewModel @Inject constructor(
             combine(
                 brandsList,
                 products,
-                favoriteIds
-            ) { brands, products, favoriteIds ->
+                favoriteIds,
+                navigationRoute,
+            ) { brands, products, favoriteIds, navigationRoute ->
                 GalleryScreenUiState(
                     brands = brands,
                     products = products,
                     favoriteIds = favoriteIds,
+                    navigationRoute = navigationRoute,
                     loadingValue = false,
                 )
             }.collect {
@@ -92,6 +96,19 @@ class GalleryScreenViewModel @Inject constructor(
             }
         }
         getFavoriteProductsIds()
+    }
+
+    fun onProductClicked(productId: Int) {
+        val route =
+            ScreenRoute.PRODUCTION_DETAIL.replace(
+                "{productId}",
+                productId.toString()
+            )
+        navigationRoute.value = route
+    }
+
+    fun resetNavigate(){
+        navigationRoute.value = null
     }
 
     private fun getFavoriteProductsIds() {

@@ -4,6 +4,7 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
@@ -19,6 +20,7 @@
             <option value="$PROJECT_DIR$/core/testing" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/booking" />
+            <option value="$PROJECT_DIR$/features/comingsoon" />
             <option value="$PROJECT_DIR$/features/common" />
             <option value="$PROJECT_DIR$/features/favorites" />
             <option value="$PROJECT_DIR$/features/gallery" />
@@ -31,7 +33,6 @@
             <option value="$PROJECT_DIR$/server" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
