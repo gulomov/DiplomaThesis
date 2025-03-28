@@ -1,8 +1,10 @@
 package com.diploma.work.gallery
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,25 +23,36 @@ fun GalleryScreen(
     viewModel: GalleryScreenViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    if (uiState.loadingValue) {
-        ProgressCircle()
-    } else {
-        Column(
-            horizontalAlignment = Alignment.Start,
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(normal100)
-        ) {
-            BrandsInGallery(brandsList = uiState.brands, brandClick = {
-                viewModel.loadProductsByBrands(brandName = it)
-            })
-            ProductsInGallery(
-                brands = uiState.brands,
-                products = uiState.products,
-                navController = navController,
-                favoriteIds = uiState.favoriteIds,
-                onDeleteFromFavoriteProducts = viewModel::deleteFromFavoriteProducts,
-                onSaveToFavoriteProduct = viewModel::saveToFavoriteProduct,
-            )
+
+    LaunchedEffect(uiState.navigationRoute) {
+        uiState.navigationRoute?.let { route ->
+            navController.navigate(route)
+            viewModel.resetNavigate()
+        }
+    }
+
+    AnimatedContent(targetState = uiState.loadingValue) {
+        if (it) {
+            ProgressCircle()
+        } else {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(normal100)
+            ) {
+                BrandsInGallery(
+                    brandsList = uiState.brands,
+                    brandClick = viewModel::loadProductsByBrands
+                )
+                ProductsInGallery(
+                    brands = uiState.brands,
+                    products = uiState.products,
+                    favoriteIds = uiState.favoriteIds,
+                    onProductClick = viewModel::onProductClicked,
+                    onDeleteFromFavoriteProducts = viewModel::deleteFromFavoriteProducts,
+                    onSaveToFavoriteProduct = viewModel::saveToFavoriteProduct,
+                )
+            }
         }
     }
 }
