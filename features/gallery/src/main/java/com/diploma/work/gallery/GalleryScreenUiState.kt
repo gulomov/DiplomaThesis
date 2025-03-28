@@ -7,5 +7,6 @@ data class GalleryScreenUiState(
     val brands: List<BrandsItem> = emptyList(),
     val products: List<AllProductsItem> = emptyList(),
     val favoriteIds: List<Int> = emptyList(),
-    val loadingValue: Boolean = true
+    val loadingValue: Boolean = true,
+    val navigationRoute: String? = null
 )
