@@ -4,14 +4,13 @@ import GenericProductItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -25,7 +24,6 @@ import com.diploma.work.design.theme.DiplomaThesisTheme
 import com.diploma.work.design.theme.GRID_CELLS
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
-import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
 
 @Composable
 fun FavoritesScreen(
@@ -34,6 +32,14 @@ fun FavoritesScreen(
     viewModel: FavoritesViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState.navigateRoute) {
+        uiState.navigateRoute?.let {
+            navController.navigate(it)
+            viewModel.resetNavigateRoute()
+        }
+    }
+
     Box(modifier = modifier.fillMaxSize()) {
         if (uiState.favoriteProducts.isEmpty()) {
             EmptyStateImage(
@@ -54,8 +60,9 @@ fun FavoritesScreen(
                     GenericProductItem(
                         item = favoriteProduct,
                         onClick = {
-                            val route = PRODUCTION_DETAIL.replace("{productId}", it.id.toString())
-                            navController.navigate(route)
+                            it.id?.let { notNullId ->
+                                viewModel.onProductClicked(notNullId)
+                            }
                         },
                         onSaveOrDeleteClick = {
                             favoriteProduct.id?.let { id ->
