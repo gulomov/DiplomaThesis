@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -16,7 +17,6 @@ import androidx.navigation.NavController
 import com.diploma.work.design.theme.GRID_CELLS
 import com.diploma.work.design.theme.normal100
 import com.diploma.work.design.theme.small100
-import com.diploma.work.navigation.ScreenRoute
 
 @Composable
 fun RecommendationsDetail(
@@ -26,6 +26,13 @@ fun RecommendationsDetail(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    LaunchedEffect(uiState.navigateRoute) {
+        uiState.navigateRoute?.let {
+            navController.navigate(it)
+            viewModel.resetNavigate()
+        }
+    }
+
     Box(modifier = modifier) {
         LazyVerticalGrid(
             modifier = Modifier,
@@ -34,15 +41,13 @@ fun RecommendationsDetail(
             horizontalArrangement = Arrangement.spacedBy(small100),
             contentPadding = PaddingValues(normal100),
             content = {
-                items(uiState.products) { product ->
+                items(uiState.products, key = { it.id ?: 0 }) { product ->
                     GenericProductItem(
                         item = product,
                         onClick = {
-                            val route = ScreenRoute.PRODUCTION_DETAIL.replace(
-                                "{productId}",
-                                it.id.toString()
-                            )
-                            navController.navigate(route)
+                            product.id?.let {
+                                viewModel.onProductClicked(it)
+                            }
                         },
                         onSaveOrDeleteClick = {
                             if (!it) {
