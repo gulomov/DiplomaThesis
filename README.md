@@ -52,8 +52,11 @@ using Kotlin, Jetpack Compose, MVVM architecture, and other useful tools.
     - **wrapper/**: Gradle wrapper scripts and properties.
     - **libs.versions.toml**: Configuration for managing library versions.
 
-## Future Plans
+## TODOs
+- [ ] Combine data into UI state data class (in progress).
+- [ ] Change the way onClick is handled in @Composable function instead of passing into the View Model 
 
+## Future Plans
 - [ ] Learn Ktor.
 - [ ] Move database from Firebase.
 - [ ] Create REST APIs to load data from a remote database.
