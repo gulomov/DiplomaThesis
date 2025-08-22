@@ -2,6 +2,8 @@ package com.diploma.work.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.analytics.FirebaseAnalyticsManager
+import com.diploma.work.analytics.FirebaseAnalyticsManager.Companion.FAVORITE_SCREEN
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.favorites.domain.GetFavoriteProductsUseCase
 import com.diploma.work.navigation.ScreenRoute.PRODUCTION_DETAIL
@@ -14,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     getFavoriteProductsUseCase: GetFavoriteProductsUseCase,
+    firebaseAnalyticsManager: FirebaseAnalyticsManager,
     private val deleteFromFavoriteProductsUseCase: DeleteFromFavoriteProductsUseCase
 ) : ViewModel() {
     val uiState = MutableStateFlow(FavoriteScreenUiState())
@@ -21,6 +24,7 @@ class FavoritesViewModel @Inject constructor(
     private val navigateRoute = MutableStateFlow<String?>(null)
 
     init {
+        firebaseAnalyticsManager.logScreenView(screenName = FAVORITE_SCREEN)
         viewModelScope.launch {
             combine(
                 getFavoriteProductsUseCase(),

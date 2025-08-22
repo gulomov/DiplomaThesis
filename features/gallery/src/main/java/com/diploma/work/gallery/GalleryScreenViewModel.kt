@@ -2,6 +2,7 @@ package com.diploma.work.gallery
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.analytics.FirebaseAnalyticsManager
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetFavoriteProductsIdsUseCase
 import com.diploma.work.common.domain.SaveToFavoriteProductUseCase
@@ -29,7 +30,8 @@ class GalleryScreenViewModel @Inject constructor(
     private val getBrandsUseCase: GetBrandsUseCase,
     private val getAllProductsUseCase: GetAllProductsUseCase,
     private val getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
-    private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase
+    private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase,
+    private val firebaseAnalyticsManager: FirebaseAnalyticsManager,
 ) : ViewModel() {
     val uiState = MutableStateFlow(GalleryScreenUiState())
     private val brandsList = MutableStateFlow(listOf(BrandsItem()))
@@ -107,7 +109,7 @@ class GalleryScreenViewModel @Inject constructor(
         navigationRoute.value = route
     }
 
-    fun resetNavigate(){
+    fun resetNavigate() {
         navigationRoute.value = null
     }
 
@@ -132,6 +134,11 @@ class GalleryScreenViewModel @Inject constructor(
     }
 
     fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
+        firebaseAnalyticsManager.logSavedProductFromGalley(
+            productId = product.id ?: 0,
+            productTitle = product.title.orEmpty(),
+            productBrand = product.brand.orEmpty()
+        )
         saveToFavoriteProductUseCase(product.asFavoriteProduct())
     }
 }

@@ -20,6 +20,8 @@ detekt = "1.23.3"
 # Firebase
 firebase-bom = "32.1.0"
 firebase-auth = "22.1.2"
+firebase-crashlitics-plg = "3.0.6"
+firebase-appdistribution = "5.1.1"
 
 # Hilt
 hilt = "2.48"
@@ -68,6 +70,7 @@ uiToolingPreviewAndroid = "1.6.8"
 junitVersion = "1.2.1"
 appcompat = "1.7.0"
 materialVersion = "1.12.0"
+firebaseCrashlyticsKtx = "20.0.0"
 
 [libraries]
 # Android Core
@@ -93,10 +96,10 @@ foundation = { module = "androidx.compose.foundation:foundation", version.ref = 
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebase-auth" }
 
 # Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -156,3 +159,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+firebase-crashliticts = {id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlitics-plg"}
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-appdistribution" }

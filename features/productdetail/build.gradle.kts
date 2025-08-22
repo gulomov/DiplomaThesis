@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
+    implementation(project(":core:analytics"))
     implementation(project(":features:common"))
     implementation(project(":features:booking"))
 
@@ -60,11 +61,11 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
-    implementation(libs.firebase.auth)
     implementation(libs.slf4j.api)
     implementation(libs.logback.android)
     implementation(libs.accompanist.pager)
     implementation(libs.coil.compose)
+    implementation(libs.firebase.crashlytics)
     ksp(libs.hilt.android.compiler)
     ksp(libs.room.compiler)
 }

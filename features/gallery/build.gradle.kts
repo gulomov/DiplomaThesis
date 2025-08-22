@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:analytics"))
     implementation(project(":features:common"))
 
     implementation(libs.core.ktx)

@@ -2,11 +2,7 @@ package com.diploma.work.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.diploma.work.common.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.common.domain.GetTopProductsUseCase
-import com.diploma.work.common.domain.FetchNewsFromFirebaseAndSaveUseCase
-import com.diploma.work.common.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
-import com.diploma.work.common.domain.FetchTopProductsFromFirebaseAndSaveUseCase
 import com.diploma.work.home.domain.GetHomeRecommendationsUseCase
 import com.diploma.work.home.domain.GetHomeScreenNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -3,17 +3,20 @@ package com.diploma.work.prdoductdetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diploma.work.analytics.FirebaseAnalyticsManager
+import com.diploma.work.analytics.FirebaseAnalyticsManager.Companion.PRODUCT_DETAIL_SCREEN
 import com.diploma.work.booking.domain.SaveBookedProductUseCase
-import com.diploma.work.prdoductdetail.domain.GetProductDetailsUseCase
 import com.diploma.work.common.domain.DeleteFromFavoriteProductsUseCase
 import com.diploma.work.common.domain.GetBookedProductByIdUseCase
 import com.diploma.work.common.domain.GetTopProductsUseCase
 import com.diploma.work.common.domain.IsProductInFavoritesUseCase
 import com.diploma.work.common.domain.SaveToFavoriteProductUseCase
+import com.diploma.work.prdoductdetail.domain.GetProductDetailsUseCase
 import com.diploma.work.prdoductdetail.domain.IsProductBookedUseCase
 import com.diploma.work.repository.data.BookedProduct
 import com.diploma.work.repository.data.ProductDetailsData
 import com.diploma.work.repository.data.TopProductItem
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -35,6 +38,8 @@ class ProductDetailsViewModel @Inject constructor(
     private val isProductBookedUseCase: IsProductBookedUseCase,
     private val saveBookedProductUseCase: SaveBookedProductUseCase,
     private val getBookedProductById: GetBookedProductByIdUseCase,
+    private val firebaseAnalyticsManager: FirebaseAnalyticsManager,
+    private val firebaseCrashlytics: FirebaseCrashlytics
 ) : ViewModel() {
     val uiState = MutableStateFlow(ProductDetailUiState())
 
@@ -47,6 +52,7 @@ class ProductDetailsViewModel @Inject constructor(
     private val bookedProductDate = MutableStateFlow<Long>(0)
 
     init {
+        firebaseAnalyticsManager.logScreenView(screenName = PRODUCT_DETAIL_SCREEN)
         getBookedProductDetail()
         isProductBooked()
         combineFlow()
@@ -101,6 +107,7 @@ class ProductDetailsViewModel @Inject constructor(
     }
 
     fun saveBookedProduct(bookedProduct: BookedProduct) = viewModelScope.launch {
+        bookedProduct.productId?.let { firebaseAnalyticsManager.logSavedProduct(it) }
         saveBookedProductUseCase(BookedProduct(bookedProduct.productId, bookedProduct.bookedDate))
         getBookedProductDetail()
         isProductBooked()
@@ -112,6 +119,7 @@ class ProductDetailsViewModel @Inject constructor(
     }
 
     fun onOpenGoogleMapClicked(address: String) {
+        firebaseCrashlytics.recordException(Exception("Recording Crash in address: $address"))
         openGoogleMap.value = address
     }
 

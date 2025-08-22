@@ -2,10 +2,21 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.service)
+    alias(libs.plugins.firebase.crashliticts)
+    alias(libs.plugins.firebase.appdistribution)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.detekt)
     alias(libs.plugins.ksp)
+}
+
+androidComponents {
+    beforeVariants {
+        firebaseAppDistribution {
+            serviceCredentialsFile = "app/firebase-service-account.json"
+            groups = "qa-testers"
+        }
+    }
 }
 
 android {
@@ -35,6 +46,10 @@ android {
 
         getByName("debug") {
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -79,6 +94,23 @@ android {
         config.setFrom(file("config/detekt/detekt.yml"))
         buildUponDefaultConfig = true
     }
+
+    firebaseCrashlytics {
+        nativeSymbolUploadEnabled = true
+    }
+
+    flavorDimensions.add("environment")
+    productFlavors {
+        create("prod") {
+            dimension = "environment"
+            versionNameSuffix = "-prod"
+        }
+        create("staging") {
+            dimension = "environment"
+            applicationIdSuffix = ".stg"
+            versionNameSuffix = "-stg"
+        }
+    }
 }
 
 dependencies {
@@ -94,6 +126,8 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:design"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:analytics"))
+    implementation(project(":core:notifications"))
 
     implementation(libs.slf4j.api)
     implementation(libs.logback.android)
@@ -115,10 +149,9 @@ dependencies {
     implementation(libs.foundation)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging)
-    implementation(libs.firebase.auth)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.room.runtime)
